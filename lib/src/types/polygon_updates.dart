@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:ui' show hashValues;
-
 import 'package:flutter/foundation.dart' show setEquals;
 import 'types.dart';
 
@@ -85,7 +83,7 @@ class PolygonUpdates {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    if (other is !PolygonUpdates) return false;
+    if (other is! PolygonUpdates) return false;
     final PolygonUpdates typedOther = other;
     return setEquals(polygonsToAdd, typedOther.polygonsToAdd) &&
         setEquals(polygonIdsToRemove, typedOther.polygonIdsToRemove) &&
@@ -94,7 +92,7 @@ class PolygonUpdates {
 
   @override
   int get hashCode =>
-      hashValues(polygonsToAdd, polygonIdsToRemove, polygonsToChange);
+      Object.hashAll([polygonsToAdd, polygonIdsToRemove, polygonsToChange]);
 
   @override
   String toString() {

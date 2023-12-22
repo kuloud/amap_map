@@ -2,11 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:ui' show hashValues;
-
 import 'package:flutter/foundation.dart' show setEquals;
 
-import 'polyline.dart';
 import 'types.dart';
 
 /// 该类主要用以描述[Polyline]的增删改等更新操作
@@ -87,7 +84,7 @@ class PolylineUpdates {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    if (other is !PolylineUpdates) return false;
+    if (other is! PolylineUpdates) return false;
     final PolylineUpdates typedOther = other;
     return setEquals(polylinesToAdd, typedOther.polylinesToAdd) &&
         setEquals(polylineIdsToRemove, typedOther.polylineIdsToRemove) &&
@@ -96,7 +93,7 @@ class PolylineUpdates {
 
   @override
   int get hashCode =>
-      hashValues(polylinesToAdd, polylineIdsToRemove, polylinesToChange);
+      Object.hashAll([polylinesToAdd, polylineIdsToRemove, polylinesToChange]);
 
   @override
   String toString() {

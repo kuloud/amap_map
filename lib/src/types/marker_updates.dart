@@ -1,9 +1,6 @@
-import 'dart:ui' show hashValues;
-
 import 'package:flutter/foundation.dart' show setEquals;
 
 import 'types.dart';
-import 'marker.dart';
 
 /// 用以描述Marker的更新项
 class MarkerUpdates {
@@ -82,7 +79,7 @@ class MarkerUpdates {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    if(other is !MarkerUpdates) return false;
+    if (other is! MarkerUpdates) return false;
     final MarkerUpdates typedOther = other;
     return setEquals(markersToAdd, typedOther.markersToAdd) &&
         setEquals(markerIdsToRemove, typedOther.markerIdsToRemove) &&
@@ -91,7 +88,7 @@ class MarkerUpdates {
 
   @override
   int get hashCode =>
-      hashValues(markersToAdd, markerIdsToRemove, markersToChange);
+      Object.hashAll([markersToAdd, markerIdsToRemove, markersToChange]);
 
   @override
   String toString() {
