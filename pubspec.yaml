@@ -1,17 +1,17 @@
 name: amap_map
 description: Amap SDK Flutter plugin
-version: 1.0.0+2
+version: 1.0.0+3
 homepage: https://github.com/kuloud/amap_map
 
 environment:
-  sdk: ">=3.1.15 <4.0.0"
+  sdk: ">=3.1.5 <4.0.0"
   flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_plugin_android_lifecycle: ^2.0.1
-  meta: ^1.3.0
+  # flutter_plugin_android_lifecycle: ^2.0.1
+  # meta: ^1.3.0
   plugin_platform_interface: ^2.0.0
   stream_transform: ^2.0.0
 
