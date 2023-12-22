@@ -1,4 +1,4 @@
-import 'package:amap_map/amap_map.dart';
+import 'package:x_amap_base/x_amap_base.dart';
 
 class ConstConfig {
   static const AMapApiKey amapApiKeys = AMapApiKey(

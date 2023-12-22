@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map/amap_map.dart';
+import 'package:x_amap_base/x_amap_base.dart';
 
 class PolylineGeodesicDemoPage extends BasePage {
   PolylineGeodesicDemoPage(String title, String subTitle)
