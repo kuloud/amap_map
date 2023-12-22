@@ -1,6 +1,6 @@
 name: amap_map
 description: Amap SDK Flutter plugin
-version: 1.0.0+1
+version: 1.0.0+2
 homepage: https://github.com/kuloud/amap_map
 
 environment:

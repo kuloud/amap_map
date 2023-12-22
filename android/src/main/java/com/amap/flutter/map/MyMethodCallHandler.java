@@ -2,7 +2,6 @@ package com.amap.flutter.map;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
