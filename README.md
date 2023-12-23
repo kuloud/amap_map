@@ -64,10 +64,6 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 
 ```
 
-## 已知问题：
-1. Flutter插件在iOS端，MapView销毁时，一定概率触发Main Thread Checker的报警，
-经过对比测试确认是Flutter的bug所致；https://github.com/flutter/flutter/issues/68490 
-（对比1.25.0-8.1.pre版本已修复，从github的issues中得知，有其它开发着反馈1.24.0-6.0.pre已修复；该问题依赖Flutter升级修复） 
 
 
 
