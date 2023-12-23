@@ -1,6 +1,6 @@
 name: amap_map
 description: Amap SDK Flutter plugin
-version: 1.0.0+3
+version: 1.0.0+4
 homepage: https://github.com/kuloud/amap_map
 
 environment:
@@ -20,10 +20,6 @@ dependencies:
   #   path: ../x_amap_base
 dev_dependencies:
   flutter_test:
-    sdk: flutter
-  # TODO(iskakaushik): The following dependencies can be removed once
-  # https://github.com/dart-lang/pub/issues/2101 is resolved.
-  flutter_driver:
     sdk: flutter
   test: ^1.16.5
   pedantic: ^1.11.0
