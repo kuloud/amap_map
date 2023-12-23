@@ -3,7 +3,6 @@ package com.amap.flutter.map;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -43,12 +42,7 @@ public class AMapFlutterMapPlugin implements
                             VIEW_TYPE,
                             new AMapPlatformViewFactory(
                                     registrar.messenger(),
-                                    new LifecycleProvider() {
-                                        @Override
-                                        public Lifecycle getLifecycle() {
-                                            return ((LifecycleOwner) activity).getLifecycle();
-                                        }
-                                    }));
+                                    () -> ((LifecycleOwner) activity).getLifecycle()));
         } else {
             registrar
                     .platformViewRegistry()
@@ -69,13 +63,7 @@ public class AMapFlutterMapPlugin implements
                         VIEW_TYPE,
                         new AMapPlatformViewFactory(
                                 binding.getBinaryMessenger(),
-                                new LifecycleProvider() {
-                                    @Nullable
-                                    @Override
-                                    public Lifecycle getLifecycle() {
-                                        return lifecycle;
-                                    }
-                                }));
+                                () -> lifecycle));
     }
 
     @Override

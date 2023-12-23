@@ -53,7 +53,7 @@ public class AMapPlatformView
     AMapPlatformView(int id,
                      Context context,
                      BinaryMessenger binaryMessenger,
-                     LifecycleProvider lifecycleProvider,
+                     LifecycleOwner lifecycleProvider,
                      AMapOptions options) {
 
         methodChannel = new MethodChannel(binaryMessenger, "amap_map_" + id);
@@ -76,28 +76,28 @@ public class AMapPlatformView
 
     private void initMyMethodCallHandlerMap() {
         String[] methodIdArray = mapController.getRegisterMethodIdArray();
-        if (null != methodIdArray && methodIdArray.length > 0) {
+        if (null != methodIdArray) {
             for (String methodId : methodIdArray) {
                 myMethodCallHandlerMap.put(methodId, mapController);
             }
         }
 
         methodIdArray = markersController.getRegisterMethodIdArray();
-        if (null != methodIdArray && methodIdArray.length > 0) {
+        if (null != methodIdArray) {
             for (String methodId : methodIdArray) {
                 myMethodCallHandlerMap.put(methodId, markersController);
             }
         }
 
         methodIdArray = polylinesController.getRegisterMethodIdArray();
-        if (null != methodIdArray && methodIdArray.length > 0) {
+        if (null != methodIdArray) {
             for (String methodId : methodIdArray) {
                 myMethodCallHandlerMap.put(methodId, polylinesController);
             }
         }
 
         methodIdArray = polygonsController.getRegisterMethodIdArray();
-        if (null != methodIdArray && methodIdArray.length > 0) {
+        if (null != methodIdArray) {
             for (String methodId : methodIdArray) {
                 myMethodCallHandlerMap.put(methodId, polygonsController);
             }

@@ -2,6 +2,8 @@ package com.amap.flutter.map;
 
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.CustomMapStyleOptions;
@@ -46,7 +48,7 @@ class AMapOptionsBuilder implements AMapOptionsSink {
     AMapPlatformView build(int id,
                            Context context,
                            BinaryMessenger binaryMessenger,
-                           LifecycleProvider lifecycleProvider) {
+                           LifecycleOwner lifecycleProvider) {
         try {
             //iOS端没有放大缩小UI, Android端强制隐藏
             options.zoomControlsEnabled(false);

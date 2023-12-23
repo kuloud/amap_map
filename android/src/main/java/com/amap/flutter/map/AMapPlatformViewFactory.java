@@ -2,6 +2,8 @@ package com.amap.flutter.map;
 
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.flutter.map.utils.ConvertUtil;
 import com.amap.flutter.map.utils.LogUtil;
@@ -22,10 +24,10 @@ import io.flutter.plugin.platform.PlatformViewFactory;
 class AMapPlatformViewFactory extends PlatformViewFactory {
     private static final String CLASS_NAME = "AMapPlatformViewFactory";
     private final BinaryMessenger binaryMessenger;
-    private final LifecycleProvider lifecycleProvider;
+    private final LifecycleOwner lifecycleProvider;
 
     AMapPlatformViewFactory(BinaryMessenger binaryMessenger,
-                            LifecycleProvider lifecycleProvider) {
+                            LifecycleOwner lifecycleProvider) {
         super(StandardMessageCodec.INSTANCE);
         this.binaryMessenger = binaryMessenger;
         this.lifecycleProvider = lifecycleProvider;
