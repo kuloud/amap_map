@@ -7,6 +7,8 @@ import android.graphics.Point;
 import android.location.Location;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -28,8 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-
 import io.flutter.view.FlutterMain;
 
 /**
@@ -41,7 +41,7 @@ import io.flutter.view.FlutterMain;
 public class ConvertUtil {
 
     private static final String CLASS_NAME = "ConvertUtil";
-
+    private static final int[] LocationTypeMap = new int[]{MyLocationStyle.LOCATION_TYPE_SHOW, MyLocationStyle.LOCATION_TYPE_FOLLOW, MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE};
     public static float density;
     private static String apiKey;
 
@@ -72,7 +72,7 @@ public class ConvertUtil {
         if (null != hasAgreeObj) {
             boolean hasAgree = toBoolean(hasAgreeObj);
             //使用反射的方法调用适配之前的版本
-            try{
+            try {
                 Method method = clazz.getMethod("updatePrivacyAgree", Context.class, boolean.class);
                 method.invoke(null, context, hasAgree);
             } catch (Throwable e) {
@@ -119,8 +119,8 @@ public class ConvertUtil {
                 return CameraUpdateFactory.newLatLngZoom(toLatLng(data.get(1)), toFloat(data.get(2)));
             case "scrollBy":
                 return CameraUpdateFactory.scrollBy( //
-                                                     toFloatPixels(data.get(1)), //
-                                                     toFloatPixels(data.get(2)));
+                        toFloatPixels(data.get(1)), //
+                        toFloatPixels(data.get(2)));
             case "zoomBy":
                 if (data.size() == 2) {
                     return CameraUpdateFactory.zoomBy(toFloat(data.get(1)));
@@ -137,7 +137,6 @@ public class ConvertUtil {
                 throw new IllegalArgumentException("Cannot interpret " + o + " as CameraUpdate");
         }
     }
-
 
     private static Point toPoint(Object o) {
         final List<?> data = toList(o);
@@ -296,8 +295,6 @@ public class ConvertUtil {
         }
         return customMapStyleOptions;
     }
-
-    private static final int[] LocationTypeMap = new int[]{MyLocationStyle.LOCATION_TYPE_SHOW, MyLocationStyle.LOCATION_TYPE_FOLLOW, MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE};
 
     private static MyLocationStyle toMyLocationStyle(Object o, float density) {
         final Map<?, ?> map = toMap(o);

@@ -16,6 +16,7 @@ import java.util.List;
 class PolylineController implements PolylineOptionsSink {
     final Polyline polyline;
     final String polylineId;
+
     PolylineController(Polyline polyline) {
         this.polyline = polyline;
         this.polylineId = polyline.getId();
@@ -26,10 +27,11 @@ class PolylineController implements PolylineOptionsSink {
     }
 
     public void remove() {
-        if(null != polyline) {
+        if (null != polyline) {
             polyline.remove();
         }
     }
+
     @Override
     public void setPoints(List<LatLng> points) {
         polyline.setPoints(points);

@@ -30,10 +30,15 @@ class MarkerController implements MarkerOptionsSink {
     }
 
     public LatLng getPosition() {
-        if(null != marker) {
+        if (null != marker) {
             return marker.getPosition();
         }
         return null;
+    }
+
+    @Override
+    public void setPosition(LatLng position) {
+        marker.setPosition(position);
     }
 
     @Override
@@ -69,11 +74,6 @@ class MarkerController implements MarkerOptionsSink {
     @Override
     public void setSnippet(String snippet) {
         marker.setSnippet(snippet);
-    }
-
-    @Override
-    public void setPosition(LatLng position) {
-        marker.setPosition(position);
     }
 
     @Override

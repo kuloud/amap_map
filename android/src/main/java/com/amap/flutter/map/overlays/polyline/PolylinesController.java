@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.amap.api.maps.AMap;
-import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.flutter.map.MyMethodCallHandler;
@@ -68,7 +67,6 @@ public class PolylinesController
     }
 
     /**
-     *
      * @param methodCall
      * @param result
      */
@@ -143,7 +141,6 @@ public class PolylinesController
             }
         }
     }
-
 
 
 }

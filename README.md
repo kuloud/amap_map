@@ -8,11 +8,7 @@
 ## 准备工作
 * 登录[高德开放平台官网](https://lbs.amap.com/)申请ApiKey。Android平台申请配置key请参考[Android获取key](https://lbs.amap.com/api/poi-sdk-android/develop/create-project/get-key/?sug_index=2), iOS平台申请配置请参考[iOS获取key](https://lbs.amap.com/api/poi-sdk-ios/develop/create-project/get-key/?sug_index=1)。
 * 引入高德地图SDK，Android平台请参考[Android Sudio配置工程](https://lbs.amap.com/api/android-sdk/guide/create-project/android-studio-create-project), iOS平台请参考[ios安装地图SDK](https://lbs.amap.com/api/ios-sdk/guide/create-project/cocoapods)
-* iOS端插件使用特殊配置:Flutter 1.22.0 之前(之后的版本可以不添加该配置)，iOS端的UiKitView还只是preview状态, 默认是不支持的, 需要手动打开开关, 需要在iOS工程的info.plist添加如下配置:
-``` XML
-<key>io.flutter.embedded_views_preview</key>
-<string>YES</string>
-```
+
 
 ## 使用示例
 ``` Dart
@@ -20,7 +16,7 @@ import 'package:amap_map_example/base_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map/amap_map.dart';
+import 'package:x_amap_base/x_amap_base.dart';
 
 class ShowMapPage extends BasePage {
   ShowMapPage(String title, String subTitle) : super(title, subTitle);
@@ -40,7 +36,6 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
     target: LatLng(39.909187, 116.397451),
     zoom: 10.0,
   );
-  List<Widget> _approvalNumberWidget = List<Widget>();
   @override
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
@@ -50,24 +45,10 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 
     return ConstrainedBox(
       constraints: BoxConstraints.expand(),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: map,
-          ),
-          Positioned(
-              right: 10,
-              bottom: 15,
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: _approvalNumberWidget),
-              ))
-        ],
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: map,
       ),
     );
   }
@@ -76,29 +57,9 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
   void onMapCreated(AMapController controller) {
     setState(() {
       _mapController = controller;
-      getApprovalNumber();
     });
   }
 
-  /// 获取审图号
-  void getApprovalNumber() async {
-    //普通地图审图号
-    String mapContentApprovalNumber =
-        await _mapController?.getMapContentApprovalNumber();
-    //卫星地图审图号
-    String satelliteImageApprovalNumber =
-        await _mapController?.getSatelliteImageApprovalNumber();
-    setState(() {
-      if (null != mapContentApprovalNumber) {
-        _approvalNumberWidget.add(Text(mapContentApprovalNumber));
-      }
-      if (null != satelliteImageApprovalNumber) {
-        _approvalNumberWidget.add(Text(satelliteImageApprovalNumber));
-      }
-    });
-    print('地图审图号（普通地图）: $mapContentApprovalNumber');
-    print('地图审图号（卫星地图): $satelliteImageApprovalNumber');
-  }
 }
 
 ```

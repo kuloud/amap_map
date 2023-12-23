@@ -42,17 +42,13 @@ public class AMapPlatformView
         PlatformView {
     private static final String CLASS_NAME = "AMapPlatformView";
     private final MethodChannel methodChannel;
-
+    private final Map<String, MyMethodCallHandler> myMethodCallHandlerMap;
     private MapController mapController;
     private MarkersController markersController;
     private PolylinesController polylinesController;
     private PolygonsController polygonsController;
-
     private TextureMapView mapView;
-
     private boolean disposed = false;
-
-    private final Map<String, MyMethodCallHandler> myMethodCallHandlerMap;
 
     AMapPlatformView(int id,
                      Context context,

@@ -9,7 +9,6 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.amap.flutter.map.utils.LogUtil;
 
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -23,10 +22,11 @@ public class AMapFlutterMapPlugin implements
         FlutterPlugin,
         ActivityAware {
     private static final String CLASS_NAME = "AMapFlutterMapPlugin";
-    private FlutterPluginBinding pluginBinding;
+    private static final String VIEW_TYPE = "com.amap.flutter.map";
     private Lifecycle lifecycle;
 
-    private static final String VIEW_TYPE = "com.amap.flutter.map";
+    public AMapFlutterMapPlugin() {
+    }
 
     public static void registerWith(PluginRegistry.Registrar registrar) {
         LogUtil.i(CLASS_NAME, "registerWith=====>");
@@ -58,15 +58,11 @@ public class AMapFlutterMapPlugin implements
         }
     }
 
-    public AMapFlutterMapPlugin() {
-    }
-
     // FlutterPlugin
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         LogUtil.i(CLASS_NAME, "onAttachedToEngine==>");
-        pluginBinding = binding;
         binding
                 .getPlatformViewRegistry()
                 .registerViewFactory(
@@ -85,7 +81,6 @@ public class AMapFlutterMapPlugin implements
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
         LogUtil.i(CLASS_NAME, "onDetachedFromEngine==>");
-        pluginBinding = null;
     }
 
 

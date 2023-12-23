@@ -3,7 +3,6 @@ package com.amap.flutter.map.overlays.polygon;
 import com.amap.api.maps.model.AMapPara;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Polygon;
-import com.amap.api.maps.model.PolygonOptions;
 
 import java.util.List;
 
@@ -13,11 +12,12 @@ import java.util.List;
  * @mail hongming.whm@alibaba-inc.com
  * @since
  */
-class PolygonController implements PolygonOptionsSink{
+class PolygonController implements PolygonOptionsSink {
 
     private final Polygon polygon;
     private final String id;
-    PolygonController(Polygon polygon){
+
+    PolygonController(Polygon polygon) {
         this.polygon = polygon;
         this.id = polygon.getId();
     }

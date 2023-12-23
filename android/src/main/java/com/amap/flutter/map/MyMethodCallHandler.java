@@ -2,7 +2,6 @@ package com.amap.flutter.map;
 
 import androidx.annotation.NonNull;
 
-
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
@@ -14,10 +13,12 @@ import io.flutter.plugin.common.MethodChannel;
  */
 public interface MyMethodCallHandler {
 
-    public void doMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result);
+    void doMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result);
+
     /**
      * 获取注册的{@link io.flutter.plugin.common.MethodCall#method}
+     *
      * @return
      */
-    public abstract String[] getRegisterMethodIdArray();
+    String[] getRegisterMethodIdArray();
 }

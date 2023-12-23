@@ -1,11 +1,8 @@
 package com.amap.flutter.map.overlays.polygon;
 
 import com.amap.api.maps.model.AMapPara;
-import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.PolygonOptions;
-import com.amap.api.maps.model.PolylineOptions;
-import com.amap.flutter.map.overlays.polyline.PolylineOptionsSink;
 
 import java.util.List;
 
@@ -17,13 +14,14 @@ import java.util.List;
  */
 class PolygonOptionsBuilder implements PolygonOptionsSink {
     final PolygonOptions polygonOptions;
+
     PolygonOptionsBuilder() {
         polygonOptions = new PolygonOptions();
         //必须设置为true，否则会出现线条转折处出现断裂的现象
         polygonOptions.usePolylineStroke(true);
     }
 
-    public PolygonOptions build(){
+    public PolygonOptions build() {
         return polygonOptions;
     }
 

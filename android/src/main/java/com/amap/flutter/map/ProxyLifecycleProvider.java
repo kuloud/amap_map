@@ -20,8 +20,7 @@ import com.amap.flutter.map.utils.LogUtil;
 public class ProxyLifecycleProvider
         implements
         Application.ActivityLifecycleCallbacks,
-        LifecycleOwner,
-        LifecycleProvider {
+        LifecycleOwner {
     private static final String CLASS_NAME = "ProxyLifecycleProvider";
     private final LifecycleRegistry lifecycle = new LifecycleRegistry(this);
     private final int registrarActivityHashCode;

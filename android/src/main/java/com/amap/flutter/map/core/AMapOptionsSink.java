@@ -4,7 +4,6 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.CustomMapStyleOptions;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.MyLocationStyle;
-import com.amap.api.maps.model.MyTrafficStyle;
 
 /**
  * @author whm

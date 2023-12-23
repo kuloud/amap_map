@@ -2,7 +2,6 @@ package com.amap.flutter.map;
 
 import android.content.Context;
 
-
 import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.CustomMapStyleOptions;
@@ -10,7 +9,6 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.flutter.map.core.AMapOptionsSink;
 import com.amap.flutter.map.utils.LogUtil;
-
 
 import java.util.List;
 
@@ -67,7 +65,7 @@ class AMapOptionsBuilder implements AMapOptionsSink {
                     && anchorY <= 1.0
                     && anchorY >= 0) {
 
-                aMapPlatformView.getMapController().setScreenAnchor( anchorX, anchorY);
+                aMapPlatformView.getMapController().setScreenAnchor(anchorX, anchorY);
             }
 
             aMapPlatformView.getMapController().setMinZoomLevel(minZoomLevel);

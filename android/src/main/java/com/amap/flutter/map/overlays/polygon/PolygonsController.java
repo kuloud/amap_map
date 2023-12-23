@@ -37,7 +37,7 @@ public class PolygonsController
     @Override
     public void doMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
         String methodId = call.method;
-        LogUtil.i(CLASS_NAME, "doMethodCall===>" +methodId);
+        LogUtil.i(CLASS_NAME, "doMethodCall===>" + methodId);
         switch (methodId) {
             case Const.METHOD_POLYGON_UPDATE:
                 invokePolylineOptions(call, result);
@@ -51,7 +51,6 @@ public class PolygonsController
     }
 
     /**
-     *
      * @param methodCall
      * @param result
      */

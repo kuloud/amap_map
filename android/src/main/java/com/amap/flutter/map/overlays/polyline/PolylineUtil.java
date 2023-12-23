@@ -19,7 +19,7 @@ class PolylineUtil {
 
     private static final String CLASS_NAME = "PolylineUtil";
     //虚线类型
-    private static final int[] DASH_LINE_TYPE = {-1,0,1};
+    private static final int[] DASH_LINE_TYPE = {-1, 0, 1};
 
     static String interpretOptions(Object o, PolylineOptionsSink sink) {
         final Map<?, ?> data = ConvertUtil.toMap(o);
@@ -60,7 +60,7 @@ class PolylineUtil {
             if (rawType > DASH_LINE_TYPE.length) {
                 rawType = 0;
             }
-            if(DASH_LINE_TYPE[rawType] == -1) {
+            if (DASH_LINE_TYPE[rawType] == -1) {
                 sink.setDashLine(false);
             } else {
                 sink.setDashLine(true);
@@ -100,7 +100,7 @@ class PolylineUtil {
         }
 
         final String dartId = (String) data.get("id");
-        if(TextUtils.isEmpty(dartId)) {
+        if (TextUtils.isEmpty(dartId)) {
             Log.w(CLASS_NAME, "没有传入正确的dart层ID, 请确认对应的key值是否正确！！！");
         }
         return dartId;

@@ -1,7 +1,6 @@
 package com.amap.flutter.map.overlays.polygon;
 
 import com.amap.api.maps.model.AMapPara;
-import com.amap.flutter.map.overlays.polyline.PolylineOptionsSink;
 import com.amap.flutter.map.utils.ConvertUtil;
 
 import java.util.Map;

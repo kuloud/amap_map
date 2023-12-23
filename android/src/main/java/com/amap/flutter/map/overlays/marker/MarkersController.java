@@ -5,12 +5,10 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.amap.api.maps.AMap;
-import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.Poi;
-import com.amap.api.maps.model.Polyline;
 import com.amap.flutter.map.MyMethodCallHandler;
 import com.amap.flutter.map.overlays.AbstractOverlayController;
 import com.amap.flutter.map.utils.Const;

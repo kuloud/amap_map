@@ -2,7 +2,6 @@ package com.amap.flutter.map.overlays.marker;
 
 import android.text.TextUtils;
 
-import com.amap.flutter.map.overlays.marker.MarkerOptionsSink;
 import com.amap.flutter.map.utils.ConvertUtil;
 
 import java.util.List;
@@ -53,7 +52,7 @@ public class MarkerUtil {
         }
         final Object rotation = data.get("rotation");
         if (rotation != null) {
-            sink.setRotation(Math.abs(360- ConvertUtil.toFloat(rotation)));
+            sink.setRotation(Math.abs(360 - ConvertUtil.toFloat(rotation)));
         }
         final Object visible = data.get("visible");
         if (visible != null) {
@@ -66,7 +65,7 @@ public class MarkerUtil {
 
         final Object infoWindowEnable = data.get("infoWindowEnable");
 
-        if(infoWindowEnable != null) {
+        if (infoWindowEnable != null) {
             sink.setInfoWindowEnable(ConvertUtil.toBoolean(infoWindowEnable));
         }
 

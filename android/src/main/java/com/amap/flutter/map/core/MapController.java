@@ -3,7 +3,6 @@ package com.amap.flutter.map.core;
 import android.graphics.Bitmap;
 import android.location.Location;
 
-
 import androidx.annotation.NonNull;
 
 import com.amap.api.maps.AMap;
@@ -43,16 +42,15 @@ public class MapController
         AMap.OnMapClickListener,
         AMap.OnMapLongClickListener,
         AMap.OnPOIClickListener {
+    private static final String CLASS_NAME = "MapController";
     private static boolean hasStarted = false;
     private final MethodChannel methodChannel;
     private final AMap amap;
     private final TextureMapView mapView;
-    private MethodChannel.Result mapReadyResult;
     protected int[] myArray = {};
-
-    private static final String CLASS_NAME = "MapController";
-
+    private MethodChannel.Result mapReadyResult;
     private boolean mapLoaded = false;
+    private boolean myLocationShowing = false;
 
     public MapController(MethodChannel methodChannel, TextureMapView mapView) {
         this.methodChannel = methodChannel;
@@ -72,7 +70,6 @@ public class MapController
         return Const.METHOD_ID_LIST_FOR_MAP;
     }
 
-
     @Override
     public void doMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
         LogUtil.i(CLASS_NAME, "doMethodCall===>" + call.method);
@@ -89,61 +86,47 @@ public class MapController
                 mapReadyResult = result;
                 break;
             case Const.METHOD_MAP_SATELLITE_IMAGE_APPROVAL_NUMBER:
-                if (null != amap) {
-                    result.success(amap.getSatelliteImageApprovalNumber());
-                }
+                result.success(amap.getSatelliteImageApprovalNumber());
                 break;
             case Const.METHOD_MAP_CONTENT_APPROVAL_NUMBER:
-                if (null != amap) {
-                    result.success(amap.getMapContentApprovalNumber());
-                }
+                result.success(amap.getMapContentApprovalNumber());
                 break;
             case Const.METHOD_MAP_UPDATE:
-                if (amap != null) {
-                    ConvertUtil.interpretAMapOptions(call.argument("options"), this);
-                    result.success(ConvertUtil.cameraPositionToMap(getCameraPosition()));
-                }
+                ConvertUtil.interpretAMapOptions(call.argument("options"), this);
+                result.success(ConvertUtil.cameraPositionToMap(getCameraPosition()));
                 break;
             case Const.METHOD_MAP_MOVE_CAMERA:
-                if (null != amap) {
-                    final CameraUpdate cameraUpdate = ConvertUtil.toCameraUpdate(call.argument("cameraUpdate"));
-                    final Object animatedObject = call.argument("animated");
-                    final Object durationObject = call.argument("duration");
+                final CameraUpdate cameraUpdate = ConvertUtil.toCameraUpdate(call.argument("cameraUpdate"));
+                final Object animatedObject = call.argument("animated");
+                final Object durationObject = call.argument("duration");
 
-                    moveCamera(cameraUpdate, animatedObject, durationObject);
-                }
+                moveCamera(cameraUpdate, animatedObject, durationObject);
                 break;
             case Const.METHOD_MAP_SET_RENDER_FPS:
-                if (null != amap) {
-                    amap.setRenderFps((Integer) call.argument("fps"));
-                    result.success(null);
-                }
+                amap.setRenderFps((Integer) call.argument("fps"));
+                result.success(null);
                 break;
             case Const.METHOD_MAP_TAKE_SNAPSHOT:
-                if (amap != null) {
-                    final MethodChannel.Result _result = result;
-                    amap.getMapScreenShot(new AMap.OnMapScreenShotListener() {
-                        @Override
-                        public void onMapScreenShot(Bitmap bitmap) {
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                            byte[] byteArray = stream.toByteArray();
-                            bitmap.recycle();
-                            _result.success(byteArray);
-                        }
+                final MethodChannel.Result _result = result;
+                amap.getMapScreenShot(new AMap.OnMapScreenShotListener() {
+                    @Override
+                    public void onMapScreenShot(Bitmap bitmap) {
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        byte[] byteArray = stream.toByteArray();
+                        bitmap.recycle();
+                        _result.success(byteArray);
+                    }
 
-                        @Override
-                        public void onMapScreenShot(Bitmap bitmap, int i) {
+                    @Override
+                    public void onMapScreenShot(Bitmap bitmap, int i) {
 
-                        }
-                    });
-                }
+                    }
+                });
                 break;
             case Const.METHOD_MAP_CLEAR_DISK:
-                if (null != amap) {
-                    amap.removecache();
-                    result.success(null);
-                }
+                amap.removecache();
+                result.success(null);
                 break;
             default:
                 LogUtil.w(CLASS_NAME, "onMethodCall not find methodId:" + call.method);
@@ -186,8 +169,6 @@ public class MapController
             amap.setCustomMapStyle(customMapStyleOptions);
         }
     }
-
-    private boolean myLocationShowing = false;
 
     @Override
     public void setMyLocationStyle(MyLocationStyle myLocationStyle) {

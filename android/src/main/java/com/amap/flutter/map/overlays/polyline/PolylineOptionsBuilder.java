@@ -1,6 +1,5 @@
 package com.amap.flutter.map.overlays.polyline;
 
-import com.amap.api.maps.model.AMapPara;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.PolylineOptions;
@@ -95,7 +94,7 @@ class PolylineOptionsBuilder implements PolylineOptionsSink {
         polylineOptions.lineJoinType(joinType);
     }
 
-    public PolylineOptions build(){
+    public PolylineOptions build() {
         return polylineOptions;
     }
 
