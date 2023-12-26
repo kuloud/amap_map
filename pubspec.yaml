@@ -7,6 +7,9 @@ platforms:
   android:
   ios:
 
+topics:
+  - amap
+
 environment:
   sdk: ">=3.1.5 <4.0.0"
   flutter: ">=3.0.0"
@@ -24,9 +27,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  test: ^1.24.9
-  pedantic: ^1.11.0
-  mockito: ^5.0.0-nullsafety.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

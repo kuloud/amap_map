@@ -1,6 +1,13 @@
 # amap_map
+[![pub package](https://img.shields.io/pub/v/amap_map.svg)](https://pub.dev/packages/amap_map)
 
 基于[高德开放平台地图SDK](https://lbs.amap.com/api/)的flutter插件
+
+|             | Android | iOS   |
+|-------------|---------|-------|
+| **AMapSDK** | 9.8.3 | 9.7.0 | 
+| **Support** | SDK 16+ | 11.0+ | 
+
 
 ## Usage
 使用Flutter插件，请参考[在Flutter里使用Packages](https://flutter.cn/docs/development/packages-and-plugins/using-packages), 添加`amap_map`的引用
@@ -65,13 +72,6 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 }
 
 ```
-
-## AMap SDK Version (v1.0.0+6)
-|平台|版本|
-|:-:|:-|
-|Android|9.8.3|
-|iOS|9.7.0|
-
 
 ## Issues
 1. [android] app 的 targetSDKVersion >= 30, 地图页返回闪退
