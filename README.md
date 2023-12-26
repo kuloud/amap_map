@@ -64,6 +64,16 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 
 ```
 
+## 已知问题
+1. [android] app 的 targetSDKVersion >= 30, 地图页返回闪退
+
+  在里的AndroidManifest.xml里的application里增加`android:allowNativeHeapPointerTagging="false"`
+  ```xml
+      <application android:allowNativeHeapPointerTagging="false">
+      ...
+      </application>
+  ```
+  google官方说明地址：https://source.android.com/devices/tech/debug/tagged-pointers
 
 
 

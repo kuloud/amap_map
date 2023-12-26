@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  permission_handler: ^6.1.3
-  flutter_plugin_android_lifecycle: ^2.0.0
+  permission_handler: ^11.1.0
+  flutter_plugin_android_lifecycle: ^2.0.17
 
   amap_map:
     # When depending on this package from a real application you should use:

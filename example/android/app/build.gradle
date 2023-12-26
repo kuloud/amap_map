@@ -68,6 +68,7 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    ndkVersion '25.1.8937393'
 }
 dependencies {
     //demo中引入高德地图SDK
