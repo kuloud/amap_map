@@ -3,14 +3,16 @@
 基于[高德开放平台地图SDK](https://lbs.amap.com/api/)的flutter插件
 
 ## Usage
-使用Flutter插件，请参考[在Flutter里使用Packages](https://flutter.cn/docs/development/packages-and-plugins/using-packages), 添加amap_map的引用
+使用Flutter插件，请参考[在Flutter里使用Packages](https://flutter.cn/docs/development/packages-and-plugins/using-packages), 添加`amap_map`的引用
+```bash
+flutter pub add amap_map
+```
 
-## 准备工作
+## Prepare
 * 登录[高德开放平台官网](https://lbs.amap.com/)申请ApiKey。Android平台申请配置key请参考[Android获取key](https://lbs.amap.com/api/poi-sdk-android/develop/create-project/get-key/?sug_index=2), iOS平台申请配置请参考[iOS获取key](https://lbs.amap.com/api/poi-sdk-ios/develop/create-project/get-key/?sug_index=1)。
-* 引入高德地图SDK，Android平台请参考[Android Sudio配置工程](https://lbs.amap.com/api/android-sdk/guide/create-project/android-studio-create-project), iOS平台请参考[ios安装地图SDK](https://lbs.amap.com/api/ios-sdk/guide/create-project/cocoapods)
 
 
-## 使用示例
+## Demo
 ``` Dart
 import 'package:amap_map_example/base_page.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +66,14 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 
 ```
 
-## 已知问题
+## AMap SDK Version (v1.0.0+6)
+|平台|版本|
+|:-:|:-|
+|Android|9.8.3|
+|iOS|9.7.0|
+
+
+## Issues
 1. [android] app 的 targetSDKVersion >= 30, 地图页返回闪退
 
   在里的AndroidManifest.xml里的application里增加`android:allowNativeHeapPointerTagging="false"`
