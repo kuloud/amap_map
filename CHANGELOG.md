@@ -1,3 +1,7 @@
+## 1.0.1
+2023-12-29.
+* 移除 `AMapWidget` 中的 `apiKey` / `privacyStatement` 字段
+
 ## 1.0.0+8
 2023-12-29.
 * 废弃 `AMapWidget` 中的 `apiKey` / `privacyStatement` 字段，使用 `AMapInitializer` 初始化
