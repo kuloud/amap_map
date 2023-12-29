@@ -1,27 +1,16 @@
-import 'dart:typed_data';
-
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CustomMapStylePage extends BasePage {
-  CustomMapStylePage(String title, String subTitle) : super(title, subTitle);
-
-  @override
-  Widget build(BuildContext context) => _CustomMapStyleBody();
-}
-
-class _CustomMapStyleBody extends StatefulWidget {
-  _CustomMapStyleBody({Key? key}) : super(key: key);
+class CustomMapStylePage extends StatefulWidget {
+  CustomMapStylePage({Key? key}) : super(key: key);
 
   @override
   _CustomMapStyleState createState() => _CustomMapStyleState();
 }
 
-class _CustomMapStyleState extends State<_CustomMapStyleBody> {
+class _CustomMapStyleState extends State<CustomMapStylePage> {
   bool _mapCreated = false;
 
   CustomStyleOptions _customStyleOptions = CustomStyleOptions(false);

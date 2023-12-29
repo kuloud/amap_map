@@ -1,23 +1,14 @@
 import 'package:amap_map/amap_map.dart';
 import 'package:x_amap_base/x_amap_base.dart';
-import 'package:amap_map_example/base_page.dart';
 import 'package:flutter/material.dart';
 
-class MultiMapDemoPage extends BasePage {
-  MultiMapDemoPage(String title, String subTitle) : super(title, subTitle);
-  @override
-  Widget build(BuildContext context) {
-    return const _MultiMapDemoBody();
-  }
-}
-
-class _MultiMapDemoBody extends StatefulWidget {
-  const _MultiMapDemoBody();
+class MultiMapDemoPage extends StatefulWidget {
+  const MultiMapDemoPage();
   @override
   State<StatefulWidget> createState() => _MultiMapDemoState();
 }
 
-class _MultiMapDemoState extends State<_MultiMapDemoBody> {
+class _MultiMapDemoState extends State<MultiMapDemoPage> {
   @override
   Widget build(BuildContext context) {
     return Container(

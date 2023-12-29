@@ -1,23 +1,13 @@
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amap_map/amap_map.dart';
 
-class ShowMapPage extends BasePage {
-  ShowMapPage(String title, String subTitle) : super(title, subTitle);
-  @override
-  Widget build(BuildContext context) {
-    return _ShowMapPageBody();
-  }
-}
-
-class _ShowMapPageBody extends StatefulWidget {
+class ShowMapPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _ShowMapPageState();
 }
 
-class _ShowMapPageState extends State<_ShowMapPageBody> {
+class _ShowMapPageState extends State<ShowMapPage> {
   List<Widget> _approvalNumberWidget = <Widget>[];
   @override
   Widget build(BuildContext context) {

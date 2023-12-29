@@ -1,25 +1,16 @@
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/widgets/amap_gridview.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
 
-class MapUIDemoPage extends BasePage {
-  MapUIDemoPage(String title, String subTitle) : super(title, subTitle);
-
-  @override
-  Widget build(BuildContext context) => _Body();
-}
-
-class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+class MapUIDemoPage extends StatefulWidget {
+  MapUIDemoPage({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<_Body> {
+class _BodyState extends State<MapUIDemoPage> {
   ///显示路况开关
   bool _trafficEnabled = false;
 

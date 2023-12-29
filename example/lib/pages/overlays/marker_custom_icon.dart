@@ -1,22 +1,13 @@
 import 'package:amap_map/amap_map.dart';
 import 'package:x_amap_base/x_amap_base.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:flutter/material.dart';
 
-class MarkerCustomIconPage extends BasePage {
-  MarkerCustomIconPage(String title, String subTitle) : super(title, subTitle);
-
-  @override
-  Widget build(BuildContext context) => _Body();
-}
-
-class _Body extends StatefulWidget {
+class MarkerCustomIconPage extends StatefulWidget {
   @override
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<_Body> {
+class _BodyState extends State<MarkerCustomIconPage> {
   static final LatLng markerPosition = const LatLng(39.909187, 116.397451);
   final Map<String, Marker> _initMarkerMap = <String, Marker>{};
   String? _currentMarkerId;

@@ -1,24 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:flutter/material.dart';
 
-class SnapshotPage extends BasePage {
-  SnapshotPage(String title, String subTitle) : super(title, subTitle);
-  @override
-  Widget build(BuildContext context) {
-    return _SnapShotBody();
-  }
-}
-
-class _SnapShotBody extends StatefulWidget {
+class SnapshotPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SnapShotState();
 }
 
-class _SnapShotState extends State<_SnapShotBody> {
+class _SnapShotState extends State<SnapshotPage> {
   AMapController? _mapController;
   Uint8List? _imageBytes;
   @override

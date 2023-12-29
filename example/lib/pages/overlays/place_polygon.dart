@@ -1,4 +1,3 @@
-import 'package:amap_map_example/base_page.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,22 +5,14 @@ import 'package:flutter/widgets.dart';
 import 'package:amap_map/amap_map.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 
-class PolygonDemoPage extends BasePage {
-  PolygonDemoPage(String title, String subTitle) : super(title, subTitle);
-  @override
-  Widget build(BuildContext context) {
-    return _Body();
-  }
-}
-
-class _Body extends StatefulWidget {
-  const _Body();
+class PolygonDemoPage extends StatefulWidget {
+  const PolygonDemoPage();
 
   @override
   State<StatefulWidget> createState() => _State();
 }
 
-class _State extends State<_Body> {
+class _State extends State<PolygonDemoPage> {
   _State();
 
 // Values when toggling Polygon color

@@ -1,28 +1,18 @@
 import 'dart:typed_data';
 
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 
-class AllMapConfigDemoPage extends BasePage {
-  AllMapConfigDemoPage(String title, String subTitle) : super(title, subTitle);
-  @override
-  Widget build(BuildContext context) {
-    return _MapUiBody();
-  }
-}
-
-class _MapUiBody extends StatefulWidget {
+class AllMapConfigDemoPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _MapUiBodyState();
 }
 
-class _MapUiBodyState extends State<_MapUiBody> {
+class _MapUiBodyState extends State<AllMapConfigDemoPage> {
   //默认显示在北京天安门
   static final CameraPosition _kInitialPosition = const CameraPosition(
     target: LatLng(39.909187, 116.397451),

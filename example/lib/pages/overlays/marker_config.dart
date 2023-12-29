@@ -2,33 +2,21 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:amap_map/amap_map.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 import 'dart:math';
 
-class MarkerConfigDemoPage extends BasePage {
-  MarkerConfigDemoPage(String title, String subTitle) : super(title, subTitle);
-
-  @override
-  Widget build(BuildContext context) {
-    return _Body();
-  }
-}
-
-class _Body extends StatefulWidget {
-  const _Body();
+class MarkerConfigDemoPage extends StatefulWidget {
+  const MarkerConfigDemoPage();
 
   @override
   State<StatefulWidget> createState() => _State();
 }
 
-class _State extends State<_Body> {
+class _State extends State<MarkerConfigDemoPage> {
   static final LatLng mapCenter = const LatLng(39.909187, 116.397451);
 
   Map<String, Marker> _markers = <String, Marker>{};

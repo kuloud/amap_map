@@ -1,24 +1,15 @@
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/widgets/amap_radio_group.dart';
 import 'package:flutter/material.dart';
 
-class ChangeMapTypePage extends BasePage {
-  ChangeMapTypePage(String title, String subTitle) : super(title, subTitle);
-
-  @override
-  Widget build(BuildContext context) => _PageBody();
-}
-
-class _PageBody extends StatefulWidget {
-  _PageBody({Key? key}) : super(key: key);
+class ChangeMapTypePage extends StatefulWidget {
+  ChangeMapTypePage({Key? key}) : super(key: key);
 
   @override
   _PageBodyState createState() => _PageBodyState();
 }
 
-class _PageBodyState extends State<_PageBody> {
+class _PageBodyState extends State<ChangeMapTypePage> {
   //地图类型
   late MapType _mapType;
   final Map<String, MapType> _radioValueMap = {

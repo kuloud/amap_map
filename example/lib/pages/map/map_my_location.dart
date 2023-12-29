@@ -1,22 +1,14 @@
 import 'package:amap_map/amap_map.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class MyLocationPage extends BasePage {
-  MyLocationPage(String title, String subTitle) : super(title, subTitle);
-  @override
-  Widget build(BuildContext context) => _Body();
-}
-
-class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+class MyLocationPage extends StatefulWidget {
+  MyLocationPage({Key? key}) : super(key: key);
   @override
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<_Body> {
+class _BodyState extends State<MyLocationPage> {
   @override
   void initState() {
     super.initState();
@@ -44,6 +36,7 @@ class _BodyState extends State<_Body> {
         circleStrokeWidth: 1,
       ),
     );
+
     return Container(
       child: amap,
     );

@@ -1,22 +1,13 @@
 import 'package:amap_map/amap_map.dart';
 import 'package:x_amap_base/x_amap_base.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:flutter/material.dart';
 
-class MarkerAddAfterMapPage extends BasePage {
-  MarkerAddAfterMapPage(String title, String subTitle) : super(title, subTitle);
-
-  @override
-  Widget build(BuildContext context) => _Body();
-}
-
-class _Body extends StatefulWidget {
+class MarkerAddAfterMapPage extends StatefulWidget {
   @override
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<_Body> {
+class _BodyState extends State<MarkerAddAfterMapPage> {
   static final LatLng defaultPosition = const LatLng(39.909187, 116.397451);
   //需要先设置一个空的map赋值给AMapWidget的markers，否则后续无法添加marker
   final Map<String, Marker> _markers = <String, Marker>{};
