@@ -88,8 +88,8 @@ class _MapUiBodyState extends State<_MapUiBody> {
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
       ///必须正确设置的合规隐私声明，否则SDK不会工作，会造成地图白屏等问题。
-      privacyStatement: ConstConfig.amapPrivacyStatement,
-      apiKey: ConstConfig.amapApiKeys,
+      // privacyStatement: ConstConfig.amapPrivacyStatement,
+      // apiKey: ConstConfig.amapApiKeys,
       initialCameraPosition: _kInitialPosition,
       mapType: _mapType,
       trafficEnabled: _trafficEnabled,
@@ -362,6 +362,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
   void onMapCreated(AMapController controller) {
     setState(() {
       _controller = controller;
+
       printApprovalNumber();
     });
   }

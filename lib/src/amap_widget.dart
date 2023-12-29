@@ -5,7 +5,7 @@ typedef void MapCreatedCallback(AMapController controller);
 ///用于展示高德地图的Widget
 class AMapWidget extends StatefulWidget {
   ///高德开放平台的key
-  ///
+  @Deprecated('高德开放平台的key，请通过AMapInitializer初始化设置，将在1.0.1+移除')
   final AMapApiKey? apiKey;
 
   /// 初始化时的地图中心点
@@ -92,11 +92,11 @@ class AMapWidget extends StatefulWidget {
   ///高德合规声明配置
   ///
   /// 高德SDK合规使用方案请参考：https://lbs.amap.com/news/sdkhgsy
+  @Deprecated('高德开放平台的key，请通过AMapInitializer初始化设置，将在1.0.1+移除')
   final AMapPrivacyStatement? privacyStatement;
 
   /// 创建一个展示高德地图的widget
   ///
-  /// 如果使用的高德地图SDK的版本是8.1.0及以上版本，
   /// 在app首次启动时必须传入高德合规声明配置[privacyStatement],后续如果没有变化不需要重复设置
   /// <li>[privacyStatement.hasContains] 隐私权政策是否包含高德开平隐私权政策</li>
   /// <li>[privacyStatement.hasShow] 是否已经弹窗展示给用户</li>
@@ -108,8 +108,9 @@ class AMapWidget extends StatefulWidget {
   /// [AssertionError] will be thrown if [initialCameraPosition] is null;
   const AMapWidget({
     Key? key,
+    @Deprecated('高德开放平台的key，请通过AMapInitializer初始化设置，将在1.0.1+移除')
     this.privacyStatement,
-    this.apiKey,
+    @Deprecated('高德开放平台的key，请通过AMapInitializer初始化设置，将在1.0.1+移除') this.apiKey,
     this.initialCameraPosition =
         const CameraPosition(target: LatLng(39.909187, 116.397451), zoom: 10),
     this.mapType = MapType.normal,
@@ -155,10 +156,10 @@ class _MapState extends State<AMapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    AMapUtil.init(context);
     final Map<String, dynamic> creationParams = <String, dynamic>{
-      'privacyStatement': widget.privacyStatement?.toMap(),
-      'apiKey': widget.apiKey?.toMap(),
+      'privacyStatement':
+          widget.privacyStatement?.toMap() ?? AMapInitializer._privacyStatement,
+      'apiKey': widget.apiKey?.toMap() ?? AMapInitializer._apiKey,
       'initialCameraPosition': widget.initialCameraPosition.toMap(),
       'options': _mapOptions.toMap(),
       'markersToAdd': serializeOverlaySet(widget.markers),

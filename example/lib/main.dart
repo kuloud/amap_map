@@ -1,3 +1,5 @@
+import 'package:amap_map/amap_map.dart';
+import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/pages/overlays/marker_add_after_map.dart';
 import 'package:amap_map_example/pages/overlays/marker_add_with_map.dart';
 import 'package:amap_map_example/pages/overlays/marker_config.dart';
@@ -75,6 +77,7 @@ class DemoWidget extends State<AMapDemo> {
   @override
   void initState() {
     super.initState();
+
     _checkPermissions();
   }
 
@@ -94,6 +97,8 @@ class DemoWidget extends State<AMapDemo> {
 
   @override
   Widget build(BuildContext context) {
+    AMapInitializer.init(context, ConstConfig.amapApiKeys);
+    AMapInitializer.updatePrivacyAgree(ConstConfig.amapPrivacyStatement);
     return Scaffold(
       appBar: AppBar(title: const Text('高德地图示例')),
       body: Container(

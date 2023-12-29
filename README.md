@@ -20,7 +20,34 @@ flutter pub add amap_map
 
 
 ## Demo
-``` Dart
+### 初始化
+在runApp启动的**第一个**Widget中，使用`context`进行组件初始化
+
+```dart
+import 'package:amap_map/amap_map.dart';
+import 'package:x_amap_base/x_amap_base.dart'; // AMapApiKey 和 AMapPrivacyStatement 定义在 package `x_amap_base` 中，需要一并引入
+
+class DemoWidget extends State<AMapDemo> {
+
+  @override
+  Widget build(BuildContext context) {
+    AMapInitializer.init(context, ConstConfig.amapApiKeys);
+    
+    return Scaffold(
+      // ...
+    );
+  }
+}
+```
+### 合规处理
+高德SDK合规使用方案请参考：https://lbs.amap.com/news/sdkhgsy ，需要进行授权交互，然后通知组件。
+
+```dart
+AMapInitializer.updatePrivacyAgree(ConstConfig.amapPrivacyStatement);
+```
+
+### 使用地图
+``` dart
 import 'package:amap_map_example/base_page.dart';
 import 'package:flutter/material.dart';
 

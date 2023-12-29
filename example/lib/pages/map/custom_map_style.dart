@@ -34,9 +34,9 @@ class _CustomMapStyleState extends State<_CustomMapStyleBody> {
     _customStyleOptions.styleExtraData =
         styleExtraByteData.buffer.asUint8List();
     //如果需要加载完成后直接展示自定义地图，可以通过setState修改CustomStyleOptions的enable为true
-    // setState(() {
-    //   _customStyleOptions.enabled = true;
-    // });
+    setState(() {
+      _customStyleOptions.enabled = true;
+    });
   }
 
   @override

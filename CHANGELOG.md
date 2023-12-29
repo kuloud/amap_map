@@ -1,3 +1,7 @@
+## 1.0.0+8
+2023-12-29.
+* 废弃 `AMapWidget` 中的 `apiKey` / `privacyStatement` 字段，使用 `AMapInitializer` 初始化
+
 ## 1.0.0+7 - 2023-12-26.
 * github action automate publish support
 
