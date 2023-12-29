@@ -65,7 +65,6 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     final AMapWidget amap = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       // //创建地图时，给marker属性赋值一个空的set，否则后续无法添加marker
       markers: Set<Marker>.of(_markers.values),
     );

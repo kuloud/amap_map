@@ -37,7 +37,6 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     final AMapWidget amap = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       myLocationStyleOptions: MyLocationStyleOptions(
         true,
         circleFillColor: Colors.lightBlue,

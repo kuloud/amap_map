@@ -38,7 +38,6 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       trafficEnabled: _trafficEnabled,
       buildingsEnabled: _buildingsEnabled,
       compassEnabled: _compassEnabled,

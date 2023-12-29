@@ -48,7 +48,6 @@ class _CustomMapStyleState extends State<_CustomMapStyleBody> {
   @override
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       onMapCreated: onMapCreated,
       customStyleOptions: _customStyleOptions,
     );

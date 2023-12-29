@@ -23,7 +23,6 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     final AMapWidget amap = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       touchPoiEnabled: true,
       onPoiTouched: _onPoiTouched,
     );

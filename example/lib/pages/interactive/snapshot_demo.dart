@@ -31,7 +31,6 @@ class _SnapShotState extends State<_SnapShotBody> {
         children: <Widget>[
           Expanded(
             child: AMapWidget(
-              apiKey: ConstConfig.amapApiKeys,
               onMapCreated: _onMapCreated,
             ),
           ),

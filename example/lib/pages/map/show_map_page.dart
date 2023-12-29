@@ -22,7 +22,6 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
   @override
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       onMapCreated: onMapCreated,
     );
 

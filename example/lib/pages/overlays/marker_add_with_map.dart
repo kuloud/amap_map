@@ -32,7 +32,6 @@ class _BodyState extends State<_Body> {
     }
 
     final AMapWidget amap = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       markers: Set<Marker>.of(_initMarkerMap.values),
     );
     return Container(

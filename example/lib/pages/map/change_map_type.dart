@@ -38,7 +38,6 @@ class _PageBodyState extends State<_PageBody> {
   Widget build(BuildContext context) {
     //创建地图
     final AMapWidget map = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       //地图类型属性
       mapType: _mapType,
     );

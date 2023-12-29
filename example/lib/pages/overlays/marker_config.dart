@@ -243,7 +243,6 @@ class _State extends State<_Body> {
     // _createMarkerImageFromBytes(context);
 
     final AMapWidget map = AMapWidget(
-      apiKey: ConstConfig.amapApiKeys,
       onMapCreated: _onMapCreated,
       markers: Set<Marker>.of(_markers.values),
     );

@@ -87,9 +87,6 @@ class _MapUiBodyState extends State<_MapUiBody> {
   @override
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
-      ///必须正确设置的合规隐私声明，否则SDK不会工作，会造成地图白屏等问题。
-      // privacyStatement: ConstConfig.amapPrivacyStatement,
-      // apiKey: ConstConfig.amapApiKeys,
       initialCameraPosition: _kInitialPosition,
       mapType: _mapType,
       trafficEnabled: _trafficEnabled,
