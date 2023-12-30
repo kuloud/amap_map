@@ -1,3 +1,7 @@
+## 1.0.2
+2023-12-30.
+* 增加插件支持
+
 ## 1.0.1
 2023-12-29.
 * 移除 `AMapWidget` 中的 `apiKey` / `privacyStatement` 字段
