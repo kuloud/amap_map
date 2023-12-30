@@ -115,32 +115,9 @@ class AMapController {
         mapId: mapId, animated: animated, duration: duration);
   }
 
-  ///设置地图每秒渲染的帧数
-  Future<void> setRenderFps(int fps) {
-    return _methodChannel.setRenderFps(fps, mapId: mapId);
-  }
-
   ///地图截屏
   Future<Uint8List?> takeSnapshot() {
     return _methodChannel.takeSnapshot(mapId: mapId);
-  }
-
-  /// 获取地图审图号（普通地图）
-  ///
-  /// 任何使用高德地图API调用地图服务的应用必须在其应用中对外透出审图号
-  ///
-  /// 如高德地图在"关于"中体现
-  Future<String?> getMapContentApprovalNumber() {
-    return _methodChannel.getMapContentApprovalNumber(mapId: mapId);
-  }
-
-  /// 获取地图审图号（卫星地图)
-  ///
-  /// 任何使用高德地图API调用地图服务的应用必须在其应用中对外透出审图号
-  ///
-  /// 如高德地图在"关于"中体现
-  Future<String?> getSatelliteImageApprovalNumber() {
-    return _methodChannel.getSatelliteImageApprovalNumber(mapId: mapId);
   }
 
   /// 清空缓存

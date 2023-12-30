@@ -23,8 +23,8 @@ dependencies:
     # the parent directory to use the current plugin's version.
     path: ../
 
-#  amap_map:
-#    path: ../../amap_map
+  amap_map_extensions:
+    path: ../../amap_map_extensions
 
 
 dev_dependencies:

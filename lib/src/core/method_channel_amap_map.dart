@@ -235,34 +235,11 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
     });
   }
 
-  ///设置地图每秒渲染的帧数
-  Future<void> setRenderFps(int fps, {required int mapId}) {
-    return channel(mapId)
-        .invokeMethod<void>('map#setRenderFps', <String, dynamic>{
-      'fps': fps,
-    });
-  }
-
   ///截屏
   Future<Uint8List?> takeSnapshot({
     required int mapId,
   }) {
     return channel(mapId).invokeMethod<Uint8List>('map#takeSnapshot');
-  }
-
-  //获取地图审图号（普通地图）
-  Future<String?> getMapContentApprovalNumber({
-    required int mapId,
-  }) {
-    return channel(mapId).invokeMethod<String>('map#contentApprovalNumber');
-  }
-
-  //获取地图审图号（卫星地图）
-  Future<String?> getSatelliteImageApprovalNumber({
-    required int mapId,
-  }) {
-    return channel(mapId)
-        .invokeMethod<String>('map#satelliteImageApprovalNumber');
   }
 
   Future<void> clearDisk({

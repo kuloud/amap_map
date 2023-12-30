@@ -4,6 +4,7 @@ import 'package:amap_map_example/main.dart';
 import 'package:amap_map_example/pages/interactive/map_ui_options.dart';
 import 'package:amap_map_example/pages/map/limit_map_bounds.dart';
 import 'package:amap_map_example/pages/map/map_my_location.dart';
+import 'package:amap_map_example/pages/map/map_with_extension_page.dart';
 import 'package:amap_map_example/pages/map/show_map_page.dart';
 import 'package:amap_map_example/pages/overlays/marker_config.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,8 @@ class DemoConfiguration {
   final WidgetBuilder buildRoute;
 }
 
-List<Demo> allDemos() => mapDemos() + interactiveDemos() + overlayDemos();
+List<Demo> allDemos() =>
+    mapDemos() + interactiveDemos() + overlayDemos() + extensionDemos();
 
 List<Demo> mapDemos() {
   return [
@@ -69,6 +71,19 @@ List<Demo> overlayDemos() {
         slug: 'marker-config',
         configurations: [
           DemoConfiguration(buildRoute: (context) => MarkerConfigDemoPage())
+        ])
+  ];
+}
+
+List<Demo> extensionDemos() {
+  return [
+    Demo(
+        title: '辅助信息获取',
+        category: DemoCategory.extension,
+        subtitle: '获取审图号',
+        slug: 'extension-info',
+        configurations: [
+          DemoConfiguration(buildRoute: (context) => MapWithExtensionPage())
         ])
   ];
 }

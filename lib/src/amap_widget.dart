@@ -97,6 +97,8 @@ class AMapWidget extends StatefulWidget {
   ///需要应用到地图上的手势集合
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
 
+  final List<AMapExtension> extensions;
+
   /// 创建一个展示高德地图的widget
   ///
   /// 在app首次启动时必须传入高德合规声明配置[privacyStatement],后续如果没有变化不需要重复设置
@@ -108,37 +110,38 @@ class AMapWidget extends StatefulWidget {
   /// 高德SDK合规使用方案请参考：https://lbs.amap.com/news/sdkhgsy
   ///
   /// [AssertionError] will be thrown if [initialCameraPosition] is null;
-  const AMapWidget({
-    Key? key,
-    this.initialCameraPosition =
-        const CameraPosition(target: LatLng(39.909187, 116.397451), zoom: 10),
-    this.mapType = MapType.normal,
-    this.buildingsEnabled = true,
-    this.compassEnabled = false,
-    this.labelsEnabled = true,
-    this.limitBounds,
-    this.minMaxZoomPreference,
-    this.rotateGesturesEnabled = true,
-    this.scaleEnabled = true,
-    this.scrollGesturesEnabled = true,
-    this.tiltGesturesEnabled = true,
-    this.touchPoiEnabled = true,
-    this.trafficEnabled = false,
-    this.zoomGesturesEnabled = true,
-    this.onMapCreated,
-    this.gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
-    this.customStyleOptions,
-    this.myLocationStyleOptions,
-    this.onCameraMove,
-    this.onCameraMoveEnd,
-    this.onLocationChanged,
-    this.onTap,
-    this.onLongPress,
-    this.onPoiTouched,
-    this.markers = const <Marker>{},
-    this.polylines = const <Polyline>{},
-    this.polygons = const <Polygon>{},
-  }) : super(key: key);
+  const AMapWidget(
+      {Key? key,
+      this.initialCameraPosition =
+          const CameraPosition(target: LatLng(39.909187, 116.397451), zoom: 10),
+      this.mapType = MapType.normal,
+      this.buildingsEnabled = true,
+      this.compassEnabled = false,
+      this.labelsEnabled = true,
+      this.limitBounds,
+      this.minMaxZoomPreference,
+      this.rotateGesturesEnabled = true,
+      this.scaleEnabled = true,
+      this.scrollGesturesEnabled = true,
+      this.tiltGesturesEnabled = true,
+      this.touchPoiEnabled = true,
+      this.trafficEnabled = false,
+      this.zoomGesturesEnabled = true,
+      this.onMapCreated,
+      this.gestureRecognizers = const <Factory<OneSequenceGestureRecognizer>>{},
+      this.customStyleOptions,
+      this.myLocationStyleOptions,
+      this.onCameraMove,
+      this.onCameraMoveEnd,
+      this.onLocationChanged,
+      this.onTap,
+      this.onLongPress,
+      this.onPoiTouched,
+      this.markers = const <Marker>{},
+      this.polylines = const <Polyline>{},
+      this.polygons = const <Polygon>{},
+      this.extensions = const []})
+      : super(key: key);
 
   ///
   @override
@@ -149,6 +152,7 @@ class _MapState extends State<AMapWidget> {
   Map<String, Marker> _markers = <String, Marker>{};
   Map<String, Polyline> _polylines = <String, Polyline>{};
   Map<String, Polygon> _polygons = <String, Polygon>{};
+  Map<String, AMapExtension> _extensions = <String, AMapExtension>{};
 
   final Completer<AMapController> _controller = Completer<AMapController>();
   late _AMapOptions _mapOptions;
@@ -169,16 +173,23 @@ class _MapState extends State<AMapWidget> {
       widget.gestureRecognizers,
       onPlatformViewCreated,
     );
-    return mapView;
+
+    return AMapLoader(
+      mapView: mapView,
+      extensions: widget.extensions,
+    );
   }
 
   @override
   void initState() {
+    AMapLoader.prepare();
     super.initState();
     _mapOptions = _AMapOptions.fromWidget(widget);
     _markers = keyByMarkerId(widget.markers);
     _polygons = keyByPolygonId(widget.polygons);
     _polylines = keyByPolylineId(widget.polylines);
+
+    _extensions = keyByExtensionId(widget.extensions);
     print('initState AMapWidget');
   }
 
@@ -218,6 +229,12 @@ class _MapState extends State<AMapWidget> {
       this,
     );
     _controller.complete(controller);
+
+    if (_extensions.isNotEmpty) {
+      await Future.forEach(
+          _extensions.values, (e) => e.bindMethodChannel(controller.channel));
+    }
+
     final MapCreatedCallback? _onMapCreated = widget.onMapCreated;
     if (_onMapCreated != null) {
       _onMapCreated(controller);

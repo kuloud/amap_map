@@ -18,3 +18,4 @@ export 'package:amap_map/src/types/types.dart';
 part 'src/amap_initializer.dart';
 part 'src/amap_controller.dart';
 part 'src/amap_widget.dart';
+part 'src/amap_loader.dart';

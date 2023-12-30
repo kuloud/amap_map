@@ -355,12 +355,12 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
   }
 
   void printApprovalNumber() async {
-    String mapContentApprovalNumber =
-        (await _controller.getMapContentApprovalNumber())!;
-    String satelliteImageApprovalNumber =
-        (await _controller.getSatelliteImageApprovalNumber())!;
-    print('地图审图号（普通地图）: $mapContentApprovalNumber');
-    print('地图审图号（卫星地图): $satelliteImageApprovalNumber');
+    // String mapContentApprovalNumber =
+    //     (await _controller.getMapContentApprovalNumber())!;
+    // String satelliteImageApprovalNumber =
+    //     (await _controller.getSatelliteImageApprovalNumber())!;
+    // print('地图审图号（普通地图）: $mapContentApprovalNumber');
+    // print('地图审图号（卫星地图): $satelliteImageApprovalNumber');
   }
 
   Widget createGridView(List<Widget> widgets) {
