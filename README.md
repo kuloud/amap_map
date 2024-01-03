@@ -8,6 +8,9 @@
 | **AMapSDK** | 9.8.3 | 9.7.0 | 
 | **Support** | SDK 16+ | 12.0+ | 
 
+本插件基于 amap_flutter_map 3.0.0 进行二开的原因：
+1. 原插件21年开始已无更新，插件年久失修，依赖SDK版本老旧
+1. 原插件只实现了基础的地图展示和交互功能，无法满足常见定制化需求
 
 ## Usage
 使用Flutter插件，请参考[在Flutter里使用Packages](https://flutter.cn/docs/development/packages-and-plugins/using-packages), 添加`amap_map`的引用
