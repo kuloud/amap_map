@@ -27,11 +27,6 @@
                            alpha:((float)((value & 0xFF000000) >> 24)) / 255.0];
 }
 
-+ (CGPoint)pointFromArray:(NSArray*)data {
-    NSAssert((data != nil && [data isKindOfClass:[NSArray class]] && data.count == 2), @"数组类型转point格式错误");
-    return CGPointMake([data[0] doubleValue],
-                       [data[1] doubleValue]);
-}
 
 /// 从数据中解析经纬度
 /// @param array 经纬度数组对（默认第一个当做维度，第二个当做经度）
@@ -209,6 +204,30 @@
     double height = fabs(mapNorthEastPoint.y - mapSouthWestPoint.y);
     MAMapRect limitRect = MAMapRectMake(mapSouthWestPoint.x, mapNorthEastPoint.y, width, height);
     return limitRect;
+}
+
+
++ (CGPoint)pointFromDictionary:(NSDictionary *)dictionary {
+  double x = [dictionary[@"x"] doubleValue];
+  double y = [dictionary[@"y"] doubleValue];
+  return CGPointMake(x, y);
+}
+
++ (CGPoint)pointFromArray:(NSArray*)array {
+    NSAssert((array != nil && [array isKindOfClass:[NSArray class]] && array.count == 2), @"数组类型转point格式错误");
+    return CGPointMake([array[0] doubleValue],
+                       [array[1] doubleValue]);
+}
+
++ (NSDictionary<NSString *, NSNumber *> *)dictionaryFromPoint:(CGPoint)point {
+  return @{
+    @"x" : @(lroundf(point.x)),
+    @"y" : @(lroundf(point.y)),
+  };
+}
+
++ (NSArray *)arrayFromLocation:(CLLocationCoordinate2D)location {
+  return @[ @(location.latitude), @(location.longitude) ];
 }
 
 

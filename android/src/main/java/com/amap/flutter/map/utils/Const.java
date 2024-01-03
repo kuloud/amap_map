@@ -1,6 +1,7 @@
 package com.amap.flutter.map.utils;
 
 /**
+ * @author kuloud
  * @author whm
  * @date 2020/11/10 9:44 PM
  * @mail hongming.whm@alibaba-inc.com
@@ -18,6 +19,8 @@ public class Const {
     public static final String METHOD_MAP_SET_RENDER_FPS = "map#setRenderFps";
     public static final String METHOD_MAP_TAKE_SNAPSHOT = "map#takeSnapshot";
     public static final String METHOD_MAP_CLEAR_DISK = "map#clearDisk";
+    public static final String METHOD_MAP_TO_SCREEN_COORDINATE = "map#toScreenCoordinate";
+    public static final String METHOD_MAP_FROM_SCREEN_COORDINATE = "map#fromScreenCoordinate";
 
     public static final String[] METHOD_ID_LIST_FOR_MAP = {
             METHOD_MAP_CONTENT_APPROVAL_NUMBER,
@@ -27,7 +30,10 @@ public class Const {
             METHOD_MAP_MOVE_CAMERA,
             METHOD_MAP_SET_RENDER_FPS,
             METHOD_MAP_TAKE_SNAPSHOT,
-            METHOD_MAP_CLEAR_DISK};
+            METHOD_MAP_CLEAR_DISK,
+            METHOD_MAP_TO_SCREEN_COORDINATE,
+            METHOD_MAP_FROM_SCREEN_COORDINATE
+            };
 
 
     /**

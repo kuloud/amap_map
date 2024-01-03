@@ -1,3 +1,7 @@
+## 1.0.3
+2024-01-03.
+* AMapController 添加 toScreenCoordinate / fromScreenCoordinate，实现屏幕坐标和经纬度的互相转换
+
 ## 1.0.2
 2023-12-30.
 * 增加插件支持

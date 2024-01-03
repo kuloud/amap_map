@@ -1,4 +1,17 @@
+// Copyright 2023-2024 kuloud
+// Copyright 2020 lbs.amap.com
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+//     http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+
 import 'dart:async';
+import 'dart:math';
 
 import 'package:x_amap_base/x_amap_base.dart';
 import 'package:amap_map/src/core/amap_flutter_platform.dart';
@@ -246,5 +259,25 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
     required int mapId,
   }) {
     return channel(mapId).invokeMethod<void>('map#clearDisk');
+  }
+
+  Future<ScreenCoordinate> toScreenLocation(
+    LatLng latLng, {
+    required int mapId,
+  }) async {
+    final Map<String, int>? point = await channel(mapId)
+        .invokeMapMethod<String, int>(
+            'map#toScreenCoordinate', latLng.toJson());
+    return ScreenCoordinate(x: point!['x']!, y: point['y']!);
+  }
+
+  Future<LatLng> fromScreenLocation(
+    ScreenCoordinate screenCoordinate, {
+    required int mapId,
+  }) async {
+    final List<dynamic>? latLng = await channel(mapId)
+        .invokeMethod<List<dynamic>>(
+            'map#fromScreenCoordinate', screenCoordinate.toJson());
+    return LatLng(latLng![0] as double, latLng[1] as double);
   }
 }

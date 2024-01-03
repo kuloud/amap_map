@@ -1,3 +1,15 @@
+// Copyright 2023-2024 kuloud
+// Copyright 2020 lbs.amap.com
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+//     http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+
 part of amap_map;
 
 final MethodChannelAMapFlutterMap _methodChannel =
@@ -123,5 +135,15 @@ class AMapController {
   /// 清空缓存
   Future<void> clearDisk() {
     return _methodChannel.clearDisk(mapId: mapId);
+  }
+
+  /// 经纬度转屏幕坐标
+  Future<ScreenCoordinate> toScreenCoordinate(LatLng latLng) {
+    return _methodChannel.toScreenLocation(latLng, mapId: mapId);
+  }
+
+  /// 屏幕坐标转经纬度
+  Future<LatLng> fromScreenCoordinate(ScreenCoordinate screenCoordinate) {
+    return _methodChannel.fromScreenLocation(screenCoordinate, mapId: mapId);
   }
 }

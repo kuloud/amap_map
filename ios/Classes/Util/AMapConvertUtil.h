@@ -24,9 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param numberColor 色值
 + (UIColor*)colorFromNumber:(NSNumber*)numberColor;
 
-/// 将数组（内含数字）转换为point坐标，（默认数组第一个元素为x值，第二个为y值）
-/// @param data 数组
-+ (CGPoint)pointFromArray:(NSArray*)data;
++ (CGPoint)pointFromDictionary:(NSDictionary *)dictionary;
 
 /// 从数据中解析经纬度
 /// @param array 经纬度数组对（默认第一个当做维度，第二个当做经度）
@@ -62,6 +60,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 解析得到mapRect结构
 /// @param array json数组[southwest,northeast]，分别为西南、东北的坐标
 + (MAMapRect)mapRectFromArray:(NSArray *)array;
+
++ (CGPoint)pointFromDictionary:(NSDictionary *)dictionary;
++ (CGPoint)pointFromArray:(NSArray *)array;
++ (NSDictionary<NSString *, NSNumber *> *)dictionaryFromPoint:(CGPoint)point;
++ (NSArray *)arrayFromLocation:(CLLocationCoordinate2D)location;
+
+
+
 
 @end
 

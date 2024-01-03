@@ -234,6 +234,16 @@
         [weakSelf.mapView clearDisk];
         result(nil);
     }];
+    [self.channel addMethodName:@"map#toScreenCoordinate" withHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
+        CLLocationCoordinate2D location = [AMapConvertUtil coordinateFromArray:call.arguments];
+        CGPoint point = [weakSelf.mapView convertCoordinate:location toPointToView:weakSelf.mapView];
+        result([AMapConvertUtil dictionaryFromPoint:point]);
+    }];
+    [self.channel addMethodName:@"map#fromScreenCoordinate" withHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
+        CGPoint point = [AMapConvertUtil pointFromDictionary:call.arguments];
+        CLLocationCoordinate2D coordinate = [weakSelf.mapView convertPoint:point toCoordinateFromView:weakSelf.mapView];
+        result([AMapConvertUtil arrayFromLocation:coordinate]);
+    }];
 }
 
 //MARK: MAMapViewDelegate

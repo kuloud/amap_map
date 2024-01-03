@@ -143,6 +143,12 @@ public class ConvertUtil {
         return new Point(toPixels(data.get(0)), toPixels(data.get(1)));
     }
 
+    public static Point pointFromMap(Object o) {
+        Object x = toMap(o).get("x");
+        Object y = toMap(o).get("y");
+        return new Point((int) x, (int) y);
+    }
+
     public static float toFloatPixels(Object o) {
         return toFloat(o) * density;
     }
@@ -495,6 +501,13 @@ public class ConvertUtil {
 
     public static Map<?, ?> toMap(Object o) {
         return (Map<?, ?>) o;
+    }
+
+    public static Map<String, Integer> pointToJson(Point point) {
+        final Map<String, Integer> data = new HashMap<>(2);
+        data.put("x", point.x);
+        data.put("y", point.y);
+        return data;
     }
 
     public static String toString(Object o) {

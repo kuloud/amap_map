@@ -1,6 +1,7 @@
 package com.amap.flutter.map.core;
 
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.location.Location;
 
 import androidx.annotation.NonNull;
@@ -125,6 +126,16 @@ public class MapController
             case Const.METHOD_MAP_CLEAR_DISK:
                 amap.removecache();
                 result.success(null);
+                break;
+            case Const.METHOD_MAP_TO_SCREEN_COORDINATE:
+                LatLng argLatLng = ConvertUtil.toLatLng(call.arguments);
+                Point resScreenLocation = amap.getProjection().toScreenLocation(argLatLng);
+                result.success(ConvertUtil.pointToJson(resScreenLocation));
+                break;
+            case Const.METHOD_MAP_FROM_SCREEN_COORDINATE:
+                Point argPoint = ConvertUtil.pointFromMap(call.arguments);
+                LatLng resLatLng = amap.getProjection().fromScreenLocation(argPoint);
+                result.success(ConvertUtil.latLngToList(resLatLng));
                 break;
             default:
                 LogUtil.w(CLASS_NAME, "onMethodCall not find methodId:" + call.method);

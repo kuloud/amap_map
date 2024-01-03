@@ -23,7 +23,19 @@ class _State extends State<MarkerConfigDemoPage> {
   BitmapDescriptor? _markerIcon;
   String? selectedMarkerId;
 
-  void _onMapCreated(AMapController controller) {}
+  Future<void> _onMapCreated(AMapController controller) async {
+    LatLng latLng = LatLng(mapCenter.latitude + sin(pi / 12.0) / 20.0,
+        mapCenter.longitude + cos(pi / 12.0) / 20.0);
+    try {
+      print('-latLng---------${latLng}');
+      ScreenCoordinate coordinate = await controller.toScreenCoordinate(latLng);
+      print('-coordinate---------${coordinate}');
+      LatLng reLatLng = await controller.fromScreenCoordinate(coordinate);
+      print('-reLatLng---------${reLatLng}');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   ///通过BitmapDescriptor.fromAssetImage的方式获取图片
   Future<void> _createMarkerImageFromAsset(BuildContext context) async {
