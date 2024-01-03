@@ -19,43 +19,43 @@ class AMapWidget extends StatefulWidget {
   /// 初始化时的地图中心点
   final CameraPosition initialCameraPosition;
 
-  ///地图类型
+  /// 地图类型
   final MapType mapType;
 
-  ///自定义地图样式
+  /// 自定义地图样式
   final CustomStyleOptions? customStyleOptions;
 
-  ///定位小蓝点
+  /// 定位小蓝点
   final MyLocationStyleOptions? myLocationStyleOptions;
 
-  ///缩放级别范围
+  /// 缩放级别范围
   final MinMaxZoomPreference? minMaxZoomPreference;
 
-  ///地图显示范围
+  /// 地图显示范围
   final LatLngBounds? limitBounds;
 
-  ///显示路况开关
+  /// 显示路况开关
   final bool trafficEnabled;
 
   /// 地图poi是否允许点击
   final bool touchPoiEnabled;
 
-  ///是否显示3D建筑物
+  /// 是否显示3D建筑物，默认显示
   final bool buildingsEnabled;
 
-  ///是否显示底图文字标注
+  /// 是否显示底图文字标注
   final bool labelsEnabled;
 
-  ///是否显示指南针
+  /// 是否显示指南针
   final bool compassEnabled;
 
-  ///是否显示比例尺
+  /// 是否显示比例尺
   final bool scaleEnabled;
 
-  ///是否支持缩放手势
+  /// 是否支持缩放手势
   final bool zoomGesturesEnabled;
 
-  ///是否支持滑动手势
+  /// 是否支持滑动手势
   final bool scrollGesturesEnabled;
 
   ///是否支持旋转手势
@@ -332,7 +332,7 @@ class _AMapOptions {
   ///是否显示3D建筑物
   final bool? buildingsEnabled;
 
-  ///是否显示底图文字标注
+  /// 是否显示底图文字标注，默认显示
   final bool? labelsEnabled;
 
   ///是否显示指南针

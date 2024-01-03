@@ -11,7 +11,6 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 
 import 'dart:async';
-import 'dart:math';
 
 import 'package:x_amap_base/x_amap_base.dart';
 import 'package:amap_map/src/core/amap_flutter_platform.dart';
@@ -45,7 +44,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
     return channel.invokeMethod<void>('map#waitForMap');
   }
 
-  ///更新地图参数
+  /// 更新地图参数
   Future<void> updateMapOptions(
     Map<String, dynamic> newOptions, {
     required int mapId,
@@ -137,32 +136,37 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
     return _events(mapId).whereType<LocationChangedEvent>();
   }
 
-  //Camera 移动回调
+  // Camera 移动回调
   Stream<CameraPositionMoveEvent> onCameraMove({required int mapId}) {
     return _events(mapId).whereType<CameraPositionMoveEvent>();
   }
 
-  ///Camera 移动结束回调
+  /// Camera 移动结束回调
   Stream<CameraPositionMoveEndEvent> onCameraMoveEnd({required int mapId}) {
     return _events(mapId).whereType<CameraPositionMoveEndEvent>();
   }
 
+  /// Camera 地图点击回调
   Stream<MapTapEvent> onMapTap({required int mapId}) {
     return _events(mapId).whereType<MapTapEvent>();
   }
 
+  /// Camera 地图长按回调
   Stream<MapLongPressEvent> onMapLongPress({required int mapId}) {
     return _events(mapId).whereType<MapLongPressEvent>();
   }
 
+  /// Camera 地图POI点点击回调
   Stream<MapPoiTouchEvent> onPoiTouched({required int mapId}) {
     return _events(mapId).whereType<MapPoiTouchEvent>();
   }
 
+  /// Camera 地图锚点点击回调
   Stream<MarkerTapEvent> onMarkerTap({required int mapId}) {
     return _events(mapId).whereType<MarkerTapEvent>();
   }
 
+  /// Camera 地图锚点拖拽结束回调
   Stream<MarkerDragEndEvent> onMarkerDragEnd({required int mapId}) {
     return _events(mapId).whereType<MarkerDragEndEvent>();
   }
@@ -234,7 +238,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
     }
   }
 
-  ///移动镜头到一个新的位置
+  /// 移动镜头到一个新的位置
   Future<void> moveCamera(
     CameraUpdate cameraUpdate, {
     required int mapId,

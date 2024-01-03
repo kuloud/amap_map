@@ -16,7 +16,9 @@ flutter pub add amap_map
 ```
 
 ## Prepare
-* 登录[高德开放平台官网](https://lbs.amap.com/)申请ApiKey。Android平台申请配置key请参考[Android获取key](https://lbs.amap.com/api/poi-sdk-android/develop/create-project/get-key/?sug_index=2), iOS平台申请配置请参考[iOS获取key](https://lbs.amap.com/api/poi-sdk-ios/develop/create-project/get-key/?sug_index=1)。
+* 登录[高德开放平台官网](https://lbs.amap.com/)申请ApiKey。
+  - Android平台申请配置key请参考[Android获取key](https://lbs.amap.com/api/poi-sdk-android/develop/create-project/get-key/?sug_index=2)
+  - iOS平台申请配置请参考[iOS获取key](https://lbs.amap.com/api/poi-sdk-ios/develop/create-project/get-key/?sug_index=1)
 
 
 ## Demo
@@ -192,6 +194,7 @@ class AMapWidget extends StatefulWidget {
   final List<AMapExtension> extensions;
 }
 ```
+
 
 ### 地图控制器
 ```dart 
