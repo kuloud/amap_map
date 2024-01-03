@@ -101,40 +101,129 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 ```
 
 ## 更多示例
+<img src="./showcase/Simulator Screenshot - iPhone 15 Pro Max - 2024-01-03 at 17.18.55.png" width="30%"/>
 
+### 地图视图
 ```dart
-final List<BasePage> _mapDemoPages = <BasePage>[
-  AllMapConfigDemoPage('总体演示', '演示AMapWidget的所有配置项'),
-  ShowMapPage('显示地图', '基本地图显示'),
-  LimitMapBoundsPage('限制地图显示范围', '演示限定手机屏幕显示地图的范围'),
-  MinMaxZoomDemoPage('指定显示级别范围', '演示指定最小最大级别功能'),
-  ChangeMapTypePage('切换地图图层', '演示内置的地图图层'),
-  CustomMapStylePage('自定义地图', '根据自定义的地图样式文件显示地图'),
-  MultiMapDemoPage('地图多实例', '同时显示多个地图'),
-];
+///用于展示高德地图的Widget
+class AMapWidget extends StatefulWidget {
+  /// 初始化时的地图中心点
+  final CameraPosition initialCameraPosition;
 
-final List<BasePage> _interactiveDemoPages = <BasePage>[
-  MapUIDemoPage('UI控制', 'ui开关演示'),
-  GesturesDemoPage('手势交互', '手势交互'),
-  PoiClickDemoPage('点击poi功能', '演示点击poi之后的回调和信息透出'),
-  MoveCameraDemoPage('改变地图视角', '演示改变地图的中心点、可视区域、缩放级别等功能'),
-  SnapshotPage('地图截屏', '地图截屏示例'),
-  MyLocationPage('显示我的位置', '在地图上显示我的位置'),
-];
+  ///地图类型
+  final MapType mapType;
 
-final List<BasePage> _markerPages = <BasePage>[
-  MarkerConfigDemoPage('Marker操作', '演示Marker的相关属性的操作'),
-  MarkerAddWithMapPage("随地图添加", "演示初始化地图时直接添加marker"),
-  MarkerAddAfterMapPage("单独添加", "演示地图初始化之后单独添加marker功能"),
-  MarkerCustomIconPage('自定义图标', '演示marker使用自定义图标功能'),
-];
+  ///自定义地图样式
+  final CustomStyleOptions? customStyleOptions;
 
-final List<BasePage> _overlayPages = <BasePage>[
-  PolylineDemoPage('Polyline操作', '演示Polyline的相关属性的操作'),
-  PolylineGeodesicDemoPage('Polyline大地曲线', '演示大地曲线的添加'),
-  PolylineTextureDemoPage('Polyline纹理线', '演示纹理线的添加'),
-  PolygonDemoPage('Polygon操作', '演示Polygon的相关属性的操作'),
-];
+  ///定位小蓝点
+  final MyLocationStyleOptions? myLocationStyleOptions;
+
+  ///缩放级别范围
+  final MinMaxZoomPreference? minMaxZoomPreference;
+
+  ///地图显示范围
+  final LatLngBounds? limitBounds;
+
+  ///显示路况开关
+  final bool trafficEnabled;
+
+  /// 地图poi是否允许点击
+  final bool touchPoiEnabled;
+
+  ///是否显示3D建筑物
+  final bool buildingsEnabled;
+
+  ///是否显示底图文字标注
+  final bool labelsEnabled;
+
+  ///是否显示指南针
+  final bool compassEnabled;
+
+  ///是否显示比例尺
+  final bool scaleEnabled;
+
+  ///是否支持缩放手势
+  final bool zoomGesturesEnabled;
+
+  ///是否支持滑动手势
+  final bool scrollGesturesEnabled;
+
+  ///是否支持旋转手势
+  final bool rotateGesturesEnabled;
+
+  ///是否支持倾斜手势
+  final bool tiltGesturesEnabled;
+
+  /// 地图上显示的Marker
+  final Set<Marker> markers;
+
+  /// 地图上显示的polyline
+  final Set<Polyline> polylines;
+
+  /// 地图上显示的polygon
+  final Set<Polygon> polygons;
+
+  /// 地图创建成功的回调, 收到此回调之后才可以操作地图
+  final MapCreatedCallback? onMapCreated;
+
+  /// 相机视角持续移动的回调
+  final ArgumentCallback<CameraPosition>? onCameraMove;
+
+  /// 相机视角移动结束的回调
+  final ArgumentCallback<CameraPosition>? onCameraMoveEnd;
+
+  /// 地图单击事件的回调
+  final ArgumentCallback<LatLng>? onTap;
+
+  /// 地图长按事件的回调
+  final ArgumentCallback<LatLng>? onLongPress;
+
+  /// 地图POI的点击回调，需要`touchPoiEnabled`true，才能回调
+  final ArgumentCallback<AMapPoi>? onPoiTouched;
+
+  ///位置回调
+  final ArgumentCallback<AMapLocation>? onLocationChanged;
+
+  ///需要应用到地图上的手势集合
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
+
+  ///拓展插件，提供更多定制化功能
+  final List<AMapExtension> extensions;
+}
+```
+
+### 地图控制器
+```dart 
+
+class AMapController {
+
+  ///改变地图视角
+  ///
+  ///通过[CameraUpdate]对象设置新的中心点、缩放比例、放大缩小、显示区域等内容
+  ///
+  ///（注意：iOS端设置显示区域时，不支持duration参数，动画时长使用iOS地图默认值350毫秒）
+  ///
+  ///可选属性[animated]用于控制是否执行动画移动
+  ///
+  ///可选属性[duration]用于控制执行动画的时长,默认250毫秒,单位:毫秒
+  Future<void> moveCamera(CameraUpdate cameraUpdate,
+      {bool animated = true, int duration = 250});
+
+  ///地图截屏
+  Future<Uint8List?> takeSnapshot();
+
+  /// 清空缓存
+  Future<void> clearDisk();
+
+  /// 经纬度转屏幕坐标
+  Future<ScreenCoordinate> toScreenCoordinate(LatLng latLng);
+
+  /// 屏幕坐标转经纬度
+  Future<LatLng> fromScreenCoordinate(ScreenCoordinate screenCoordinate);
+}
+
+
 ```
 
 ## Issues
