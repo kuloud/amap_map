@@ -10,7 +10,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 
-import 'package:amap_map_extensions/amap_map_extensions.dart';
+// import 'package:amap_map_extensions/amap_map_extensions.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:typed_data';
@@ -24,7 +24,7 @@ class MapWithExtensionPage extends StatefulWidget {
 
 class _MapWithExtensionPageState extends State<MapWithExtensionPage> {
   List<Widget> _approvalNumberWidget = <Widget>[];
-  final _extension = AmapMapExtensions();
+  // final _extension = AmapMapExtensions();
 
   @override
   Widget build(BuildContext context) {

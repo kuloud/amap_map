@@ -1,3 +1,7 @@
+## 1.0.4
+2024-01-04.
+* 添加 InfoWindowExtension，支持自定义 InfoWindow 样式
+
 ## 1.0.3+1
 2024-01-03.
 * 处理lint，更新文档
