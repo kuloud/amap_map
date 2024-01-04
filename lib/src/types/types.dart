@@ -23,3 +23,5 @@ export 'bitmap.dart';
 export 'extension_context.dart';
 export 'amap_extension.dart';
 export 'screen_coordinate.dart';
+
+export '../extension/extensions.dart';

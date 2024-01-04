@@ -1,11 +1,11 @@
 // Copyright 2023-2024 kuloud
-
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,12 @@ class AMapInitializer {
 
   AMapInitializer._();
 
-  static Future<void> init(BuildContext context, AMapApiKey apiKey) async {
+  /// 初始化地图组件
+  ///
+  /// @param context 用于图片资源适配屏幕密度，需在[AMapWidget]使用前调用[init]方法
+  /// @param apiKey 申请的 AMapSDK Key，如果熟悉原生侧集成配置，可以参考高德文档集成，可选
+  ///
+  static void init(BuildContext context, {AMapApiKey? apiKey}) {
     AMapUtil.init(context);
     _apiKey = apiKey;
   }
@@ -33,7 +38,7 @@ class AMapInitializer {
   ///
   /// 高德SDK合规使用方案请参考：https://lbs.amap.com/news/sdkhgsy
   ///
-  static updatePrivacyAgree(AMapPrivacyStatement privacyStatement) {
+  static void updatePrivacyAgree(AMapPrivacyStatement privacyStatement) {
     _privacyStatement = privacyStatement;
   }
 }

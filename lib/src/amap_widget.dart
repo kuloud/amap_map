@@ -220,6 +220,7 @@ class _MapState extends State<AMapWidget> {
     _updateMarkers();
     _updatePolylines();
     _updatePolygons();
+    _updateExtensions();
   }
 
   Future<void> onPlatformViewCreated(int id) async {
@@ -231,8 +232,12 @@ class _MapState extends State<AMapWidget> {
     _controller.complete(controller);
 
     if (_extensions.isNotEmpty) {
-      await Future.forEach(
-          _extensions.values, (e) => e.bindMethodChannel(controller.channel));
+      debugPrint('[onPlatformViewCreated] $controller');
+      await Future.forEach(_extensions.values, (e) {
+        debugPrint('[onPlatformViewCreated] controller: ${controller.mapId}');
+        e.bindMethodChannel(controller.channel);
+        e.bindMapController(controller);
+      });
     }
 
     final MapCreatedCallback? _onMapCreated = widget.onMapCreated;
@@ -303,6 +308,11 @@ class _MapState extends State<AMapWidget> {
     controller._updatePolygons(
         PolygonUpdates.from(_polygons.values.toSet(), widget.polygons));
     _polygons = keyByPolygonId(widget.polygons);
+  }
+
+  void _updateExtensions() async {
+    // final AMapController controller = await _controller.future;
+    _extensions = keyByExtensionId(widget.extensions);
   }
 }
 

@@ -6,6 +6,7 @@ import 'package:amap_map_example/pages/map/limit_map_bounds.dart';
 import 'package:amap_map_example/pages/map/map_my_location.dart';
 import 'package:amap_map_example/pages/map/map_with_extension_page.dart';
 import 'package:amap_map_example/pages/map/show_map_page.dart';
+import 'package:amap_map_example/pages/overlays/custom_info_window.dart';
 import 'package:amap_map_example/pages/overlays/marker_config.dart';
 import 'package:flutter/material.dart';
 
@@ -71,6 +72,14 @@ List<Demo> overlayDemos() {
         slug: 'marker-config',
         configurations: [
           DemoConfiguration(buildRoute: (context) => MarkerConfigDemoPage())
+        ]),
+    Demo(
+        title: '自定义InfoWindow',
+        category: DemoCategory.overlay,
+        subtitle: '自定义与Marker绑定的InfoWindow样式',
+        slug: 'custom-info-window',
+        configurations: [
+          DemoConfiguration(buildRoute: (context) => CustomInfoWindowDemoPage())
         ])
   ];
 }

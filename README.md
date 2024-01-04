@@ -36,7 +36,7 @@ class DemoWidget extends State<AMapDemo> {
 
   @override
   Widget build(BuildContext context) {
-    AMapInitializer.init(context, ConstConfig.amapApiKeys);
+    AMapInitializer.init(context, apiKey: ConstConfig.amapApiKeys);
     
     return Scaffold(
       // ...

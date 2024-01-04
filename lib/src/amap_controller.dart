@@ -1,12 +1,12 @@
 // Copyright 2023-2024 kuloud
 // Copyright 2020 lbs.amap.com
-
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 
@@ -48,48 +48,52 @@ class AMapController {
   }
 
   void _connectStreams(int mapId) {
-    if (_mapState.widget.onLocationChanged != null) {
-      _methodChannel.onLocationChanged(mapId: mapId).listen(
-          (LocationChangedEvent e) =>
-              _mapState.widget.onLocationChanged!(e.value));
-    }
-
-    if (_mapState.widget.onCameraMove != null) {
-      _methodChannel.onCameraMove(mapId: mapId).listen(
-          (CameraPositionMoveEvent e) =>
-              _mapState.widget.onCameraMove!(e.value));
-    }
-    if (_mapState.widget.onCameraMoveEnd != null) {
-      _methodChannel.onCameraMoveEnd(mapId: mapId).listen(
-          (CameraPositionMoveEndEvent e) =>
-              _mapState.widget.onCameraMoveEnd!(e.value));
-    }
-    if (_mapState.widget.onTap != null) {
-      _methodChannel
-          .onMapTap(mapId: mapId)
-          .listen(((MapTapEvent e) => _mapState.widget.onTap!(e.value)));
-    }
-    if (_mapState.widget.onLongPress != null) {
-      _methodChannel.onMapLongPress(mapId: mapId).listen(
-          ((MapLongPressEvent e) => _mapState.widget.onLongPress!(e.value)));
-    }
-
-    if (_mapState.widget.onPoiTouched != null) {
-      _methodChannel.onPoiTouched(mapId: mapId).listen(
-          ((MapPoiTouchEvent e) => _mapState.widget.onPoiTouched!(e.value)));
-    }
+    _methodChannel.onLocationChanged(mapId: mapId).listen(
+        (LocationChangedEvent e) =>
+            _mapState.widget.onLocationChanged?.call(e.value));
 
     _methodChannel
-        .onMarkerTap(mapId: mapId)
-        .listen((MarkerTapEvent e) => _mapState.onMarkerTap(e.value));
-
-    _methodChannel.onMarkerDragEnd(mapId: mapId).listen(
-        (MarkerDragEndEvent e) =>
-            _mapState.onMarkerDragEnd(e.value, e.position));
+        .onCameraMove(mapId: mapId)
+        .listen((CameraPositionMoveEvent e) {
+      _mapState._extensions.values.forEach((ext) => ext.onCameraMove(e.value));
+      _mapState.widget.onCameraMove?.call(e.value);
+    });
 
     _methodChannel
-        .onPolylineTap(mapId: mapId)
-        .listen((PolylineTapEvent e) => _mapState.onPolylineTap(e.value));
+        .onCameraMoveEnd(mapId: mapId)
+        .listen((CameraPositionMoveEndEvent e) {
+      _mapState._extensions.values
+          .forEach((ext) => ext.onCameraMoveEnd(e.value));
+      _mapState.widget.onCameraMoveEnd?.call(e.value);
+    });
+    _methodChannel
+        .onMapTap(mapId: mapId)
+        .listen(((MapTapEvent e) => _mapState.widget.onTap?.call(e.value)));
+    _methodChannel.onMapLongPress(mapId: mapId).listen(((MapLongPressEvent e) {
+      _mapState._extensions.values.forEach((ext) => ext.onLongPress(e.value));
+      _mapState.widget.onLongPress?.call(e.value);
+    }));
+
+    _methodChannel.onPoiTouched(mapId: mapId).listen(((MapPoiTouchEvent e) {
+      _mapState._extensions.values.forEach((ext) => ext.onPoiTouched(e.value));
+      _mapState.widget.onPoiTouched?.call(e.value);
+    }));
+
+    _methodChannel.onMarkerTap(mapId: mapId).listen((MarkerTapEvent e) {
+      _mapState._extensions.values.forEach((ext) => ext.onMarkerTap(e.value));
+      _mapState.onMarkerTap(e.value);
+    });
+
+    _methodChannel.onMarkerDragEnd(mapId: mapId).listen((MarkerDragEndEvent e) {
+      _mapState._extensions.values
+          .forEach((ext) => ext.onMarkerDragEnd(e.value));
+      _mapState.onMarkerDragEnd(e.value, e.position);
+    });
+
+    _methodChannel.onPolylineTap(mapId: mapId).listen((PolylineTapEvent e) {
+      _mapState._extensions.values.forEach((ext) => ext.onPolylineTap(e.value));
+      _mapState.onPolylineTap(e.value);
+    });
   }
 
   void disponse() {
@@ -137,12 +141,12 @@ class AMapController {
     return _methodChannel.clearDisk(mapId: mapId);
   }
 
-  /// 经纬度转屏幕坐标
+  /// 经纬度转屏幕坐标 since v1.0.3
   Future<ScreenCoordinate> toScreenCoordinate(LatLng latLng) {
     return _methodChannel.toScreenLocation(latLng, mapId: mapId);
   }
 
-  /// 屏幕坐标转经纬度
+  /// 屏幕坐标转经纬度 From v1.0.3
   Future<LatLng> fromScreenCoordinate(ScreenCoordinate screenCoordinate) {
     return _methodChannel.fromScreenLocation(screenCoordinate, mapId: mapId);
   }
