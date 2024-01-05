@@ -58,6 +58,7 @@ class _AMapLoaderState extends State<AMapLoader> {
         buildContext: context,
         currentStep: CurrentStep.preparing,
         loader: widget);
+
     widget.prepareFromExtension(aMapContext);
     super.didChangeDependencies();
   }

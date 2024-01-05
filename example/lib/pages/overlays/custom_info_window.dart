@@ -28,7 +28,8 @@ class _State extends State<CustomInfoWindowDemoPage> {
         color: Colors.lightBlue.shade400,
         child: Text('info'),
       ),
-      option: InfoWindowOption(latLng: mapCenter));
+      option: InfoWindowOption(
+          latLng: mapCenter, offset: EdgeInsets.only(bottom: 32)));
 
   Future<void> _onMapCreated(AMapController controller) async {}
 

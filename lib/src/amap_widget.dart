@@ -234,7 +234,6 @@ class _MapState extends State<AMapWidget> {
     if (_extensions.isNotEmpty) {
       debugPrint('[onPlatformViewCreated] $controller');
       await Future.forEach(_extensions.values, (e) {
-        debugPrint('[onPlatformViewCreated] controller: ${controller.mapId}');
         e.bindMethodChannel(controller.channel);
         e.bindMapController(controller);
       });

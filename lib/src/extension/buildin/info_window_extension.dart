@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:amap_map/amap_map.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 
 /// [amap_map]插件支持默认的[InfoWindow]展示[title]和[snippet]字段，如果要自定义
@@ -37,11 +37,12 @@ import 'package:x_amap_base/x_amap_base.dart';
 class InfoWindowExtension extends AMapExtension {
   InfoWindowExtension({required this.infoWindow, this.option});
 
-  StreamController<InfoWindowExtension> _streamController =
-      StreamController<InfoWindowExtension>.broadcast();
+  final _streamController = StreamController<InfoWindowExtension>.broadcast();
 
   final Widget infoWindow;
   InfoWindowOption? option;
+
+  final GlobalKey _infoWindowKey = GlobalKey();
 
   AMapController? mapController;
   double? _x;
@@ -67,6 +68,12 @@ class InfoWindowExtension extends AMapExtension {
     _x = coordinate.x.toDouble();
     _y = coordinate.y.toDouble();
 
+    final size = _infoWindowKey.currentContext?.size;
+    if (size != null && _x != null && _y != null) {
+      _x = _x! - size.width / 2;
+      _y = _y! - size.height;
+    }
+
     _streamController.add(this);
   }
 
@@ -79,10 +86,10 @@ class InfoWindowExtension extends AMapExtension {
   @override
   Widget build(AMapContext aMapContext, Widget child) {
     return Stack(
+      key: ValueKey(this),
       children: [
         child,
         StreamBuilder<InfoWindowExtension>(
-            key: ValueKey(this),
             initialData: this,
             stream: _streamController.stream,
             builder: (context, snapshot) {
@@ -97,6 +104,7 @@ class InfoWindowExtension extends AMapExtension {
                 top: data._y,
                 left: data._x,
                 child: Container(
+                  key: _infoWindowKey,
                   margin: data.option?.offset,
                   child: infoWindow,
                 ),
@@ -104,6 +112,12 @@ class InfoWindowExtension extends AMapExtension {
             }),
       ],
     );
+  }
+
+  @override
+  void onDispose() {
+    _streamController.close();
+    super.onDispose();
   }
 }
 
