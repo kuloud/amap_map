@@ -25,6 +25,7 @@ dependencies:
   # provider: ^6.1.1
   # x_amap_base:
   #   path: ../x_amap_base
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

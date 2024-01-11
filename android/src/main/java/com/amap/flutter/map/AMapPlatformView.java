@@ -13,6 +13,7 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.TextureMapView;
 import com.amap.flutter.map.core.MapController;
+import com.amap.flutter.map.core.MapsInitializerController;
 import com.amap.flutter.map.overlays.marker.MarkersController;
 import com.amap.flutter.map.overlays.polygon.PolygonsController;
 import com.amap.flutter.map.overlays.polyline.PolylinesController;
@@ -20,6 +21,7 @@ import com.amap.flutter.map.utils.LogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
@@ -43,6 +45,8 @@ public class AMapPlatformView
     private static final String CLASS_NAME = "AMapPlatformView";
     private final MethodChannel methodChannel;
     private final Map<String, MyMethodCallHandler> myMethodCallHandlerMap;
+
+    private MapsInitializerController mapsInitializerController;
     private MapController mapController;
     private MarkersController markersController;
     private PolylinesController polylinesController;
@@ -58,11 +62,12 @@ public class AMapPlatformView
 
         methodChannel = new MethodChannel(binaryMessenger, "amap_map_" + id);
         methodChannel.setMethodCallHandler(this);
-        myMethodCallHandlerMap = new HashMap<String, MyMethodCallHandler>(8);
+        myMethodCallHandlerMap = new HashMap<>(8);
 
         try {
             mapView = new TextureMapView(context, options);
             AMap amap = mapView.getMap();
+            mapsInitializerController = new MapsInitializerController(methodChannel);
             mapController = new MapController(methodChannel, mapView);
             markersController = new MarkersController(methodChannel, amap);
             polylinesController = new PolylinesController(methodChannel, amap);
@@ -79,6 +84,13 @@ public class AMapPlatformView
         if (null != methodIdArray) {
             for (String methodId : methodIdArray) {
                 myMethodCallHandlerMap.put(methodId, mapController);
+            }
+        }
+
+        methodIdArray = mapsInitializerController.getRegisterMethodIdArray();
+        if (null != methodIdArray) {
+            for (String methodId : methodIdArray) {
+                myMethodCallHandlerMap.put(methodId, mapsInitializerController);
             }
         }
 
@@ -127,7 +139,7 @@ public class AMapPlatformView
         LogUtil.i(CLASS_NAME, "onMethodCall==>" + call.method + ", arguments==> " + call.arguments);
         String methodId = call.method;
         if (myMethodCallHandlerMap.containsKey(methodId)) {
-            myMethodCallHandlerMap.get(methodId).doMethodCall(call, result);
+            Objects.requireNonNull(myMethodCallHandlerMap.get(methodId)).doMethodCall(call, result);
         } else {
             LogUtil.w(CLASS_NAME, "onMethodCall, the methodId: " + call.method + ", not implemented");
             result.notImplemented();

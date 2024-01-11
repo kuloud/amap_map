@@ -6,6 +6,7 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.MyLocationStyle;
 
 /**
+ * @author kuloud
  * @author whm
  * @date 2020/10/29 9:56 AM
  * @mail hongming.whm@alibaba-inc.com
@@ -13,9 +14,9 @@ import com.amap.api.maps.model.MyLocationStyle;
  */
 public interface AMapOptionsSink {
 
-    public void setCamera(CameraPosition camera);
+    void setCamera(CameraPosition camera);
 
-    public void setMapType(int mapType);
+    void setMapType(int mapType);
 
     public void setCustomMapStyleOptions(CustomMapStyleOptions customMapStyleOptions);
 
