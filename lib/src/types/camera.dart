@@ -54,10 +54,10 @@ class CameraPosition {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (runtimeType != other.runtimeType) return false;
-    final CameraPosition typedOther = other;
+    final CameraPosition typedOther = other as CameraPosition;
     return bearing == typedOther.bearing &&
         target == typedOther.target &&
         tilt == typedOther.tilt &&
