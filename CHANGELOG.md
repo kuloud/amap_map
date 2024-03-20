@@ -1,3 +1,10 @@
+## 1.0.5
+2024-03-20.
+* 升级amap android sdk版本 V10.0.600 2024-03-15
+* 升级amap ios sdk版本 V10.0.600 2024-03-15
+* [example] 适配迁移Gradle声明性插件 https://docs.flutter.dev/release/breaking-changes/flutter-gradle-plugin-apply
+* permission_handler 11.1.0 -> 11.3.0
+
 ## 1.0.4
 2024-01-04.
 * 添加 InfoWindowExtension，支持自定义 InfoWindow 样式
