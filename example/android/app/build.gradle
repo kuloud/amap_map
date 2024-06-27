@@ -73,7 +73,7 @@ android {
 }
 dependencies {
     //demo中引入高德地图SDK
-    implementation 'com.amap.api:3dmap:10.0.600'
+    implementation 'com.amap.api:3dmap-location-search:10.0.700_loc6.4.5_sea9.7.2'
 }
 
 flutter {

@@ -1,25 +1,16 @@
 import 'package:amap_map/amap_map.dart';
 import 'package:x_amap_base/x_amap_base.dart';
-import 'package:amap_map_example/base_page.dart';
-import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/widgets/amap_gridview.dart';
 import 'package:flutter/material.dart';
 
-class MoveCameraDemoPage extends BasePage {
-  MoveCameraDemoPage(String title, String subTitle) : super(title, subTitle);
-
-  @override
-  Widget build(BuildContext context) => _Body();
-}
-
-class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+class MoveCameraDemoPage extends StatefulWidget {
+  MoveCameraDemoPage({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<_Body> {
+class _BodyState extends State<MoveCameraDemoPage> {
   AMapController? _mapController;
   String? _currentZoom;
   @override
