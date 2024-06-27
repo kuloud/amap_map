@@ -9,6 +9,8 @@ class MyLocationPage extends StatefulWidget {
 }
 
 class _BodyState extends State<MyLocationPage> {
+  AMapController? _mapController;
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +37,15 @@ class _BodyState extends State<MyLocationPage> {
         circleStrokeColor: Colors.blue,
         circleStrokeWidth: 1,
       ),
+      onLocationChanged: (loc) {
+        if (isLocationValid(loc)) {
+          print(loc);
+          _mapController?.moveCamera(CameraUpdate.newLatLng(loc.latLng));
+        }
+      },
+      onMapCreated: (controller) {
+        _mapController = controller;
+      },
     );
 
     return Container(

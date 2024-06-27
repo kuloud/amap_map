@@ -43,5 +43,6 @@ class RouteConfig {
         );
       }
     }
+    return null;
   }
 }

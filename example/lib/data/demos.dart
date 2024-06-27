@@ -37,7 +37,7 @@ List<Demo> mapDemos() {
         subtitle: '定位蓝点指的是进入地图后显示当前位置点的功能',
         slug: 'my-location',
         configurations: [
-          DemoConfiguration(buildRoute: (context) => LimitMapBoundsPage())
+          DemoConfiguration(buildRoute: (context) => MyLocationPage())
         ]),
     Demo(
         title: '限制地图显示范围',
@@ -45,7 +45,7 @@ List<Demo> mapDemos() {
         subtitle: '演示限定手机屏幕显示地图的范围',
         slug: 'limit-map-bounds',
         configurations: [
-          DemoConfiguration(buildRoute: (context) => MyLocationPage())
+          DemoConfiguration(buildRoute: (context) => LimitMapBoundsPage())
         ]),
   ];
 }

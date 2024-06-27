@@ -31,3 +31,4 @@ part 'src/amap_initializer.dart';
 part 'src/amap_controller.dart';
 part 'src/amap_widget.dart';
 part 'src/amap_loader.dart';
+part 'src/utils/location_utils.dart';
