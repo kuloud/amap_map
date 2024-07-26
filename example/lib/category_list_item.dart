@@ -198,9 +198,10 @@ class _CategoryHeader extends StatelessWidget {
                         padding: const EdgeInsetsDirectional.only(start: 8),
                         child: Text(
                           category.toDisplayTitle(),
-                          style: Theme.of(context).textTheme.headline5!.apply(
-                                color: colorScheme.onSurface,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.headlineMedium!.apply(
+                                    color: colorScheme.onSurface,
+                                  ),
                         ),
                       ),
                     ],
@@ -291,12 +292,12 @@ class CategoryDemoItem extends StatelessWidget {
                     children: [
                       Text(
                         demo.title,
-                        style: textTheme.subtitle1!
+                        style: textTheme.titleMedium!
                             .apply(color: colorScheme.onSurface),
                       ),
                       Text(
                         demo.subtitle,
-                        style: textTheme.overline!.apply(
+                        style: textTheme.labelMedium!.apply(
                           color: colorScheme.onSurface.withOpacity(0.5),
                         ),
                       ),

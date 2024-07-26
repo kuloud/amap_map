@@ -11,6 +11,7 @@ jobs:
         uses: actions/checkout@main # required!
         
       - name: '>> Dart package <<'
+        id: package_publisher
         uses: k-paxian/dart-package-publisher@master
         with:
           accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
@@ -18,3 +19,15 @@ jobs:
           skipTests: true
           flutter: true
           force: true
+      - name: Create Release
+        if: steps.package_publisher.outputs.success == 'true'
+        uses: kuloud/Github-Release-Action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.package_publisher.outputs.localVersion }}
+          title: Release ${{ steps.package_publisher.outputs.localVersion }}
+          body: |
+            Automated release for version ${{ steps.package_publisher.outputs.localVersion }}
+          draft: false
+          prerelease: false
