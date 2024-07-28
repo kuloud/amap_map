@@ -356,4 +356,29 @@ public class MapController
     }
 
 
+    @Override
+    public void setLogoPosition(int logoPosition) {
+        if (null != amap) {
+            amap.getUiSettings().setLogoPosition(logoPosition);
+        }
+    }
+
+    @Override
+    public int getLogoPosition() {
+        return null != amap ? amap.getUiSettings().getLogoPosition() : 0;
+    }
+
+    @Override
+    public void setLogoBottomMargin(int pixels) {
+        if (null != amap) {
+            amap.getUiSettings().setLogoBottomMargin(pixels);
+        }
+    }
+
+    @Override
+    public void setLogoLeftMargin(int pixels) {
+        if (null != amap) {
+            amap.getUiSettings().setLogoLeftMargin(pixels);
+        }
+    }
 }

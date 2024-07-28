@@ -1,5 +1,8 @@
 package com.amap.flutter.map.core;
 
+import androidx.annotation.IntRange;
+
+import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.CustomMapStyleOptions;
 import com.amap.api.maps.model.LatLngBounds;
@@ -12,7 +15,7 @@ import com.amap.api.maps.model.MyLocationStyle;
  * @mail hongming.whm@alibaba-inc.com
  * @since
  */
-public interface AMapOptionsSink {
+public interface AMapOptionsSink extends UISettingsSink {
 
     void setCamera(CameraPosition camera);
 
@@ -41,7 +44,6 @@ public interface AMapOptionsSink {
     public void setCompassEnabled(boolean compassEnabled);
 
     public void setScaleEnabled(boolean scaleEnabled);
-
 
     public void setZoomGesturesEnabled(boolean zoomGesturesEnabled);
 

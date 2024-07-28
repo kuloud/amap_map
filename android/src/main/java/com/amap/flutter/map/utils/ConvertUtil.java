@@ -278,6 +278,21 @@ public class ConvertUtil {
             if (null != zoomGesturesEnabled) {
                 sink.setZoomGesturesEnabled(toBoolean(zoomGesturesEnabled));
             }
+
+            final Object logoPosition = data.get("logoPosition");
+            if (null != logoPosition) {
+                sink.setLogoPosition(toInt(logoPosition));
+            }
+
+            final Object logoBottomMargin = data.get("logoBottomMargin");
+            if (null != logoBottomMargin) {
+                sink.setLogoBottomMargin(toInt(logoBottomMargin));
+            }
+
+            final Object logoLeftMargin = data.get("logoLeftMargin");
+            if (null != logoLeftMargin) {
+                sink.setLogoLeftMargin(toInt(logoLeftMargin));
+            }
         } catch (Throwable e) {
             LogUtil.e(CLASS_NAME, "interpretAMapOptions", e);
         }

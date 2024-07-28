@@ -1,7 +1,10 @@
 import 'package:amap_map/amap_map.dart';
 import 'package:amap_map_example/widgets/amap_gridview.dart';
+import 'package:amap_map_example/widgets/amap_radio_group.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
+import 'package:x_amap_base/x_amap_base.dart';
+import 'package:x_common/utils/logger.dart';
 
 class MapUIDemoPage extends StatefulWidget {
   MapUIDemoPage({Key? key}) : super(key: key);
@@ -26,6 +29,16 @@ class _BodyState extends State<MapUIDemoPage> {
   ///是否显示比例尺
   bool _scaleEnabled = true;
 
+  LogoPosition _logoPosition = LogoPosition.BOTTOM_LEFT;
+  int _logoBottomMargin = 0;
+  int _logoLeftMargin = 0;
+
+  final Map<String, LogoPosition?> _radioValueMap = {
+    '底部居左': LogoPosition.BOTTOM_LEFT,
+    '底部居中': LogoPosition.BOTTOM_CENTER,
+    '底部居右': LogoPosition.BOTTOM_RIGHT,
+  };
+
   @override
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
@@ -34,6 +47,9 @@ class _BodyState extends State<MapUIDemoPage> {
       compassEnabled: _compassEnabled,
       labelsEnabled: _labelsEnabled,
       scaleEnabled: _scaleEnabled,
+      logoPosition: _logoPosition,
+      logoBottomMargin: _logoBottomMargin,
+      logoLeftMargin: _logoLeftMargin,
     );
 
     //ui控制
@@ -97,6 +113,43 @@ class _BodyState extends State<MapUIDemoPage> {
               padding: EdgeInsets.only(left: 10),
               child: AMapGradView(childrenWidgets: _uiOptions),
             ),
+            AMapRadioGroup<LogoPosition?>(
+              groupLabel: 'Logo位置',
+              groupValue: _logoPosition,
+              radioValueMap: _radioValueMap,
+              onChanged: (value) => {
+                //改变当前地图样式为选中的样式
+                setState(() {
+                  _logoPosition = value!;
+                })
+              },
+            ),
+            Text('Logo底部边距: $_logoBottomMargin'),
+            Slider(
+              value: _logoBottomMargin.toDouble(),
+              min: 0,
+              max: 100,
+              divisions: 100,
+              label: _logoBottomMargin.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _logoBottomMargin = value.round();
+                });
+              },
+            ),
+            Text('Logo左侧边距: $_logoLeftMargin'),
+            Slider(
+              value: _logoLeftMargin.toDouble(),
+              min: 0,
+              max: 100,
+              divisions: 100,
+              label: _logoLeftMargin.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _logoLeftMargin = value.round();
+                });
+              },
+            ),
           ],
         ),
       );
@@ -110,7 +163,7 @@ class _BodyState extends State<MapUIDemoPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             child: map,
           ),

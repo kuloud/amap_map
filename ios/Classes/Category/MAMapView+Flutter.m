@@ -3,6 +3,7 @@
 //  amap_map
 //
 //  Created by lly on 2020/10/30.
+//  Updated by kuloud on 2024/07/29.
 //
 
 #import "MAMapView+Flutter.h"
@@ -217,6 +218,50 @@
     if (rotateCameraEnable) {
         self.rotateCameraEnabled = [rotateCameraEnable boolValue];
     }
+    
+    NSNumber *logoPosition = dict[@"logoPosition"];
+    NSNumber *logoBottomMargin = dict[@"logoBottomMargin"];
+    NSNumber *logoLeftMargin = dict[@"logoLeftMargin"];
+
+    CGSize mapSize = self.bounds.size;
+    CGSize logoSize = CGSizeMake(110, 40); // 官方文档只一行代码 _mapView.logoCenter = CGPointMake(CGRectGetWidth(self.view.bounds)-55, 450);，猜测logo的大小是110x40
+
+    CGPoint logoCenter = CGPointZero;
+
+    if (logoBottomMargin || logoLeftMargin) {
+        CGFloat bottomMargin = logoBottomMargin ? [logoBottomMargin floatValue] : 0;
+        CGFloat leftMargin = logoLeftMargin ? [logoLeftMargin floatValue] : 0;
+
+        logoCenter.x = leftMargin + logoSize.width / 2;
+        logoCenter.y = mapSize.height - bottomMargin - logoSize.height / 2;
+
+    } else if (logoPosition) {
+        NSInteger position = [logoPosition integerValue];
+        switch (position) {
+            case 0: // LOGO_POSITION_BOTTOM_LEFT
+                logoCenter = CGPointMake(logoSize.width / 2, mapSize.height - logoSize.height / 2);
+                break;
+            case 1: // LOGO_POSITION_BOTTOM_CENTER
+                logoCenter = CGPointMake(mapSize.width / 2, mapSize.height - logoSize.height / 2);
+                break;
+            case 2: // LOGO_POSITION_BOTTOM_RIGHT
+                logoCenter = CGPointMake(mapSize.width - logoSize.width / 2, mapSize.height - logoSize.height / 2);
+                break;
+            default:
+                // 默认为左下角
+                logoCenter = CGPointMake(logoSize.width / 2, mapSize.height - logoSize.height / 2);
+                break;
+        }
+    } else {
+        logoCenter = CGPointMake(logoSize.width / 2, mapSize.height - logoSize.height / 2);
+    }
+
+    // 确保logoCenter在mapView.bounds之内
+    logoCenter.x = MAX(logoSize.width / 2, MIN(logoCenter.x, mapSize.width - logoSize.width / 2));
+    logoCenter.y = MAX(logoSize.height / 2, MIN(logoCenter.y, mapSize.height - logoSize.height / 2));
+
+    // 设置logo的位置
+    self.logoCenter = logoCenter;
 }
 
 @end

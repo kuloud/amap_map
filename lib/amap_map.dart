@@ -24,6 +24,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:x_common/utils/logger.dart';
 
 export 'package:amap_map/src/types/types.dart';
 

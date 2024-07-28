@@ -2,6 +2,7 @@ package com.amap.flutter.map;
 
 import android.content.Context;
 
+import androidx.annotation.IntRange;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.amap.api.maps.AMapOptions;
@@ -10,6 +11,7 @@ import com.amap.api.maps.model.CustomMapStyleOptions;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.flutter.map.core.AMapOptionsSink;
+import com.amap.flutter.map.core.UISettingsSink;
 import com.amap.flutter.map.utils.LogUtil;
 
 import java.util.List;
@@ -22,7 +24,7 @@ import io.flutter.plugin.common.BinaryMessenger;
  * @mail hongming.whm@alibaba-inc.com
  * @since
  */
-class AMapOptionsBuilder implements AMapOptionsSink {
+class AMapOptionsBuilder implements AMapOptionsSink, UISettingsSink {
     private static final String CLASS_NAME = "AMapOptionsBuilder";
     private final AMapOptions options = new AMapOptions();
     private CustomMapStyleOptions customMapStyleOptions;
@@ -35,6 +37,10 @@ class AMapOptionsBuilder implements AMapOptionsSink {
     private boolean touchPoiEnabled = true;
     private boolean buildingsEnabled = true;
     private boolean labelsEnabled = true;
+
+    private int logoPosition = AMapOptions.LOGO_POSITION_BOTTOM_LEFT;
+    private int logoBottomMargin = 0;
+    private int logoLeftMargin = 0;
 
     private float anchorX = 2.0F;
     private float anchorY = 2.0F;
@@ -81,6 +87,10 @@ class AMapOptionsBuilder implements AMapOptionsSink {
             aMapPlatformView.getMapController().setTouchPoiEnabled(touchPoiEnabled);
             aMapPlatformView.getMapController().setBuildingsEnabled(buildingsEnabled);
             aMapPlatformView.getMapController().setLabelsEnabled(labelsEnabled);
+
+            aMapPlatformView.getMapController().setLogoPosition(logoPosition);
+            aMapPlatformView.getMapController().setLogoBottomMargin(logoBottomMargin);
+            aMapPlatformView.getMapController().setLogoLeftMargin(logoLeftMargin);
 
 
             if (null != initialMarkers) {
@@ -193,6 +203,27 @@ class AMapOptionsBuilder implements AMapOptionsSink {
     @Override
     public void setScaleEnabled(boolean scaleEnabled) {
         options.scaleControlsEnabled(scaleEnabled);
+    }
+
+    @Override
+    public void setLogoPosition(@IntRange(from = AMapOptions.LOGO_POSITION_BOTTOM_LEFT, to = AMapOptions.LOGO_POSITION_BOTTOM_RIGHT) int logoPosition) {
+        options.logoPosition(logoPosition);
+        this.logoPosition = logoPosition;
+    }
+
+    @Override
+    public int getLogoPosition() {
+        return options.getLogoPosition();
+    }
+
+    @Override
+    public void setLogoBottomMargin(int pixels) {
+        this.logoBottomMargin = pixels;
+    }
+
+    @Override
+    public void setLogoLeftMargin(int pixels) {
+        this.logoLeftMargin = pixels;
     }
 
 

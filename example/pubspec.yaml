@@ -22,6 +22,7 @@ dependencies:
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
     path: ../
+  x_common: ^1.0.4
 
   # amap_map_extensions: ^0.0.1
   # amap_map_extensions:
