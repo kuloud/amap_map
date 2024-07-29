@@ -1,5 +1,5 @@
 PODS:
-  - AMap3DMap (10.0.700):
+  - AMap3DMap (10.0.800):
     - AMapFoundation (>= 1.8.0)
   - amap_map (1.0.3):
     - AMap3DMap
@@ -28,7 +28,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  AMap3DMap: 6ee456d7ba946ebbad580a343b74ffa8e9936175
+  AMap3DMap: 6761e0381f517978312e4f795ce77b2b9f6781a6
   amap_map: 8773e5cacc760edf208b1e6e61000241d26385fa
   AMapFoundation: 9885c48fc3a78fdfb84a0299a2293e56ea3c9fec
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7

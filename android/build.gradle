@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.amap.api:3dmap-location-search:10.0.700_loc6.4.5_sea9.7.2'
+    implementation 'com.amap.api:3dmap-location-search:10.0.800_loc6.4.5_sea9.7.2'
     implementation 'androidx.annotation:annotation:1.8.1'
 }
 

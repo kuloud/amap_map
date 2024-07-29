@@ -1,10 +1,14 @@
-## 1.0.6
+## 1.0.8
+2024-07-29.
+* 升级amap android sdk版本 10.0.800_loc6.4.5_sea9.7.2 | 2024-07-19 
+
+## 1.0.7
 2024-07-28.
 * Close Issue [#10](https://github.com/kuloud/amap_map/issues/10) 添加Logo位置设置，参见example: map_ui_options.dart
 
 ## 1.0.6
 2024-06-27.
-* 升级amap android sdk版本 V10.0.700_loc6.4.5_sea9.7.2 2024-05-13 看高德更新日志，应该是计划后续版本捆绑loc+search一起更新了
+* 升级amap android sdk版本 V10.0.700_loc6.4.5_sea9.7.2 | 2024-05-13 `看高德更新日志，应该是计划后续版本捆绑loc+search一起更新了`
 
 ## 1.0.5
 2024-03-20.

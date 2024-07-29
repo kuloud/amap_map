@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'amap_map'
-  s.version          = '1.0.3'
+  s.version          = '1.0.8'
   s.summary          = 'A new Flutter plugin.'
   s.description      = <<-DESC
 A new Flutter plugin for AMap.
@@ -12,7 +12,7 @@ A new Flutter plugin for AMap.
   s.homepage         = 'https://github.com/kuloud/amap_map'
   s.license          = { :type => 'Apache License, Version 2.0', :file => '../LICENSE' }
   s.author           = { 'kuloud' => 'kuloud@outlook.com' }
-  s.source           = { :git => 'https://github.com/kuloud/amap_map.git', :tag => 'v1.0.3' }
+  s.source           = { :git => 'https://github.com/kuloud/amap_map.git', :tag => 'v1.0.8' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
