@@ -1,34 +1,38 @@
 # amap_map
+
 [![pub package](https://img.shields.io/pub/v/amap_map.svg)](https://pub.dev/packages/amap_map)
 
-基于[高德开放平台地图SDK](https://lbs.amap.com/api/)的flutter插件
+基于[高德开放平台地图 SDK](https://lbs.amap.com/api/)的 flutter 插件
 
-|             | Android | iOS   |
-|-------------|---------|-------|
-| **AMapSDK** | 10.0.700_loc6.4.5_sea9.7.2 | 10.0.700 | 
-| **Support** | SDK 16+ | 12.0+ | 
+|             | Android                    | iOS      |
+| ----------- | -------------------------- | -------- |
+| **AMapSDK** | 10.0.700_loc6.4.5_sea9.7.2 | 10.0.700 |
+| **Support** | SDK 16+                    | 12.0+    |
 
 本插件基于 amap_flutter_map 3.0.0 进行二开的原因：
-1. 原插件21年开始已无更新，插件年久失修，依赖SDK版本老旧
+
+1. 原插件 21 年开始已无更新，插件年久失修，依赖 SDK 版本老旧
 1. 原插件只实现了基础的地图展示和交互功能，无法满足常见定制化需求
 
-计划基于AMap轻量版SDK定制开发[amap_map_lite](https://pub.dev/packages/amap_map_lite)，在lite分支维护，lite版插件将使用 2.x.y 命名版本
-
 ## Usage
-使用Flutter插件，请参考[在Flutter里使用Packages](https://flutter.cn/docs/development/packages-and-plugins/using-packages), 添加`amap_map`的引用
+
+使用 Flutter 插件，请参考[在 Flutter 里使用 Packages](https://flutter.cn/docs/development/packages-and-plugins/using-packages), 添加`amap_map`的引用
+
 ```bash
 flutter pub add amap_map
 ```
 
 ## Prepare
-* 登录[高德开放平台官网](https://lbs.amap.com/)申请ApiKey。
-  - Android平台申请配置key请参考[Android获取key](https://lbs.amap.com/api/poi-sdk-android/develop/create-project/get-key/?sug_index=2)
-  - iOS平台申请配置请参考[iOS获取key](https://lbs.amap.com/api/poi-sdk-ios/develop/create-project/get-key/?sug_index=1)
 
+- 登录[高德开放平台官网](https://lbs.amap.com/)申请 ApiKey。
+  - Android 平台申请配置 key 请参考[Android 获取 key](https://lbs.amap.com/api/poi-sdk-android/develop/create-project/get-key/?sug_index=2)
+  - iOS 平台申请配置请参考[iOS 获取 key](https://lbs.amap.com/api/poi-sdk-ios/develop/create-project/get-key/?sug_index=1)
 
 ## Demo
+
 ### 初始化
-在runApp启动的**第一个**Widget中，使用`context`进行组件初始化
+
+在 runApp 启动的**第一个**Widget 中，使用`context`进行组件初始化
 
 ```dart
 import 'package:amap_map/amap_map.dart';
@@ -39,22 +43,25 @@ class DemoWidget extends State<AMapDemo> {
   @override
   Widget build(BuildContext context) {
     AMapInitializer.init(context, apiKey: ConstConfig.amapApiKeys);
-    
+
     return Scaffold(
       // ...
     );
   }
 }
 ```
+
 ### 合规处理
-高德SDK合规使用方案请参考：https://lbs.amap.com/news/sdkhgsy ，需要进行授权交互，然后通知组件。
+
+高德 SDK 合规使用方案请参考：https://lbs.amap.com/news/sdkhgsy ，需要进行授权交互，然后通知组件。
 
 ```dart
 AMapInitializer.updatePrivacyAgree(ConstConfig.amapPrivacyStatement);
 ```
 
 ### 使用地图
-``` dart
+
+```dart
 import 'package:amap_map_example/base_page.dart';
 import 'package:flutter/material.dart';
 
@@ -108,9 +115,11 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 ```
 
 ## 更多示例
+
 <img src="./showcase/Simulator Screenshot - iPhone 15 Pro Max - 2024-01-03 at 17.18.55.png" width="30%"/>
 
 ### 地图视图
+
 ```dart
 ///用于展示高德地图的Widget
 class AMapWidget extends StatefulWidget {
@@ -162,6 +171,15 @@ class AMapWidget extends StatefulWidget {
   ///是否支持倾斜手势
   final bool tiltGesturesEnabled;
 
+  /// logo 位置，此字段高德只支持Android，本插件iOS借用logoCenter做了实现
+  final LogoPosition? logoPosition;
+
+  /// logo 底部间距(px)，此字段高德只支持Android，本插件iOS借用logoCenter做了实现
+  final int? logoBottomMargin;
+
+  /// logo 靠左间距(px)，此字段高德只支持Android，本插件iOS借用logoCenter做了实现
+  final int? logoLeftMargin;
+
   /// 地图上显示的Marker
   final Set<Marker> markers;
 
@@ -200,9 +218,9 @@ class AMapWidget extends StatefulWidget {
 }
 ```
 
-
 ### 地图控制器
-```dart 
+
+```dart
 
 class AMapController {
 
@@ -235,16 +253,17 @@ class AMapController {
 ```
 
 ## Issues
+
 1. [android] app 的 targetSDKVersion >= 30, 地图页返回闪退
 
-  在里的AndroidManifest.xml里的application里增加`android:allowNativeHeapPointerTagging="false"`
-  ```xml
-      <application android:allowNativeHeapPointerTagging="false">
-      ...
-      </application>
-  ```
-  google官方说明地址：https://source.android.com/devices/tech/debug/tagged-pointers
+在里的 AndroidManifest.xml 里的 application 里增加`android:allowNativeHeapPointerTagging="false"`
 
+```xml
+    <application android:allowNativeHeapPointerTagging="false">
+    ...
+    </application>
+```
 
+google 官方说明地址：https://source.android.com/devices/tech/debug/tagged-pointers
 
-
+2. 原本本插件拓展设计的思路是把一些不常用的特性功能做成可插拔的 extension，昨天（2024/07/28）考虑了下，觉得有点过度设计了，包括轻量版 SDK 的接入适配，于是决定后续实现做些调整，尽量贴合 SDK API 实现功能。

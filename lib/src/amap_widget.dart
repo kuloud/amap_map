@@ -64,10 +64,13 @@ class AMapWidget extends StatefulWidget {
   ///是否支持倾斜手势
   final bool tiltGesturesEnabled;
 
+  /// logo 位置，此字段高德只支持Android，本插件iOS借用logoCenter做了实现
   final LogoPosition? logoPosition;
 
+  /// logo 底部间距(px)，此字段高德只支持Android，本插件iOS借用logoCenter做了实现
   final int? logoBottomMargin;
 
+  /// logo 靠左间距(px)，此字段高德只支持Android，本插件iOS借用logoCenter做了实现
   final int? logoLeftMargin;
 
   /// 地图上显示的Marker
