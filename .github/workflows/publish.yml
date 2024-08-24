@@ -19,6 +19,13 @@ jobs:
           skipTests: true
           flutter: true
           force: true
+
+      - name: Get Commit Logs
+        id: git_log
+        run: |
+          export GIT_LOG=$(git log --pretty=format:'- %s' $(git describe --tags --abbrev=0)..HEAD)
+          echo "git_log=$GIT_LOG" >> $GITHUB_ENV
+
       - name: Create Release
         if: steps.package_publisher.outputs.success == 'true'
         uses: kuloud/Github-Release-Action@v1
@@ -29,5 +36,7 @@ jobs:
           title: Release ${{ steps.package_publisher.outputs.localVersion }}
           body: |
             Automated release for version ${{ steps.package_publisher.outputs.localVersion }}
+            Changes in this release:
+            ${{ env.git_log }}
           draft: false
           prerelease: false
