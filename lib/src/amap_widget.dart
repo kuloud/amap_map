@@ -108,6 +108,9 @@ class AMapWidget extends StatefulWidget {
 
   final List<AMapExtension> extensions;
 
+  /// 设置地图语言
+  final MapLanguage? mapLanguage;
+
   /// 创建一个展示高德地图的widget
   ///
   /// 在app首次启动时必须传入高德合规声明配置[privacyStatement],后续如果没有变化不需要重复设置
@@ -150,6 +153,7 @@ class AMapWidget extends StatefulWidget {
       this.polylines = const <Polyline>{},
       this.polygons = const <Polygon>{},
       this.extensions = const [],
+      this.mapLanguage,
       this.logoPosition,
       this.logoBottomMargin,
       this.logoLeftMargin})
@@ -380,47 +384,51 @@ class _AMapOptions {
   final int? logoBottomMargin;
   final int? logoLeftMargin;
 
-  _AMapOptions({
-    this.mapType = MapType.normal,
-    this.buildingsEnabled,
-    this.customStyleOptions,
-    this.myLocationStyleOptions,
-    this.compassEnabled,
-    this.labelsEnabled,
-    this.limitBounds,
-    this.minMaxZoomPreference,
-    this.scaleEnabled,
-    this.touchPoiEnabled,
-    this.trafficEnabled,
-    this.rotateGesturesEnabled,
-    this.scrollGesturesEnabled,
-    this.tiltGesturesEnabled,
-    this.zoomGesturesEnabled,
-    this.logoPosition,
-    this.logoBottomMargin,
-    this.logoLeftMargin,
-  });
+  final MapLanguage? mapLanguage;
+
+  _AMapOptions(
+      {this.mapType = MapType.normal,
+      this.buildingsEnabled,
+      this.customStyleOptions,
+      this.myLocationStyleOptions,
+      this.compassEnabled,
+      this.labelsEnabled,
+      this.limitBounds,
+      this.minMaxZoomPreference,
+      this.scaleEnabled,
+      this.touchPoiEnabled,
+      this.trafficEnabled,
+      this.rotateGesturesEnabled,
+      this.scrollGesturesEnabled,
+      this.tiltGesturesEnabled,
+      this.zoomGesturesEnabled,
+      this.logoPosition,
+      this.logoBottomMargin,
+      this.logoLeftMargin,
+      this.mapLanguage});
 
   static _AMapOptions fromWidget(AMapWidget map) {
     return _AMapOptions(
-        mapType: map.mapType,
-        buildingsEnabled: map.buildingsEnabled,
-        compassEnabled: map.compassEnabled,
-        labelsEnabled: map.labelsEnabled,
-        limitBounds: map.limitBounds,
-        minMaxZoomPreference: map.minMaxZoomPreference,
-        scaleEnabled: map.scaleEnabled,
-        touchPoiEnabled: map.touchPoiEnabled,
-        trafficEnabled: map.trafficEnabled,
-        rotateGesturesEnabled: map.rotateGesturesEnabled,
-        scrollGesturesEnabled: map.scrollGesturesEnabled,
-        tiltGesturesEnabled: map.tiltGesturesEnabled,
-        zoomGesturesEnabled: map.zoomGesturesEnabled,
-        customStyleOptions: map.customStyleOptions?.clone(),
-        myLocationStyleOptions: map.myLocationStyleOptions?.clone(),
-        logoPosition: map.logoPosition?.index,
-        logoBottomMargin: map.logoBottomMargin,
-        logoLeftMargin: map.logoLeftMargin);
+      mapType: map.mapType,
+      buildingsEnabled: map.buildingsEnabled,
+      compassEnabled: map.compassEnabled,
+      labelsEnabled: map.labelsEnabled,
+      limitBounds: map.limitBounds,
+      minMaxZoomPreference: map.minMaxZoomPreference,
+      scaleEnabled: map.scaleEnabled,
+      touchPoiEnabled: map.touchPoiEnabled,
+      trafficEnabled: map.trafficEnabled,
+      rotateGesturesEnabled: map.rotateGesturesEnabled,
+      scrollGesturesEnabled: map.scrollGesturesEnabled,
+      tiltGesturesEnabled: map.tiltGesturesEnabled,
+      zoomGesturesEnabled: map.zoomGesturesEnabled,
+      customStyleOptions: map.customStyleOptions?.clone(),
+      myLocationStyleOptions: map.myLocationStyleOptions?.clone(),
+      logoPosition: map.logoPosition?.index,
+      logoBottomMargin: map.logoBottomMargin,
+      logoLeftMargin: map.logoLeftMargin,
+      mapLanguage: map.mapLanguage,
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -449,6 +457,7 @@ class _AMapOptions {
     addIfNonNull('logoPosition', logoPosition);
     addIfNonNull('logoBottomMargin', logoBottomMargin);
     addIfNonNull('logoLeftMargin', logoLeftMargin);
+    addIfNonNull('mapLanguage', mapLanguage?.value);
     return optionsMap;
   }
 

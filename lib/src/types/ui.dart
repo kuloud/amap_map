@@ -21,6 +21,15 @@ enum MapType {
   bus,
 }
 
+/// 地图底图语言，目前支持中文底图和英文底图
+enum MapLanguage {
+  chinese('zh_cn'),
+  english('en');
+
+  final String value;
+  const MapLanguage(this.value);
+}
+
 // 设置摄像机的边界.
 class CameraTargetBounds {
   /// 使用指定的边界框或空值创建摄影机目标边界

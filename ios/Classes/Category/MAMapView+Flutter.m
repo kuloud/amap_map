@@ -262,6 +262,15 @@
 
     // 设置logo的位置
     self.logoCenter = logoCenter;
+
+    // 设置地图语言
+    NSString *mapLanguage = dict[@"mapLanguage"];
+    // 中文:@0: 英文:@1. 英文使用注意事项：1、不能和自定义地图样式同时使用；2、英文状态只在MAMapTypeStandard生效
+    if ([mapLanguage isEqualToString:@"zh_cn"]) {
+        self.mapLanguage = @0;
+    } else if ([mapLanguage isEqualToString:@"en"]) {
+        self.mapLanguage = @1;
+    }
 }
 
 @end

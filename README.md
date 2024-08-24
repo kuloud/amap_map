@@ -215,6 +215,9 @@ class AMapWidget extends StatefulWidget {
 
   ///拓展插件，提供更多定制化功能
   final List<AMapExtension> extensions;
+
+  /// 设置地图语言
+  final MapLanguage? mapLanguage;
 }
 ```
 

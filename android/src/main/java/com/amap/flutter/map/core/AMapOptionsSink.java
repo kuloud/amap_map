@@ -58,4 +58,11 @@ public interface AMapOptionsSink extends UISettingsSink {
     public void setInitialPolylines(Object initialPolylines);
 
     public void setInitialPolygons(Object initialPolygons);
+
+    /**
+     * 设置地图语言
+     *
+     * @param mapLanguage {@link com.amap.api.maps.AMap#CHINESE }, {@link com.amap.api.maps.AMap#ENGLISH }
+     */
+    void setMapLanguage(String mapLanguage);
 }

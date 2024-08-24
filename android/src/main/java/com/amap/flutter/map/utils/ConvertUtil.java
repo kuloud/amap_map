@@ -293,6 +293,11 @@ public class ConvertUtil {
             if (null != logoLeftMargin) {
                 sink.setLogoLeftMargin(toInt(logoLeftMargin));
             }
+
+            final Object mapLanguage = data.get("mapLanguage");
+            if (null != mapLanguage) {
+                sink.setMapLanguage(toString(mapLanguage));
+            }
         } catch (Throwable e) {
             LogUtil.e(CLASS_NAME, "interpretAMapOptions", e);
         }

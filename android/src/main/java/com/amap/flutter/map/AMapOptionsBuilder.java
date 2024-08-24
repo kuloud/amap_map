@@ -51,6 +51,8 @@ class AMapOptionsBuilder implements AMapOptionsSink, UISettingsSink {
 
     private Object initialPolygons;
 
+    private String mapLanguage;
+
     AMapPlatformView build(int id,
                            Context context,
                            BinaryMessenger binaryMessenger,
@@ -107,6 +109,8 @@ class AMapOptionsBuilder implements AMapOptionsSink, UISettingsSink {
                 List<Object> polygonList = (List<Object>) initialPolygons;
                 aMapPlatformView.getPolygonsController().addByList(polygonList);
             }
+
+            aMapPlatformView.getMapController().setMapLanguage(mapLanguage);
             return aMapPlatformView;
         } catch (Throwable e) {
             LogUtil.e(CLASS_NAME, "build", e);
@@ -242,5 +246,9 @@ class AMapOptionsBuilder implements AMapOptionsSink, UISettingsSink {
         this.initialPolygons = polygonsObject;
     }
 
+    @Override
+    public void setMapLanguage(String mapLanguage) {
+        this.mapLanguage = mapLanguage;
+    }
 
 }

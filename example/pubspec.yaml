@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  permission_handler: ^11.3.0
-  flutter_plugin_android_lifecycle: ^2.0.17
+  permission_handler: ^11.3.1
+  flutter_plugin_android_lifecycle: ^2.0.21
 
   amap_map:
     # When depending on this package from a real application you should use:
@@ -23,6 +23,7 @@ dependencies:
     # the parent directory to use the current plugin's version.
     path: ../
   x_common: ^1.0.4
+  x_amap_base: ^1.0.3
 
   # amap_map_extensions: ^0.0.1
   # amap_map_extensions:

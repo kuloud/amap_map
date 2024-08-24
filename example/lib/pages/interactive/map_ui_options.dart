@@ -4,7 +4,6 @@ import 'package:amap_map_example/widgets/amap_radio_group.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
 import 'package:x_amap_base/x_amap_base.dart';
-import 'package:x_common/utils/logger.dart';
 
 class MapUIDemoPage extends StatefulWidget {
   MapUIDemoPage({Key? key}) : super(key: key);

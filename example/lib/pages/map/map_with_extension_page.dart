@@ -13,8 +13,6 @@
 // import 'package:amap_map_extensions/amap_map_extensions.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:typed_data';
-
 import 'package:amap_map/amap_map.dart';
 
 class MapWithExtensionPage extends StatefulWidget {

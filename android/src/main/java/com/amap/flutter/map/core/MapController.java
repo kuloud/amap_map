@@ -355,6 +355,13 @@ public class MapController
         //不实现
     }
 
+    @Override
+    public void setMapLanguage(String mapLanguage) {
+        if (null != amap) {
+            amap.setMapLanguage(mapLanguage);
+        }
+    }
+
 
     @Override
     public void setLogoPosition(int logoPosition) {
