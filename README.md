@@ -213,11 +213,11 @@ class AMapWidget extends StatefulWidget {
   ///需要应用到地图上的手势集合
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
 
-  ///拓展插件，提供更多定制化功能
-  final List<AMapExtension> extensions;
-
   /// 设置地图语言
   final MapLanguage? mapLanguage;
+
+  /// Marker InfoWindow 适配器
+  final InfoWindowAdapter? infoWindowAdapter;
 }
 ```
 

@@ -109,6 +109,7 @@ class AMapWidget extends StatefulWidget {
   /// 设置地图语言
   final MapLanguage? mapLanguage;
 
+  /// Marker InfoWindow 适配器
   final InfoWindowAdapter? infoWindowAdapter;
 
   /// 创建一个展示高德地图的widget
