@@ -8,7 +8,7 @@ import 'package:x_amap_base/x_amap_base.dart';
 import 'bitmap.dart';
 
 /// Marker拖动回调
-typedef void MarkerDragEndCallback(String id, LatLng endPosition);
+typedef MarkerDragEndCallback = void Function(String id, LatLng endPosition);
 
 ///Marker的气泡
 ///
@@ -91,11 +91,11 @@ class Marker extends BaseOverlay {
     this.zIndex = 0.0,
     this.onTap,
     this.onDragEnd,
-  })  : this.alpha =
+  })  : alpha =
             // ignore: unnecessary_null_comparison
             (alpha != null ? (alpha < 0 ? 0 : (alpha > 1 ? 1 : alpha)) : alpha),
         // ignore: unnecessary_null_comparison
-        this.anchor = (anchor == null
+        anchor = (anchor == null
             ? Offset(0.5, 1.0)
             : ((anchor.dx < 0 ||
                     anchor.dx > 1 ||
@@ -182,6 +182,7 @@ class Marker extends BaseOverlay {
     return copyMark;
   }
 
+  @override
   Marker clone() => copyWith();
 
   @override

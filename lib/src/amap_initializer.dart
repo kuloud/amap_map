@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-part of amap_map;
+part of '../amap_map.dart';
 
 class AMapInitializer {
   static AMapApiKey? _apiKey;

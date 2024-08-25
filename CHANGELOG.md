@@ -1,8 +1,14 @@
+## 1.0.11
+2024-08-25
+* 升级amap iOS sdk版本 10.0.900 | 2024-08-23
+* code lint
+
 ## 1.0.10
 2024-08-25
 * 移除extension实现机制
 * 添加 getMapContentApprovalNumber / getSatelliteImageApprovalNumber（参见example#ShowMapPage）
 * 添加 InfoWindowAdapter（参见example#CustomInfoWindowDemoPage）,结合 infoWindowEnable 和 BaseInfoWindowAdapter 自行实现具体逻辑
+* permission_handler 11.3.0 -> 11.3.1
 
 ## 1.0.9
 2024-08-24

@@ -18,29 +18,27 @@ class MapEvent<T> {
 
 ///定位回调接口
 class LocationChangedEvent extends MapEvent<AMapLocation> {
-  LocationChangedEvent(int mapId, AMapLocation value) : super(mapId, value);
+  LocationChangedEvent(super.mapId, super.value);
 }
 
 ///地图移动回调
 class CameraPositionMoveEvent extends MapEvent<CameraPosition> {
-  CameraPositionMoveEvent(int mapId, CameraPosition value)
-      : super(mapId, value);
+  CameraPositionMoveEvent(super.mapId, super.value);
 }
 
 ///地图移动结束回调
 class CameraPositionMoveEndEvent extends MapEvent<CameraPosition> {
-  CameraPositionMoveEndEvent(int mapId, CameraPosition value)
-      : super(mapId, value);
+  CameraPositionMoveEndEvent(super.mapId, super.value);
 }
 
 ///点击地图回调
 class MapTapEvent extends MapEvent<LatLng> {
-  MapTapEvent(int mapId, LatLng value) : super(mapId, value);
+  MapTapEvent(super.mapId, super.value);
 }
 
 ///长按地图回调
 class MapLongPressEvent extends MapEvent<LatLng> {
-  MapLongPressEvent(int mapId, LatLng value) : super(mapId, value);
+  MapLongPressEvent(super.mapId, super.value);
 }
 
 /// 带位置回调的地图事件
@@ -57,21 +55,20 @@ class _PositionedMapEvent<T> extends MapEvent<T> {
 
 /// [Marker] 的点击事件
 class MarkerTapEvent extends MapEvent<String> {
-  MarkerTapEvent(int mapId, String markerId) : super(mapId, markerId);
+  MarkerTapEvent(super.mapId, super.markerId);
 }
 
 /// [Marker] 的拖拽结束事件，附带拖拽结束时的位置信息[LatLng].
 class MarkerDragEndEvent extends _PositionedMapEvent<String> {
-  MarkerDragEndEvent(int mapId, LatLng position, String markerId)
-      : super(mapId, position, markerId);
+  MarkerDragEndEvent(super.mapId, super.position, super.markerId);
 }
 
 /// [Polyline] 的点击事件
 class PolylineTapEvent extends MapEvent<String> {
-  PolylineTapEvent(int mapId, String polylineId) : super(mapId, polylineId);
+  PolylineTapEvent(super.mapId, super.polylineId);
 }
 
 /// Poi点击事件
 class MapPoiTouchEvent extends MapEvent<AMapPoi> {
-  MapPoiTouchEvent(int mapId, AMapPoi poi) : super(mapId, poi);
+  MapPoiTouchEvent(super.mapId, super.poi);
 }

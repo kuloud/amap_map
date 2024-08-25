@@ -62,9 +62,9 @@ class Polyline extends BaseOverlay {
     this.customTexture,
     this.onTap,
     this.color = const Color(0xCCC4E0F0),
-  })  : assert(points.length > 0),
-        this.width = (width <= 0 ? 10 : width),
-        this.alpha = (alpha < 0 ? 0 : (alpha > 1 ? 1 : alpha)),
+  })  : assert(points.isNotEmpty),
+        width = (width <= 0 ? 10 : width),
+        alpha = (alpha < 0 ? 0 : (alpha > 1 ? 1 : alpha)),
         super();
 
   /// 覆盖物的坐标点数组,points不能为空
@@ -131,6 +131,7 @@ class Polyline extends BaseOverlay {
     return copyPolyline;
   }
 
+  @override
   Polyline clone() => copyWith();
 
   /// 将对象转换为可序列化的map.
@@ -175,9 +176,6 @@ class Polyline extends BaseOverlay {
         joinType == typedOther.joinType &&
         color == typedOther.color;
   }
-
-  @override
-  int get hashCode => super.hashCode;
 
   dynamic _pointsToJson() {
     final List<dynamic> result = <dynamic>[];

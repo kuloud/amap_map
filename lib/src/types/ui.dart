@@ -72,14 +72,12 @@ class MinMaxZoomPreference {
   /// 缩放级别范围为[3, 20]，超出范围取边界值
   ///
   const MinMaxZoomPreference(double minZoom, double maxZoom)
-      : this.minZoom =
-            ((minZoom < 3 ? 3 : minZoom) > (maxZoom > 20 ? 20 : maxZoom)
-                ? maxZoom
-                : minZoom),
-        this.maxZoom =
-            ((minZoom < 3 ? 3 : minZoom) > (maxZoom > 20 ? 20 : maxZoom)
-                ? minZoom
-                : maxZoom);
+      : minZoom = ((minZoom < 3 ? 3 : minZoom) > (maxZoom > 20 ? 20 : maxZoom)
+            ? maxZoom
+            : minZoom),
+        maxZoom = ((minZoom < 3 ? 3 : minZoom) > (maxZoom > 20 ? 20 : maxZoom)
+            ? minZoom
+            : maxZoom);
 
   /// 最小zoomLevel
   final double? minZoom;
@@ -152,10 +150,10 @@ class MyLocationStyleOptions {
     }
     return MyLocationStyleOptions(
       json['enabled'] ?? false,
-      circleFillColor: json['circleFillColor'] ?? null,
-      circleStrokeColor: json['circleStrokeColor'] ?? null,
-      circleStrokeWidth: json['circleStrokeWidth'] ?? null,
-      icon: json['icon'] ?? null,
+      circleFillColor: json['circleFillColor'],
+      circleStrokeColor: json['circleStrokeColor'],
+      circleStrokeWidth: json['circleStrokeWidth'],
+      icon: json['icon'],
     );
   }
 
@@ -225,8 +223,8 @@ class CustomStyleOptions {
     }
     return CustomStyleOptions(
       json['enabled'] ?? false,
-      styleData: json['styleData'] ?? null,
-      styleExtraData: json['styleExtraData'] ?? null,
+      styleData: json['styleData'],
+      styleExtraData: json['styleExtraData'],
     );
   }
 

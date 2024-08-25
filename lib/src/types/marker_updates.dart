@@ -6,16 +6,6 @@ import 'types.dart';
 class MarkerUpdates {
   /// 根据之前的marker列表[previous]和当前的marker列表[current]创建[MakerUpdates].
   MarkerUpdates.from(Set<Marker> previous, Set<Marker> current) {
-    // ignore: unnecessary_null_comparison
-    if (previous == null) {
-      previous = Set<Marker>.identity();
-    }
-
-    // ignore: unnecessary_null_comparison
-    if (current == null) {
-      current = Set<Marker>.identity();
-    }
-
     final Map<String, Marker> previousMarkers = keyByMarkerId(previous);
     final Map<String, Marker> currentMarkers = keyByMarkerId(current);
 

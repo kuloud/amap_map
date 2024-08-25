@@ -38,7 +38,7 @@ class CameraPosition {
   ///
   /// 主要在插件内部使用
   static CameraPosition? fromMap(dynamic json) {
-    if (json == null || !(json is Map<dynamic, dynamic>)) {
+    if (json == null || json is! Map<dynamic, dynamic>) {
       return null;
     }
     final LatLng? target = LatLng.fromJson(json['target']);

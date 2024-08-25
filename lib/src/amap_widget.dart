@@ -10,9 +10,9 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 
-part of amap_map;
+part of '../amap_map.dart';
 
-typedef void MapCreatedCallback(AMapController controller);
+typedef MapCreatedCallback = void Function(AMapController controller);
 
 ///用于展示高德地图的Widget
 class AMapWidget extends StatefulWidget {
@@ -124,7 +124,7 @@ class AMapWidget extends StatefulWidget {
   ///
   /// [AssertionError] will be thrown if [initialCameraPosition] is null;
   const AMapWidget(
-      {Key? key,
+      {super.key,
       this.initialCameraPosition =
           const CameraPosition(target: LatLng(39.909187, 116.397451), zoom: 10),
       this.mapType = MapType.normal,
@@ -157,8 +157,7 @@ class AMapWidget extends StatefulWidget {
       this.infoWindowAdapter,
       this.logoPosition,
       this.logoBottomMargin,
-      this.logoLeftMargin})
-      : super(key: key);
+      this.logoLeftMargin});
 
   ///
   @override
@@ -169,7 +168,7 @@ class _MapState extends State<AMapWidget> {
   Map<String, Marker> _markers = <String, Marker>{};
   Map<String, Polyline> _polylines = <String, Polyline>{};
   Map<String, Polygon> _polygons = <String, Polygon>{};
-  Map<String, Widget?> _infoWindows = <String, Widget?>{};
+  final Map<String, Widget?> _infoWindows = <String, Widget?>{};
 
   final Completer<AMapController> _controller = Completer<AMapController>();
   late _AMapOptions _mapOptions;
@@ -244,38 +243,38 @@ class _MapState extends State<AMapWidget> {
     );
     _controller.complete(controller);
 
-    final MapCreatedCallback? _onMapCreated = widget.onMapCreated;
-    if (_onMapCreated != null) {
-      _onMapCreated(controller);
+    final MapCreatedCallback? onMapCreated = widget.onMapCreated;
+    if (onMapCreated != null) {
+      onMapCreated(controller);
     }
   }
 
   void onMarkerTap(String markerId) {
-    final Marker? _marker = _markers[markerId];
-    if (_marker != null) {
-      final ArgumentCallback<String>? _onTap = _marker.onTap;
-      if (_onTap != null) {
-        _onTap(markerId);
+    final Marker? marker = _markers[markerId];
+    if (marker != null) {
+      final ArgumentCallback<String>? onTap = marker.onTap;
+      if (onTap != null) {
+        onTap(markerId);
       }
     }
   }
 
   void onMarkerDragEnd(String markerId, LatLng position) {
-    final Marker? _marker = _markers[markerId];
-    if (_marker != null) {
-      final MarkerDragEndCallback? _onDragEnd = _marker.onDragEnd;
-      if (_onDragEnd != null) {
-        _onDragEnd(markerId, position);
+    final Marker? marker = _markers[markerId];
+    if (marker != null) {
+      final MarkerDragEndCallback? onDragEnd = marker.onDragEnd;
+      if (onDragEnd != null) {
+        onDragEnd(markerId, position);
       }
     }
   }
 
   void onPolylineTap(String polylineId) {
-    final Polyline? _polyline = _polylines[polylineId];
-    if (_polyline != null) {
-      final ArgumentCallback<String>? _onTap = _polyline.onTap;
-      if (_onTap != null) {
-        _onTap(polylineId);
+    final Polyline? polyline = _polylines[polylineId];
+    if (polyline != null) {
+      final ArgumentCallback<String>? onTap = polyline.onTap;
+      if (onTap != null) {
+        onTap(polylineId);
       }
     }
   }

@@ -9,16 +9,6 @@ import 'types.dart';
 class PolygonUpdates {
   /// 通过Polygon的前后更新集合构造一个PolygonUpdates
   PolygonUpdates.from(Set<Polygon> previous, Set<Polygon> current) {
-    // ignore: unnecessary_null_comparison
-    if (previous == null) {
-      previous = Set<Polygon>.identity();
-    }
-
-    // ignore: unnecessary_null_comparison
-    if (current == null) {
-      current = Set<Polygon>.identity();
-    }
-
     final Map<String, Polygon> previousPolygons = keyByPolygonId(previous);
     final Map<String, Polygon> currentPolygons = keyByPolygonId(current);
 
@@ -29,10 +19,10 @@ class PolygonUpdates {
       return currentPolygons[id]!;
     }
 
-    final Set<String> _polygonIdsToRemove =
+    final Set<String> tempPolygonIdsToRemove =
         prevPolygonIds.difference(currentPolygonIds);
 
-    final Set<Polygon> _polygonsToAdd = currentPolygonIds
+    final Set<Polygon> tempPolygonsToAdd = currentPolygonIds
         .difference(prevPolygonIds)
         .map(idToCurrentPolygon)
         .toSet();
@@ -42,15 +32,15 @@ class PolygonUpdates {
       return current != previous;
     }
 
-    final Set<Polygon> _polygonsToChange = currentPolygonIds
+    final Set<Polygon> tempPolygonsToChange = currentPolygonIds
         .intersection(prevPolygonIds)
         .map(idToCurrentPolygon)
         .where(hasChanged)
         .toSet();
 
-    polygonsToAdd = _polygonsToAdd;
-    polygonIdsToRemove = _polygonIdsToRemove;
-    polygonsToChange = _polygonsToChange;
+    polygonsToAdd = tempPolygonsToAdd;
+    polygonIdsToRemove = tempPolygonIdsToRemove;
+    polygonsToChange = tempPolygonsToChange;
   }
 
   /// 想要添加的polygon对象集合.

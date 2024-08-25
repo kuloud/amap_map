@@ -10,16 +10,6 @@ import 'types.dart';
 class PolylineUpdates {
   /// 通过polyline的前后更新集合构造一个polylineUpdates
   PolylineUpdates.from(Set<Polyline> previous, Set<Polyline> current) {
-    // ignore: unnecessary_null_comparison
-    if (previous == null) {
-      previous = Set<Polyline>.identity();
-    }
-
-    // ignore: unnecessary_null_comparison
-    if (current == null) {
-      current = Set<Polyline>.identity();
-    }
-
     final Map<String, Polyline> previousPolylines = keyByPolylineId(previous);
     final Map<String, Polyline> currentPolylines = keyByPolylineId(current);
 
@@ -30,10 +20,10 @@ class PolylineUpdates {
       return currentPolylines[id]!;
     }
 
-    final Set<String> _polylineIdsToRemove =
+    final Set<String> tempPolylineIdsToRemove =
         prevPolylineIds.difference(currentPolylineIds);
 
-    final Set<Polyline> _polylinesToAdd = currentPolylineIds
+    final Set<Polyline> tempPolylinesToAdd = currentPolylineIds
         .difference(prevPolylineIds)
         .map(idToCurrentPolyline)
         .toSet();
@@ -43,15 +33,15 @@ class PolylineUpdates {
       return current != previous;
     }
 
-    final Set<Polyline> _polylinesToChange = currentPolylineIds
+    final Set<Polyline> tempPolylinesToChange = currentPolylineIds
         .intersection(prevPolylineIds)
         .map(idToCurrentPolyline)
         .where(hasChanged)
         .toSet();
 
-    polylinesToAdd = _polylinesToAdd;
-    polylineIdsToRemove = _polylineIdsToRemove;
-    polylinesToChange = _polylinesToChange;
+    polylinesToAdd = tempPolylinesToAdd;
+    polylineIdsToRemove = tempPolylineIdsToRemove;
+    polylinesToChange = tempPolylinesToChange;
   }
 
   /// 用于添加polyline的集合

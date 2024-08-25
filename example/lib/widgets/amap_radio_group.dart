@@ -24,13 +24,13 @@ class _AMapRadioGroupState<T> extends State<AMapRadioGroup<T>> {
   @override
   void initState() {
     super.initState();
-    _groupValue = (widget.groupValue ?? null) as T?;
+    _groupValue = (widget.groupValue);
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> radioList = <Widget>[];
-    _groupValue = (widget.groupValue ?? null) as T?;
+    _groupValue = (widget.groupValue);
     Widget _myRadio(String label, dynamic radioValue) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,

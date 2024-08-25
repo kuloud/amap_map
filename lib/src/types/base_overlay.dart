@@ -6,7 +6,7 @@ class BaseOverlay {
   String get id => _id;
 
   BaseOverlay() {
-    this._id = this.hashCode.toString();
+    _id = hashCode.toString();
   }
 
   void setIdForCopy(String copyId) => _id = copyId;

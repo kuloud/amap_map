@@ -182,7 +182,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
           _mapEventStreamController.add(LocationChangedEvent(
               mapId, AMapLocation.fromMap(call.arguments['location'])!));
         } catch (e) {
-          print("location#changed error=======>" + e.toString());
+          print("location#changed error=======>$e");
         }
         break;
 
@@ -191,7 +191,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
           _mapEventStreamController.add(CameraPositionMoveEvent(
               mapId, CameraPosition.fromMap(call.arguments['position'])!));
         } catch (e) {
-          print("camera#onMove error===>" + e.toString());
+          print("camera#onMove error===>$e");
         }
         break;
       case 'camera#onMoveEnd':
@@ -199,7 +199,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
           _mapEventStreamController.add(CameraPositionMoveEndEvent(
               mapId, CameraPosition.fromMap(call.arguments['position'])!));
         } catch (e) {
-          print("camera#onMoveEnd error===>" + e.toString());
+          print("camera#onMoveEnd error===>$e");
         }
         break;
       case 'map#onTap':
@@ -232,7 +232,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
           _mapEventStreamController.add(MapPoiTouchEvent(
               mapId, AMapPoi.fromJson(call.arguments['poi'])!));
         } catch (e) {
-          print('map#onPoiTouched error===>' + e.toString());
+          print('map#onPoiTouched error===>$e');
         }
         break;
     }

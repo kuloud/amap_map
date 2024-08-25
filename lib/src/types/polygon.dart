@@ -60,6 +60,7 @@ class Polygon extends BaseOverlay {
     return copyPolyline;
   }
 
+  @override
   Polygon clone() => copyWith();
 
   /// 转换成可以序列化的map
