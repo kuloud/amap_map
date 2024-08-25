@@ -79,13 +79,6 @@ class _AMapDemoState extends State<AMapDemo>
                 category: DemoCategory.overlay,
                 demos: overlayDemos(),
               )),
-          AnimatedCategoryItem(
-              startDelayFraction: 0.15,
-              controller: _animationController,
-              child: CategoryListItem(
-                category: DemoCategory.extension,
-                demos: extensionDemos(),
-              )),
         ],
       ),
     );

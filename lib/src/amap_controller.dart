@@ -55,43 +55,37 @@ class AMapController {
     _methodChannel
         .onCameraMove(mapId: mapId)
         .listen((CameraPositionMoveEvent e) {
-      _mapState._extensions.values.forEach((ext) => ext.onCameraMove(e.value));
       _mapState.widget.onCameraMove?.call(e.value);
+      if (_mapState.widget.infoWindowAdapter != null) {
+        _mapState.updateMarkers();
+      }
     });
 
     _methodChannel
         .onCameraMoveEnd(mapId: mapId)
         .listen((CameraPositionMoveEndEvent e) {
-      _mapState._extensions.values
-          .forEach((ext) => ext.onCameraMoveEnd(e.value));
       _mapState.widget.onCameraMoveEnd?.call(e.value);
     });
     _methodChannel
         .onMapTap(mapId: mapId)
         .listen(((MapTapEvent e) => _mapState.widget.onTap?.call(e.value)));
     _methodChannel.onMapLongPress(mapId: mapId).listen(((MapLongPressEvent e) {
-      _mapState._extensions.values.forEach((ext) => ext.onLongPress(e.value));
       _mapState.widget.onLongPress?.call(e.value);
     }));
 
     _methodChannel.onPoiTouched(mapId: mapId).listen(((MapPoiTouchEvent e) {
-      _mapState._extensions.values.forEach((ext) => ext.onPoiTouched(e.value));
       _mapState.widget.onPoiTouched?.call(e.value);
     }));
 
     _methodChannel.onMarkerTap(mapId: mapId).listen((MarkerTapEvent e) {
-      _mapState._extensions.values.forEach((ext) => ext.onMarkerTap(e.value));
       _mapState.onMarkerTap(e.value);
     });
 
     _methodChannel.onMarkerDragEnd(mapId: mapId).listen((MarkerDragEndEvent e) {
-      _mapState._extensions.values
-          .forEach((ext) => ext.onMarkerDragEnd(e.value));
       _mapState.onMarkerDragEnd(e.value, e.position);
     });
 
     _methodChannel.onPolylineTap(mapId: mapId).listen((PolylineTapEvent e) {
-      _mapState._extensions.values.forEach((ext) => ext.onPolylineTap(e.value));
       _mapState.onPolylineTap(e.value);
     });
   }
@@ -149,5 +143,13 @@ class AMapController {
   /// 屏幕坐标转经纬度 From v1.0.3
   Future<LatLng> fromScreenCoordinate(ScreenCoordinate screenCoordinate) {
     return _methodChannel.fromScreenLocation(screenCoordinate, mapId: mapId);
+  }
+
+  Future<String> getMapContentApprovalNumber() {
+    return _methodChannel.getMapContentApprovalNumber(mapId: mapId);
+  }
+
+  Future<String> getSatelliteImageApprovalNumber() {
+    return _methodChannel.getSatelliteImageApprovalNumber(mapId: mapId);
   }
 }

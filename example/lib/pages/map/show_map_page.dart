@@ -43,23 +43,23 @@ class _ShowMapPageState extends State<ShowMapPage> {
   void onMapCreated(AMapController controller) {
     setState(() {
       _mapController = controller;
-      // getApprovalNumber();
+      getApprovalNumber();
     });
   }
 
   /// 获取审图号
   void getApprovalNumber() async {
-    // //普通地图审图号
-    // String mapContentApprovalNumber =
-    //     (await _mapController.getMapContentApprovalNumber())!;
-    // //卫星地图审图号
-    // String satelliteImageApprovalNumber =
-    //     (await _mapController.getSatelliteImageApprovalNumber())!;
-    // setState(() {
-    //   _approvalNumberWidget.add(Text(mapContentApprovalNumber));
-    //   _approvalNumberWidget.add(Text(satelliteImageApprovalNumber));
-    // });
-    // print('地图审图号（普通地图）: $mapContentApprovalNumber');
-    // print('地图审图号（卫星地图): $satelliteImageApprovalNumber');
+    //普通地图审图号
+    String mapContentApprovalNumber =
+        (await _mapController.getMapContentApprovalNumber());
+    //卫星地图审图号
+    String satelliteImageApprovalNumber =
+        (await _mapController.getSatelliteImageApprovalNumber());
+    setState(() {
+      _approvalNumberWidget.add(Text(mapContentApprovalNumber));
+      _approvalNumberWidget.add(Text(satelliteImageApprovalNumber));
+    });
+    print('地图审图号（普通地图）: $mapContentApprovalNumber');
+    print('地图审图号（卫星地图): $satelliteImageApprovalNumber');
   }
 }

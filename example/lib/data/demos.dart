@@ -5,7 +5,6 @@ import 'package:amap_map_example/pages/interactive/map_ui_options.dart';
 import 'package:amap_map_example/pages/map/change_map_lang.dart';
 import 'package:amap_map_example/pages/map/limit_map_bounds.dart';
 import 'package:amap_map_example/pages/map/map_my_location.dart';
-import 'package:amap_map_example/pages/map/map_with_extension_page.dart';
 import 'package:amap_map_example/pages/map/show_map_page.dart';
 import 'package:amap_map_example/pages/overlays/custom_info_window.dart';
 import 'package:amap_map_example/pages/overlays/marker_config.dart';
@@ -19,8 +18,7 @@ class DemoConfiguration {
   final WidgetBuilder buildRoute;
 }
 
-List<Demo> allDemos() =>
-    mapDemos() + interactiveDemos() + overlayDemos() + extensionDemos();
+List<Demo> allDemos() => mapDemos() + interactiveDemos() + overlayDemos();
 
 List<Demo> mapDemos() {
   return [
@@ -89,19 +87,6 @@ List<Demo> overlayDemos() {
         slug: 'custom-info-window',
         configurations: [
           DemoConfiguration(buildRoute: (context) => CustomInfoWindowDemoPage())
-        ])
-  ];
-}
-
-List<Demo> extensionDemos() {
-  return [
-    Demo(
-        title: '辅助信息获取',
-        category: DemoCategory.extension,
-        subtitle: '获取审图号',
-        slug: 'extension-info',
-        configurations: [
-          DemoConfiguration(buildRoute: (context) => MapWithExtensionPage())
         ])
   ];
 }

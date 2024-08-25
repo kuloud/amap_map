@@ -3,7 +3,7 @@ description: Demonstrates how to use the amap_map plugin.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 environment:
   sdk: ">=3.1.5 <4.0.0"
@@ -16,19 +16,9 @@ dependencies:
   flutter_plugin_android_lifecycle: ^2.0.21
 
   amap_map:
-    # When depending on this package from a real application you should use:
-    #   amap_map: ^x.y.z
-    # See https://dart.dev/tools/pub/dependencies#version-constraints
-    # The example app is bundled with the plugin so we use a path dependency on
-    # the parent directory to use the current plugin's version.
     path: ../
   x_common: ^1.0.4
   x_amap_base: ^1.0.3
-
-  # amap_map_extensions: ^0.0.1
-  # amap_map_extensions:
-  #   path: ../../amap_map_extensions
-
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +29,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -51,5 +40,3 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
-

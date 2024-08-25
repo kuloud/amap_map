@@ -1,3 +1,9 @@
+## 1.0.10
+2024-08-25
+* 移除extension实现机制
+* 添加 getMapContentApprovalNumber / getSatelliteImageApprovalNumber（参见example#ShowMapPage）
+* 添加 InfoWindowAdapter（参见example#CustomInfoWindowDemoPage）,结合 infoWindowEnable 和 BaseInfoWindowAdapter 自行实现具体逻辑
+
 ## 1.0.9
 2024-08-24
 * 设置地图语言，支持中文、英文（按SDK描述：1、不能和自定义地图样式同时使用；2、英文状态只在标准地图生效）

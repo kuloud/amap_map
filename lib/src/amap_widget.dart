@@ -106,10 +106,10 @@ class AMapWidget extends StatefulWidget {
   ///需要应用到地图上的手势集合
   final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
 
-  final List<AMapExtension> extensions;
-
   /// 设置地图语言
   final MapLanguage? mapLanguage;
+
+  final InfoWindowAdapter? infoWindowAdapter;
 
   /// 创建一个展示高德地图的widget
   ///
@@ -152,8 +152,8 @@ class AMapWidget extends StatefulWidget {
       this.markers = const <Marker>{},
       this.polylines = const <Polyline>{},
       this.polygons = const <Polygon>{},
-      this.extensions = const [],
       this.mapLanguage,
+      this.infoWindowAdapter,
       this.logoPosition,
       this.logoBottomMargin,
       this.logoLeftMargin})
@@ -168,7 +168,7 @@ class _MapState extends State<AMapWidget> {
   Map<String, Marker> _markers = <String, Marker>{};
   Map<String, Polyline> _polylines = <String, Polyline>{};
   Map<String, Polygon> _polygons = <String, Polygon>{};
-  Map<String, AMapExtension> _extensions = <String, AMapExtension>{};
+  Map<String, Widget?> _infoWindows = <String, Widget?>{};
 
   final Completer<AMapController> _controller = Completer<AMapController>();
   late _AMapOptions _mapOptions;
@@ -190,22 +190,19 @@ class _MapState extends State<AMapWidget> {
       onPlatformViewCreated,
     );
 
-    return AMapLoader(
-      mapView: mapView,
-      extensions: widget.extensions,
+    return Stack(
+      children: [mapView, ..._infoWindows.values.nonNulls],
     );
   }
 
   @override
   void initState() {
-    AMapLoader.prepare();
     super.initState();
     _mapOptions = _AMapOptions.fromWidget(widget);
     _markers = keyByMarkerId(widget.markers);
     _polygons = keyByPolygonId(widget.polygons);
     _polylines = keyByPolylineId(widget.polylines);
 
-    _extensions = keyByExtensionId(widget.extensions);
     print('initState AMapWidget');
   }
 
@@ -233,10 +230,9 @@ class _MapState extends State<AMapWidget> {
   void didUpdateWidget(covariant AMapWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     _updateOptions();
-    _updateMarkers();
+    updateMarkers();
     _updatePolylines();
     _updatePolygons();
-    _updateExtensions();
   }
 
   Future<void> onPlatformViewCreated(int id) async {
@@ -246,14 +242,6 @@ class _MapState extends State<AMapWidget> {
       this,
     );
     _controller.complete(controller);
-
-    if (_extensions.isNotEmpty) {
-      debugPrint('[onPlatformViewCreated] $controller');
-      await Future.forEach(_extensions.values, (e) {
-        e.bindMethodChannel(controller.channel);
-        e.bindMapController(controller);
-      });
-    }
 
     final MapCreatedCallback? _onMapCreated = widget.onMapCreated;
     if (_onMapCreated != null) {
@@ -303,12 +291,24 @@ class _MapState extends State<AMapWidget> {
     _mapOptions = newOptions;
   }
 
-  void _updateMarkers() async {
+  void updateMarkers() async {
     final AMapController controller = await _controller.future;
+    MarkerUpdates markerUpdates =
+        MarkerUpdates.from(_markers.values.toSet(), widget.markers);
+
+    markerUpdates.markerIdsToRemove?.forEach((markerId) {
+      _removeInfoWindow(markerId);
+    });
+
     // ignore: unawaited_futures
-    controller._updateMarkers(
-        MarkerUpdates.from(_markers.values.toSet(), widget.markers));
+    controller._updateMarkers(markerUpdates);
     _markers = keyByMarkerId(widget.markers);
+
+    if (widget.infoWindowAdapter != null) {
+      _markers.values.forEach((marker) {
+        _onInfoWindowUpdate(marker);
+      });
+    }
   }
 
   void _updatePolylines() async {
@@ -325,9 +325,19 @@ class _MapState extends State<AMapWidget> {
     _polygons = keyByPolygonId(widget.polygons);
   }
 
-  void _updateExtensions() async {
-    // final AMapController controller = await _controller.future;
-    _extensions = keyByExtensionId(widget.extensions);
+  void _onInfoWindowUpdate(Marker marker) {
+    if (widget.infoWindowAdapter != null) {
+      setState(() {
+        _infoWindows[marker.id] =
+            widget.infoWindowAdapter!.getInfoWindow(context, marker);
+      });
+    }
+  }
+
+  void _removeInfoWindow(String markerId) {
+    setState(() {
+      _infoWindows.remove(markerId);
+    });
   }
 }
 

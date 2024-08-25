@@ -22,16 +22,13 @@ class _State extends State<CustomInfoWindowDemoPage> {
   BitmapDescriptor? _markerIcon;
   String? selectedMarkerId;
   bool showInfoWindow = false;
+  AMapController? _controller;
 
-  final _infoWindowExtension = InfoWindowExtension(
-      infoWindow: Container(
-        color: Colors.lightBlue.shade400,
-        child: Text('info'),
-      ),
-      option: InfoWindowOption(
-          latLng: mapCenter, offset: EdgeInsets.only(bottom: 32)));
-
-  Future<void> _onMapCreated(AMapController controller) async {}
+  Future<void> _onMapCreated(AMapController controller) async {
+    setState(() {
+      _controller = controller;
+    });
+  }
 
   void _add() {
     final int markerCount = _markers.length;
@@ -168,8 +165,8 @@ class _State extends State<CustomInfoWindowDemoPage> {
     setState(() {
       showInfoWindow = value;
       _markers[selectedMarkerId!] = marker.copyWith(
-          // visibleParam: value,
-          );
+        visibleParam: value,
+      );
     });
   }
 
@@ -190,14 +187,10 @@ class _State extends State<CustomInfoWindowDemoPage> {
       _markerIcon = BitmapDescriptor.fromIconPath('assets/location_marker.png');
     }
 
-    _infoWindowExtension.option?.show =
-        _markers[selectedMarkerId] != null && showInfoWindow;
-    _infoWindowExtension.option?.latLng = _markers[selectedMarkerId]?.position;
-
-    final AMapWidget map = AMapWidget(
+    AMapWidget map = AMapWidget(
       onMapCreated: _onMapCreated,
       markers: Set<Marker>.of(_markers.values),
-      extensions: [_infoWindowExtension],
+      infoWindowAdapter: CustomInfoWindowAdapter(_controller, selectedMarkerId),
     );
     return Container(
       height: MediaQuery.of(context).size.height,
@@ -287,6 +280,46 @@ class _State extends State<CustomInfoWindowDemoPage> {
                 ],
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomInfoWindowAdapter extends BaseInfoWindowAdapter {
+  CustomInfoWindowAdapter(AMapController? controller, this.selectedMarkerId)
+      : super(controller);
+
+  final String? selectedMarkerId;
+
+  @override
+  Widget? buildInfoWindowContent(BuildContext context, Marker marker) {
+    if (marker.id != selectedMarkerId) {
+      return null;
+    }
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 4.0,
+            spreadRadius: 2.0,
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            marker.infoWindow.title ?? 'No Title',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            marker.infoWindow.snippet ?? 'No Snippet',
           ),
         ],
       ),

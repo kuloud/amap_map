@@ -20,8 +20,5 @@ export 'polyline_updates.dart';
 export 'polygon.dart';
 export 'polygon_updates.dart';
 export 'bitmap.dart';
-export 'extension_context.dart';
-export 'amap_extension.dart';
 export 'screen_coordinate.dart';
-
-export '../extension/extensions.dart';
+export 'info_window_adapter.dart';

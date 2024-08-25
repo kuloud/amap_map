@@ -284,4 +284,20 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
             'map#fromScreenCoordinate', screenCoordinate.toJson());
     return LatLng(latLng![0] as double, latLng[1] as double);
   }
+
+  Future<String> getMapContentApprovalNumber({
+    required int mapId,
+  }) async {
+    return await channel(mapId)
+            .invokeMethod<String>('map#contentApprovalNumber') ??
+        '';
+  }
+
+  Future<String> getSatelliteImageApprovalNumber({
+    required int mapId,
+  }) async {
+    return await channel(mapId)
+            .invokeMethod<String>('map#satelliteImageApprovalNumber') ??
+        '';
+  }
 }
