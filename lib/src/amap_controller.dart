@@ -10,7 +10,7 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 
-part of amap_map;
+part of '../amap_map.dart';
 
 final MethodChannelAMapFlutterMap _methodChannel =
     AMapFlutterPlatform.instance as MethodChannelAMapFlutterMap;
@@ -30,7 +30,7 @@ class AMapController {
   static Future<AMapController> init(
     int id,
     CameraPosition initialCameration,
-    _MapState mapState,
+    mapState,
   ) async {
     await _methodChannel.init(id);
     return AMapController._(

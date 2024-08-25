@@ -16,10 +16,10 @@ class MarkerUpdates {
       return currentMarkers[id]!;
     }
 
-    final Set<String> _markerIdsToRemove =
+    final Set<String> tempMarkerIdsToRemove =
         prevMarkerIds.difference(currentMarkerIds);
 
-    final Set<Marker> _markersToAdd = currentMarkerIds
+    final Set<Marker> tempMarkersToAdd = currentMarkerIds
         .difference(prevMarkerIds)
         .map(idToCurrentMarker)
         .toSet();
@@ -29,15 +29,15 @@ class MarkerUpdates {
       return current != previous;
     }
 
-    final Set<Marker> _markersToChange = currentMarkerIds
+    final Set<Marker> tempMarkersToChange = currentMarkerIds
         .intersection(prevMarkerIds)
         .map(idToCurrentMarker)
         .where(hasChanged)
         .toSet();
 
-    markersToAdd = _markersToAdd;
-    markerIdsToRemove = _markerIdsToRemove;
-    markersToChange = _markersToChange;
+    markersToAdd = tempMarkersToAdd;
+    markerIdsToRemove = tempMarkerIdsToRemove;
+    markersToChange = tempMarkersToChange;
   }
 
   /// 想要添加的marker集合.

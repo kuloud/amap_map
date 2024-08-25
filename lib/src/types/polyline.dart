@@ -184,6 +184,11 @@ class Polyline extends BaseOverlay {
     }
     return result;
   }
+
+  @override
+  int get hashCode => Object.hashAll([
+        id,
+      ]);
 }
 
 Map<String, Polyline> keyByPolylineId(Iterable<Polyline> polylines) {

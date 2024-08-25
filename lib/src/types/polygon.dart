@@ -18,8 +18,8 @@ class Polygon extends BaseOverlay {
       this.fillColor = const Color(0xC487CEFA),
       this.visible = true,
       this.joinType = JoinType.bevel})
-      : assert(points.length > 0),
-        this.strokeWidth = (strokeWidth <= 0 ? 10 : strokeWidth),
+      : assert(points.isNotEmpty),
+        strokeWidth = (strokeWidth <= 0 ? 10 : strokeWidth),
         super();
 
   /// 覆盖物的坐标点数组,不能为空
@@ -100,7 +100,9 @@ class Polygon extends BaseOverlay {
   }
 
   @override
-  int get hashCode => super.hashCode;
+  int get hashCode => Object.hashAll([
+        id,
+      ]);
 
   dynamic _pointsToJson() {
     final List<dynamic> result = <dynamic>[];

@@ -235,15 +235,17 @@ class Marker extends BaseOverlay {
   }
 
   @override
-  int get hashCode => super.hashCode;
-
-  @override
   String toString() {
     return 'Marker{id: $id, alpha: $alpha, anchor: $anchor, '
         'clickable: $clickable, draggable: $draggable,'
         'icon: $icon, infoWindowEnable: $infoWindowEnable, infoWindow: $infoWindow, position: $position, rotation: $rotation, '
         'visible: $visible, zIndex: $zIndex, onTap: $onTap}';
   }
+
+  @override
+  int get hashCode => Object.hashAll([
+        id,
+      ]);
 }
 
 Map<String, Marker> keyByMarkerId(Iterable<Marker> markers) {

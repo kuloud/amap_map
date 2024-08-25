@@ -7,12 +7,11 @@ class AMapRadioGroup<T> extends StatefulWidget {
   final Map<String, T>? radioValueMap;
   final ValueChanged<T?>? onChanged;
   AMapRadioGroup(
-      {Key? key,
+      {super.key,
       this.groupLabel,
       this.groupValue,
       this.radioValueMap,
-      this.onChanged})
-      : super(key: key);
+      this.onChanged});
 
   @override
   _AMapRadioGroupState<T> createState() => _AMapRadioGroupState<T>();
@@ -31,7 +30,7 @@ class _AMapRadioGroupState<T> extends State<AMapRadioGroup<T>> {
   Widget build(BuildContext context) {
     List<Widget> radioList = <Widget>[];
     _groupValue = (widget.groupValue);
-    Widget _myRadio(String label, dynamic radioValue) {
+    Widget myRadio(String label, dynamic radioValue) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -39,11 +38,11 @@ class _AMapRadioGroupState<T> extends State<AMapRadioGroup<T>> {
           Radio<T>(
             value: radioValue,
             groupValue: _groupValue,
-            onChanged: (T? _value) {
+            onChanged: (T? value) {
               setState(() {
-                _groupValue = _value;
+                _groupValue = value;
               });
-              widget.onChanged!(_value);
+              widget.onChanged!(value);
             },
           ),
         ],
@@ -52,7 +51,7 @@ class _AMapRadioGroupState<T> extends State<AMapRadioGroup<T>> {
 
     if (widget.radioValueMap != null) {
       widget.radioValueMap!.forEach((key, value) {
-        radioList.add(_myRadio(key, value));
+        radioList.add(myRadio(key, value));
       });
     }
     return Container(

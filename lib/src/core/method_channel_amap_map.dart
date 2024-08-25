@@ -23,6 +23,7 @@ import 'package:stream_transform/stream_transform.dart';
 
 import 'map_event.dart';
 
+// ignore: constant_identifier_names
 const VIEW_TYPE = 'com.amap.flutter.map';
 
 /// 使用[MethodChannel]与Native代码通信的[AMapFlutterPlatform]的实现。

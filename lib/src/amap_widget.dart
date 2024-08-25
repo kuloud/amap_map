@@ -305,9 +305,9 @@ class _MapState extends State<AMapWidget> {
     _markers = keyByMarkerId(widget.markers);
 
     if (widget.infoWindowAdapter != null) {
-      _markers.values.forEach((marker) {
+      for (var marker in _markers.values) {
         _onInfoWindowUpdate(marker);
-      });
+      }
     }
   }
 
