@@ -23,7 +23,12 @@ jobs:
       - name: Get Commit Logs
         id: git_log
         run: |
-          export GIT_LOG=$(git log --pretty=format:'- %s' $(git describe --tags --abbrev=0)..HEAD)
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$TAG" ]; then
+            GIT_LOG=$(git log --pretty=format:'- %s')
+          else
+            GIT_LOG=$(git log --pretty=format:'- %s' $TAG..HEAD)
+          fi
           echo "git_log=$GIT_LOG" >> $GITHUB_ENV
 
       - name: Create Release
