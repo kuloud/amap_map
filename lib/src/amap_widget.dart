@@ -223,7 +223,7 @@ class _MapState extends State<AMapWidget> {
   @override
   void deactivate() async {
     super.deactivate();
-    print('deactivate AMapWidget}');
+    print('deactivate AMapWidget');
   }
 
   @override

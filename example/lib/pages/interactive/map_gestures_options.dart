@@ -4,10 +4,10 @@ import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
 
 class GesturesDemoPage extends StatefulWidget {
-  GesturesDemoPage({Key? key}) : super(key: key);
+  GesturesDemoPage({super.key});
 
   @override
-  _BodyState createState() => _BodyState();
+  State<GesturesDemoPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<GesturesDemoPage> {
@@ -71,7 +71,7 @@ class _BodyState extends State<GesturesDemoPage> {
         },
       ),
     ];
-    Widget _gesturesOptiosWeidget() {
+    Widget gesturesOptiosWeidget() {
       return Container(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -103,7 +103,7 @@ class _BodyState extends State<GesturesDemoPage> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                child: _gesturesOptiosWeidget(),
+                child: gesturesOptiosWeidget(),
               ),
             ),
           ),

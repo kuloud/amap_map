@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:amap_map/amap_map.dart';
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
@@ -54,10 +52,10 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
 
   late AMapController _controller;
 
-  CustomStyleOptions _customStyleOptions = CustomStyleOptions(false);
+  final CustomStyleOptions _customStyleOptions = CustomStyleOptions(false);
 
   ///自定义定位小蓝点
-  MyLocationStyleOptions _myLocationStyleOptions =
+  final MyLocationStyleOptions _myLocationStyleOptions =
       MyLocationStyleOptions(false);
   @override
   void initState() {
@@ -100,7 +98,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       onPoiTouched: _onMapPoiTouched,
     );
 
-    Widget _mapTypeRadio(String label, MapType radioValue) {
+    Widget mapTypeRadio(String label, MapType radioValue) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -118,16 +116,16 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       );
     }
 
-    final List<Widget> _mapTypeList = [
-      _mapTypeRadio('普通地图', MapType.normal),
-      _mapTypeRadio('卫星地图', MapType.satellite),
-      _mapTypeRadio('导航地图', MapType.navi),
-      _mapTypeRadio('公交地图', MapType.bus),
-      _mapTypeRadio('黑夜模式', MapType.night),
+    final List<Widget> mapTypeList = [
+      mapTypeRadio('普通地图', MapType.normal),
+      mapTypeRadio('卫星地图', MapType.satellite),
+      mapTypeRadio('导航地图', MapType.navi),
+      mapTypeRadio('公交地图', MapType.bus),
+      mapTypeRadio('黑夜模式', MapType.night),
     ];
 
     //ui控制
-    final List<Widget> _uiOptions = [
+    final List<Widget> uiOptions = [
       AMapSwitchButton(
         label: Text('显示路况'),
         defaultValue: _trafficEnabled,
@@ -233,7 +231,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       ),
     ];
 
-    Widget _mapTypeOptions() {
+    Widget mapTypeOptions() {
       return Container(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -243,14 +241,14 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
             Text('地图样式', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
               padding: EdgeInsets.only(left: 10),
-              child: createGridView(_mapTypeList),
+              child: createGridView(mapTypeList),
             ),
           ],
         ),
       );
     }
 
-    Widget _myLocationStyleContainer() {
+    Widget myLocationStyleContainer() {
       return Container(
         padding: EdgeInsets.all(5),
         child: Row(
@@ -273,7 +271,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       );
     }
 
-    Widget _uiOptionsWidget() {
+    Widget uiOptionsWidget() {
       return Container(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -283,14 +281,14 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
             Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
               padding: EdgeInsets.only(left: 10),
-              child: createGridView(_uiOptions),
+              child: createGridView(uiOptions),
             ),
           ],
         ),
       );
     }
 
-    Widget _gesturesOptiosWeidget() {
+    Widget gesturesOptiosWeidget() {
       return Container(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -307,13 +305,13 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       );
     }
 
-    Widget _optionsItem() {
+    Widget optionsItem() {
       return Column(
         children: [
-          _mapTypeOptions(),
-          _myLocationStyleContainer(),
-          _uiOptionsWidget(),
-          _gesturesOptiosWeidget(),
+          mapTypeOptions(),
+          myLocationStyleContainer(),
+          uiOptionsWidget(),
+          gesturesOptiosWeidget(),
           TextButton(
             child: const Text('moveCamera到首开'),
             onPressed: _moveCameraToShoukai,
@@ -337,7 +335,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                child: _optionsItem(),
+                child: optionsItem(),
               ),
             ),
           ),
@@ -366,7 +364,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
   Widget createGridView(List<Widget> widgets) {
     return GridView.count(
         primary: false,
-        physics: new NeverScrollableScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         //水平子Widget之间间距
         crossAxisSpacing: 1.0,
         //垂直子Widget之间间距

@@ -18,7 +18,7 @@ class CustomInfoWindowDemoPage extends StatefulWidget {
 class _State extends State<CustomInfoWindowDemoPage> {
   static final LatLng mapCenter = const LatLng(39.909187, 116.397451);
 
-  Map<String, Marker> _markers = <String, Marker>{};
+  final Map<String, Marker> _markers = <String, Marker>{};
   BitmapDescriptor? _markerIcon;
   String? selectedMarkerId;
   bool showInfoWindow = false;
@@ -77,7 +77,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
   }
 
   void _removeAll() {
-    if (_markers.length > 0) {
+    if (_markers.isNotEmpty) {
       setState(() {
         _markers.clear();
         selectedMarkerId = null.toString();
@@ -87,7 +87,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
 
   void _changeInfo() async {
     final Marker marker = _markers[selectedMarkerId]!;
-    final String newTitle = marker.infoWindow.title! + '*';
+    final String newTitle = '${marker.infoWindow.title!}*';
     if (selectedMarkerId != null) {
       setState(() {
         _markers[selectedMarkerId!] = marker.copyWith(
@@ -183,9 +183,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
   Widget build(BuildContext context) {
     ///以下几种获取自定图片的方式使用其中一种即可。
     //最简单的方式
-    if (null == _markerIcon) {
-      _markerIcon = BitmapDescriptor.fromIconPath('assets/location_marker.png');
-    }
+    _markerIcon ??= BitmapDescriptor.fromIconPath('assets/location_marker.png');
 
     AMapWidget map = AMapWidget(
       onMapCreated: _onMapCreated,
@@ -245,7 +243,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
                         children: <Widget>[
                           TextButton(
                             child: const Text('全部移除'),
-                            onPressed: _markers.length > 0 ? _removeAll : null,
+                            onPressed: _markers.isNotEmpty ? _removeAll : null,
                           ),
                           AMapSwitchButton(
                             label: Text('允许拖动'),
@@ -288,8 +286,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
 }
 
 class CustomInfoWindowAdapter extends BaseInfoWindowAdapter {
-  CustomInfoWindowAdapter(AMapController? controller, this.selectedMarkerId)
-      : super(controller);
+  CustomInfoWindowAdapter(super.controller, this.selectedMarkerId);
 
   final String? selectedMarkerId;
 

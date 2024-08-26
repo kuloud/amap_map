@@ -14,10 +14,10 @@ import 'package:amap_map_example/widgets/amap_radio_group.dart';
 import 'package:flutter/material.dart';
 
 class ChangeMapLangPage extends StatefulWidget {
-  ChangeMapLangPage({Key? key}) : super(key: key);
+  ChangeMapLangPage({super.key});
 
   @override
-  _PageBodyState createState() => _PageBodyState();
+  State<ChangeMapLangPage> createState() => _PageBodyState();
 }
 
 class _PageBodyState extends State<ChangeMapLangPage> {

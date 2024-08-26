@@ -4,10 +4,10 @@ import 'package:amap_map_example/widgets/amap_gridview.dart';
 import 'package:flutter/material.dart';
 
 class MoveCameraDemoPage extends StatefulWidget {
-  MoveCameraDemoPage({Key? key}) : super(key: key);
+  MoveCameraDemoPage({super.key});
 
   @override
-  _BodyState createState() => _BodyState();
+  State<MoveCameraDemoPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<MoveCameraDemoPage> {
@@ -20,14 +20,14 @@ class _BodyState extends State<MoveCameraDemoPage> {
       onCameraMove: _onCameraMove,
       onCameraMoveEnd: _onCameraMoveEnd,
     );
-    List<Widget> _optionsWidget = [
+    List<Widget> optionsWidget = [
       _createMyFloatButton('改变显示区域', _changeLatLngBounds),
       _createMyFloatButton('改变中心点', _changeCameraPosition),
       _createMyFloatButton('改变缩放级别到18', _changeCameraZoom),
       _createMyFloatButton('按照像素移动地图', _scrollBy),
     ];
 
-    Widget _cameraOptions() {
+    Widget cameraOptions() {
       return Container(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -36,7 +36,7 @@ class _BodyState extends State<MoveCameraDemoPage> {
           children: [
             Container(
               child: AMapGradView(
-                childrenWidgets: _optionsWidget,
+                childrenWidgets: optionsWidget,
               ),
             ),
           ],
@@ -112,7 +112,7 @@ class _BodyState extends State<MoveCameraDemoPage> {
                           )
                         : SizedBox(),
                     Container(
-                      child: _cameraOptions(),
+                      child: cameraOptions(),
                     ),
                   ],
                 ),
@@ -204,16 +204,16 @@ class _BodyState extends State<MoveCameraDemoPage> {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        shape: MaterialStateProperty.all(
+        shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         //文字颜色
-        foregroundColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: WidgetStateProperty.all(Colors.white),
         //水波纹颜色
-        overlayColor: MaterialStateProperty.all(Colors.blueAccent),
+        overlayColor: WidgetStateProperty.all(Colors.blueAccent),
         //背景颜色
-        backgroundColor: MaterialStateProperty.resolveWith((states) {
+        backgroundColor: WidgetStateProperty.resolveWith((states) {
           //设置按下时的背景颜色
-          if (states.contains(MaterialState.pressed)) {
+          if (states.contains(WidgetState.pressed)) {
             return Colors.blueAccent;
           }
           //默认背景颜色

@@ -16,7 +16,7 @@ class AMapGradView extends StatefulWidget {
       this.childAspectRatio,
       required this.childrenWidgets});
   @override
-  _GradViewState createState() => _GradViewState();
+  State<AMapGradView> createState() => _GradViewState();
 }
 
 class _GradViewState extends State<AMapGradView> {

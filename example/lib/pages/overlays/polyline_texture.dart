@@ -13,7 +13,7 @@ class PolylineTextureDemoPage extends StatefulWidget {
 class _State extends State<PolylineTextureDemoPage> {
   _State();
 
-  Map<String, Polyline> _polylines = <String, Polyline>{};
+  final Map<String, Polyline> _polylines = <String, Polyline>{};
   late String selectedPolylineId;
 
   void _onMapCreated(AMapController controller) {}
@@ -76,16 +76,16 @@ class _State extends State<PolylineTextureDemoPage> {
               child: TextButton(
                 onPressed: _add,
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
                   //文字颜色
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  foregroundColor: WidgetStateProperty.all(Colors.white),
                   //水波纹颜色
-                  overlayColor: MaterialStateProperty.all(Colors.blueAccent),
+                  overlayColor: WidgetStateProperty.all(Colors.blueAccent),
                   //背景颜色
-                  backgroundColor: MaterialStateProperty.resolveWith((states) {
+                  backgroundColor: WidgetStateProperty.resolveWith((states) {
                     //设置按下时的背景颜色
-                    if (states.contains(MaterialState.pressed)) {
+                    if (states.contains(WidgetState.pressed)) {
                       return Colors.blueAccent;
                     }
                     //默认背景颜色

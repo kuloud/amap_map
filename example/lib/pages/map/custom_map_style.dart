@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomMapStylePage extends StatefulWidget {
-  CustomMapStylePage({Key? key}) : super(key: key);
+  CustomMapStylePage({super.key});
 
   @override
-  _CustomMapStyleState createState() => _CustomMapStyleState();
+  State<CustomMapStylePage> createState() => _CustomMapStyleState();
 }
 
 class _CustomMapStyleState extends State<CustomMapStylePage> {
   bool _mapCreated = false;
 
-  CustomStyleOptions _customStyleOptions = CustomStyleOptions(false);
+  final CustomStyleOptions _customStyleOptions = CustomStyleOptions(false);
   //加载自定义地图样式
   void _loadCustomData() async {
     ByteData styleByteData = await rootBundle.load('assets/style.data');

@@ -23,7 +23,7 @@ class Path {
 }
 
 class RouteConfig {
-  static List<Path> _paths = [
+  static final List<Path> _paths = [
     Path(
       r'^/([\w-]+)$',
       (context, match) => DemoPage(slug: match),

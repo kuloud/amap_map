@@ -245,6 +245,17 @@ class Marker extends BaseOverlay {
   @override
   int get hashCode => Object.hashAll([
         id,
+        alpha,
+        anchor,
+        clickable,
+        draggable,
+        icon,
+        infoWindowEnable,
+        infoWindow,
+        position,
+        rotation,
+        visible,
+        zIndex
       ]);
 }
 

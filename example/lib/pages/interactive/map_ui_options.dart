@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 
 class MapUIDemoPage extends StatefulWidget {
-  MapUIDemoPage({Key? key}) : super(key: key);
+  MapUIDemoPage({super.key});
 
   @override
-  _BodyState createState() => _BodyState();
+  State<MapUIDemoPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<MapUIDemoPage> {
@@ -52,7 +52,7 @@ class _BodyState extends State<MapUIDemoPage> {
     );
 
     //ui控制
-    final List<Widget> _uiOptions = [
+    final List<Widget> uiOptions = [
       AMapSwitchButton(
         label: Text('显示路况'),
         defaultValue: _trafficEnabled,
@@ -100,7 +100,7 @@ class _BodyState extends State<MapUIDemoPage> {
       ),
     ];
 
-    Widget _uiOptionsWidget() {
+    Widget uiOptionsWidget() {
       return Container(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -110,7 +110,7 @@ class _BodyState extends State<MapUIDemoPage> {
             Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
               padding: EdgeInsets.only(left: 10),
-              child: AMapGradView(childrenWidgets: _uiOptions),
+              child: AMapGradView(childrenWidgets: uiOptions),
             ),
             AMapRadioGroup<LogoPosition?>(
               groupLabel: 'Logo位置',
@@ -169,7 +169,7 @@ class _BodyState extends State<MapUIDemoPage> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                child: _uiOptionsWidget(),
+                child: uiOptionsWidget(),
               ),
             ),
           ),

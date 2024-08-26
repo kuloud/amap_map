@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class MyLocationPage extends StatefulWidget {
-  MyLocationPage({Key? key}) : super(key: key);
+  MyLocationPage({super.key});
   @override
-  _BodyState createState() => _BodyState();
+  State<MyLocationPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<MyLocationPage> {

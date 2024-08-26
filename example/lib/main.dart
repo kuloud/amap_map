@@ -4,7 +4,6 @@ import 'package:amap_map_example/category_list_item.dart';
 import 'package:amap_map_example/const_config.dart';
 import 'package:amap_map_example/data/demos.dart';
 import 'package:amap_map_example/routes.dart';
-import 'package:amap_map_example/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -95,7 +94,6 @@ class _AMapDemoState extends State<AMapDemo>
 
 void main() {
   runApp(MaterialApp(
-      theme: ThemeData(colorScheme: DemoThemeData.lightColorScheme),
       themeMode: ThemeMode.light,
       onGenerateRoute: RouteConfig.onGenerateRoute,
       home: AMapDemo()));

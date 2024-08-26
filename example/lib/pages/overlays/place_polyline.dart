@@ -1,6 +1,5 @@
 import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:amap_map/amap_map.dart';
 import 'package:x_amap_base/x_amap_base.dart';
@@ -23,7 +22,7 @@ class _State extends State<PolylineDemoPage> {
     Colors.green,
     Colors.pink,
   ];
-  Map<String, Polyline> _polylines = <String, Polyline>{};
+  final Map<String, Polyline> _polylines = <String, Polyline>{};
   String? selectedPolylineId;
 
   void _onMapCreated(AMapController controller) {}
@@ -64,7 +63,7 @@ class _State extends State<PolylineDemoPage> {
   }
 
   void _changeWidth() {
-    final Polyline? selectedPolyline = _polylines[selectedPolylineId]!;
+    final Polyline? selectedPolyline = _polylines[selectedPolylineId];
     //有选中的Polyline
     if (selectedPolyline != null) {
       double currentWidth = selectedPolyline.width;
@@ -109,7 +108,7 @@ class _State extends State<PolylineDemoPage> {
   }
 
   void _changeCapType() {
-    final Polyline? polyline = _polylines[selectedPolylineId]!;
+    final Polyline? polyline = _polylines[selectedPolylineId];
     if (polyline == null) {
       return;
     }

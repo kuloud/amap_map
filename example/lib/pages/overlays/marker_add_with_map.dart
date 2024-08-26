@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class MarkerAddWithMapPage extends StatefulWidget {
   @override
-  _BodyState createState() => _BodyState();
+  State<MarkerAddWithMapPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<MarkerAddWithMapPage> {

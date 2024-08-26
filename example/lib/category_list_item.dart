@@ -172,7 +172,6 @@ class _CategoryHeader extends StatelessWidget {
       margin: margin,
       child: Material(
         shape: RoundedRectangleBorder(borderRadius: borderRadius),
-        color: colorScheme.onBackground,
         clipBehavior: Clip.antiAlias,
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -198,10 +197,7 @@ class _CategoryHeader extends StatelessWidget {
                         padding: const EdgeInsetsDirectional.only(start: 8),
                         child: Text(
                           category.toDisplayTitle(),
-                          style:
-                              Theme.of(context).textTheme.headlineMedium!.apply(
-                                    color: colorScheme.onSurface,
-                                  ),
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),
                     ],
@@ -268,7 +264,6 @@ class CategoryDemoItem extends StatelessWidget {
     return Material(
       // Makes integration tests possible.
       key: ValueKey(demo.describe),
-      color: Theme.of(context).colorScheme.surface,
       child: MergeSemantics(
         child: InkWell(
           onTap: () {
@@ -292,8 +287,7 @@ class CategoryDemoItem extends StatelessWidget {
                     children: [
                       Text(
                         demo.title,
-                        style: textTheme.titleMedium!
-                            .apply(color: colorScheme.onSurface),
+                        style: textTheme.titleMedium,
                       ),
                       Text(
                         demo.subtitle,
@@ -305,7 +299,7 @@ class CategoryDemoItem extends StatelessWidget {
                       Divider(
                         thickness: 1,
                         height: 1,
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ],
                   ),

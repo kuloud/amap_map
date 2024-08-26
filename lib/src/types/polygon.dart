@@ -100,9 +100,8 @@ class Polygon extends BaseOverlay {
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        id,
-      ]);
+  int get hashCode => Object.hashAll(
+      [id, points, strokeWidth, strokeColor, fillColor, visible, joinType]);
 
   dynamic _pointsToJson() {
     final List<dynamic> result = <dynamic>[];

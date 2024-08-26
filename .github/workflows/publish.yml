@@ -40,8 +40,8 @@ jobs:
           tag_name: v${{ steps.package_publisher.outputs.localVersion }}
           title: Release ${{ steps.package_publisher.outputs.localVersion }}
           body: |
-            Automated release for version ${{ steps.package_publisher.outputs.localVersion }}
-            Changes in this release:
+            Automated release for version ${{ steps.package_publisher.outputs.localVersion }}\n
+            Changes in this release:\n
             ${{ env.git_log }}
           draft: false
           prerelease: false

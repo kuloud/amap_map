@@ -3,10 +3,10 @@ import 'package:amap_map_example/widgets/amap_radio_group.dart';
 import 'package:flutter/material.dart';
 
 class ChangeMapTypePage extends StatefulWidget {
-  ChangeMapTypePage({Key? key}) : super(key: key);
+  ChangeMapTypePage({super.key});
 
   @override
-  _PageBodyState createState() => _PageBodyState();
+  State<ChangeMapTypePage> createState() => _PageBodyState();
 }
 
 class _PageBodyState extends State<ChangeMapTypePage> {

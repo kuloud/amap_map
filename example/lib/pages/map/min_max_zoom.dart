@@ -2,10 +2,10 @@ import 'package:amap_map/amap_map.dart';
 import 'package:flutter/material.dart';
 
 class MinMaxZoomDemoPage extends StatefulWidget {
-  MinMaxZoomDemoPage({Key? key}) : super(key: key);
+  MinMaxZoomDemoPage({super.key});
 
   @override
-  _BodyState createState() => _BodyState();
+  State<MinMaxZoomDemoPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<MinMaxZoomDemoPage> {

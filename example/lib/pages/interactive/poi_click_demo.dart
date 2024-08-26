@@ -3,10 +3,10 @@ import 'package:x_amap_base/x_amap_base.dart';
 import 'package:flutter/material.dart';
 
 class PoiClickDemoPage extends StatefulWidget {
-  PoiClickDemoPage({Key? key}) : super(key: key);
+  PoiClickDemoPage({super.key});
 
   @override
-  _BodyState createState() => _BodyState();
+  State<PoiClickDemoPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<PoiClickDemoPage> {

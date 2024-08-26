@@ -14,7 +14,7 @@ class AMapRadioGroup<T> extends StatefulWidget {
       this.onChanged});
 
   @override
-  _AMapRadioGroupState<T> createState() => _AMapRadioGroupState<T>();
+  State<AMapRadioGroup<T>> createState() => _AMapRadioGroupState<T>();
 }
 
 class _AMapRadioGroupState<T> extends State<AMapRadioGroup<T>> {

@@ -188,6 +188,15 @@ class Polyline extends BaseOverlay {
   @override
   int get hashCode => Object.hashAll([
         id,
+        points,
+        width,
+        visible,
+        geodesic,
+        alpha,
+        dashLineType,
+        capType,
+        joinType,
+        color
       ]);
 }
 

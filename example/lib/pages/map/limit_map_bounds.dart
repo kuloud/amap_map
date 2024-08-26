@@ -3,10 +3,10 @@ import 'package:x_amap_base/x_amap_base.dart';
 import 'package:flutter/material.dart';
 
 class LimitMapBoundsPage extends StatefulWidget {
-  LimitMapBoundsPage({Key? key}) : super(key: key);
+  LimitMapBoundsPage({super.key});
 
   @override
-  _BodyState createState() => _BodyState();
+  State<LimitMapBoundsPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<LimitMapBoundsPage> {
