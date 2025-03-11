@@ -2,6 +2,9 @@
 2025-03-11
 * 升级amap android sdk版本 10.1.200_loc6.4.9_sea9.7.4 | 2025-03-11
 * 升级amap iOS sdk版本 10.1.200 | 2024-12-26
+* 修复问题：android 构建异常，过期接口 io.flutter.view.FlutterMain 替换
+* 修复问题：android 构建异常，过期接口 PluginRegistry.Registrar 替换
+
 
 ## 1.0.12
 2024-08-26
