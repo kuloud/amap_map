@@ -1,5 +1,5 @@
 PODS:
-  - AMap3DMap (10.0.900):
+  - AMap3DMap (10.1.200):
     - AMapFoundation (>= 1.8.0)
   - amap_map (1.0.8):
     - AMap3DMap
