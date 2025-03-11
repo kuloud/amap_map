@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.5.4'
     }
 }
 
@@ -22,7 +22,8 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 34
+    namespace = "com.amap.flutter.map"
+    compileSdkVersion 35
 
     defaultConfig {
         minSdkVersion 16
@@ -34,6 +35,6 @@ android {
 
 dependencies {
     implementation 'com.amap.api:3dmap-location-search:10.1.200_loc6.4.9_sea9.7.4'
-    implementation 'androidx.annotation:annotation:1.8.1'
+    implementation 'androidx.annotation:annotation:1.9.1'
 }
 

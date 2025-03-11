@@ -11,7 +11,7 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 
 /// 高德地图Flutter插件入口文件
-library amap_map;
+library;
 
 import 'dart:async';
 

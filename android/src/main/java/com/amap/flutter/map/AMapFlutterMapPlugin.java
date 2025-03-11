@@ -23,33 +23,9 @@ public class AMapFlutterMapPlugin implements
     private static final String CLASS_NAME = "AMapFlutterMapPlugin";
     private static final String VIEW_TYPE = "com.amap.flutter.map";
     private Lifecycle lifecycle;
+    private FlutterPluginBinding pluginBinding;
 
     public AMapFlutterMapPlugin() {
-    }
-
-    public static void registerWith(PluginRegistry.Registrar registrar) {
-        LogUtil.i(CLASS_NAME, "registerWith=====>");
-
-        final Activity activity = registrar.activity();
-        if (activity == null) {
-            LogUtil.w(CLASS_NAME, "activity is null!!!");
-            return;
-        }
-        if (activity instanceof LifecycleOwner) {
-            registrar
-                    .platformViewRegistry()
-                    .registerViewFactory(
-                            VIEW_TYPE,
-                            new AMapPlatformViewFactory(
-                                    registrar.messenger(),
-                                    () -> ((LifecycleOwner) activity).getLifecycle()));
-        } else {
-            registrar
-                    .platformViewRegistry()
-                    .registerViewFactory(
-                            VIEW_TYPE,
-                            new AMapPlatformViewFactory(registrar.messenger(), new ProxyLifecycleProvider(activity)));
-        }
     }
 
     // FlutterPlugin
@@ -57,6 +33,7 @@ public class AMapFlutterMapPlugin implements
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         LogUtil.i(CLASS_NAME, "onAttachedToEngine==>");
+        this.pluginBinding = binding;
         binding
                 .getPlatformViewRegistry()
                 .registerViewFactory(
@@ -78,6 +55,13 @@ public class AMapFlutterMapPlugin implements
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         LogUtil.i(CLASS_NAME, "onAttachedToActivity==>");
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding);
+        pluginBinding.getPlatformViewRegistry().registerViewFactory(
+                VIEW_TYPE,
+                new AMapPlatformViewFactory(
+                        pluginBinding.getBinaryMessenger(),
+                        () -> lifecycle
+                )
+        );
     }
 
     @Override

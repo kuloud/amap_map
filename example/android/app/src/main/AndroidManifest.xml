@@ -19,6 +19,7 @@
 
     <application
         android:allowNativeHeapPointerTagging="false"
+        android:enableOnBackInvokedCallback="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="amap_map_example">
