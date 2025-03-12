@@ -167,8 +167,8 @@ class MyLocationStyleOptions {
     }
 
     addIfPresent('enabled', enabled);
-    addIfPresent('circleFillColor', circleFillColor?.value);
-    addIfPresent('circleStrokeColor', circleStrokeColor?.value);
+    addIfPresent('circleFillColor', circleFillColor?.toARGB32());
+    addIfPresent('circleStrokeColor', circleStrokeColor?.toARGB32());
     addIfPresent('circleStrokeWidth', circleStrokeWidth);
     addIfPresent('icon', icon?.toMap());
     return json;

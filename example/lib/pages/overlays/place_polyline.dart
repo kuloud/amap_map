@@ -171,7 +171,7 @@ class _State extends State<PolylineDemoPage> {
     List<LatLng> currentPoints = polyline.points;
     List<LatLng> newPoints = <LatLng>[];
     newPoints.addAll(currentPoints);
-    newPoints.add(LatLng(39.835347, 116.34575));
+    newPoints.add(const LatLng(39.835347, 116.34575));
 
     setState(() {
       _polylines[selectedPolylineId!] = polyline.copyWith(
@@ -218,28 +218,28 @@ class _State extends State<PolylineDemoPage> {
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('添加'),
                             onPressed: _add,
+                            child: const Text('添加'),
                           ),
                           TextButton(
-                            child: const Text('删除'),
                             onPressed:
                                 (selectedPolylineId == null) ? null : _remove,
+                            child: const Text('删除'),
                           ),
                           TextButton(
-                            child: const Text('修改线宽'),
                             onPressed: (selectedPolylineId == null)
                                 ? null
                                 : _changeWidth,
+                            child: const Text('修改线宽'),
                           ),
                           TextButton(
-                            child: const Text('修改透明度'),
                             onPressed: (selectedPolylineId == null)
                                 ? null
                                 : _changeAlpha,
+                            child: const Text('修改透明度'),
                           ),
                           AMapSwitchButton(
-                            label: Text('显示'),
+                            label: const Text('显示'),
                             onSwitchChanged: (selectedPolylineId == null)
                                 ? null
                                 : _toggleVisible,
@@ -250,34 +250,34 @@ class _State extends State<PolylineDemoPage> {
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('修改颜色'),
                             onPressed: (selectedPolylineId == null)
                                 ? null
                                 : _changeColor,
+                            child: const Text('修改颜色'),
                           ),
                           TextButton(
-                            child: const Text('修改线头样式'),
                             onPressed: (selectedPolylineId == null)
                                 ? null
                                 : _changeCapType,
+                            child: const Text('修改线头样式'),
                           ),
                           TextButton(
-                            child: const Text('修改连接样式'),
                             onPressed: (selectedPolylineId == null)
                                 ? null
                                 : _changeJointType,
+                            child: const Text('修改连接样式'),
                           ),
                           TextButton(
-                            child: const Text('修改虚线类型'),
                             onPressed: (selectedPolylineId == null)
                                 ? null
                                 : _changeDashLineType,
+                            child: const Text('修改虚线类型'),
                           ),
                           TextButton(
-                            child: const Text('修改坐标'),
                             onPressed: (selectedPolylineId == null)
                                 ? null
                                 : _changePoints,
+                            child: const Text('修改坐标'),
                           ),
                         ],
                       ),

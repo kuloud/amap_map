@@ -155,7 +155,7 @@ class Polyline extends BaseOverlay {
     addIfPresent('capType', capType.index);
     addIfPresent('joinType', joinType.index);
     addIfPresent('customTexture', customTexture?.toMap());
-    addIfPresent('color', color.value);
+    addIfPresent('color', color.toARGB32());
     return json;
   }
 

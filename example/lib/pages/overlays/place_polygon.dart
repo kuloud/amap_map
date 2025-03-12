@@ -110,7 +110,7 @@ class _State extends State<PolygonDemoPage> {
     List<LatLng> currentPoints = polygon.points;
     List<LatLng> newPoints = <LatLng>[];
     newPoints.addAll(currentPoints);
-    newPoints.add(LatLng(39.828809, 116.360364));
+    newPoints.add(const LatLng(39.828809, 116.360364));
 
     setState(() {
       _polygons[selectedPolygonId!] = polygon.copyWith(
@@ -133,7 +133,7 @@ class _State extends State<PolygonDemoPage> {
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
       initialCameraPosition:
-          CameraPosition(target: LatLng(39.828809, 116.360364), zoom: 13),
+          const CameraPosition(target: LatLng(39.828809, 116.360364), zoom: 13),
       onMapCreated: _onMapCreated,
       polygons: Set<Polygon>.of(_polygons.values),
     );
@@ -159,42 +159,42 @@ class _State extends State<PolygonDemoPage> {
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('添加'),
                             onPressed: _add,
+                            child: const Text('添加'),
                           ),
                           TextButton(
-                            child: const Text('删除'),
                             onPressed:
                                 (selectedPolygonId == null) ? null : _remove,
+                            child: const Text('删除'),
                           ),
                           TextButton(
-                            child: const Text('修改边框宽度'),
                             onPressed: (selectedPolygonId == null)
                                 ? null
                                 : _changeStrokeWidth,
+                            child: const Text('修改边框宽度'),
                           ),
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('修改边框和填充色'),
                             onPressed: (selectedPolygonId == null)
                                 ? null
                                 : _changeColors,
+                            child: const Text('修改边框和填充色'),
                           ),
                           AMapSwitchButton(
-                            label: Text('显示'),
+                            label: const Text('显示'),
                             onSwitchChanged: (selectedPolygonId == null)
                                 ? null
                                 : _toggleVisible,
                             defaultValue: true,
                           ),
                           TextButton(
-                            child: const Text('修改坐标'),
                             onPressed: (selectedPolygonId == null)
                                 ? null
                                 : _changePoints,
+                            child: const Text('修改坐标'),
                           ),
                         ],
                       ),

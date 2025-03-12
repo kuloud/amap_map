@@ -266,64 +266,64 @@ class _State extends State<MarkerConfigDemoPage> {
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('添加'),
                             onPressed: _add,
+                            child: const Text('添加'),
                           ),
                           TextButton(
-                            child: const Text('移除'),
                             onPressed:
                                 (selectedMarkerId == null) ? null : _remove,
+                            child: const Text('移除'),
                           ),
                           TextButton(
-                            child: const Text('更新InfoWidow'),
                             onPressed:
                                 (selectedMarkerId == null) ? null : _changeInfo,
+                            child: const Text('更新InfoWidow'),
                           ),
                           TextButton(
-                            child: const Text('修改锚点'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changeAnchor,
+                            child: const Text('修改锚点'),
                           ),
                           TextButton(
-                            child: const Text('修改透明度'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changeAlpha,
+                            child: const Text('修改透明度'),
                           ),
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('全部移除'),
                             onPressed: _markers.isNotEmpty ? _removeAll : null,
+                            child: const Text('全部移除'),
                           ),
                           AMapSwitchButton(
-                            label: Text('允许拖动'),
+                            label: const Text('允许拖动'),
                             onSwitchChanged: (selectedMarkerId == null)
                                 ? null
                                 : _toggleDraggable,
                             defaultValue: false,
                           ),
                           AMapSwitchButton(
-                            label: Text('显示'),
+                            label: const Text('显示'),
                             onSwitchChanged: (selectedMarkerId == null)
                                 ? null
                                 : _toggleVisible,
                             defaultValue: true,
                           ),
                           TextButton(
-                            child: const Text('修改坐标'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changePosition,
+                            child: const Text('修改坐标'),
                           ),
                           TextButton(
-                            child: const Text('修改旋转角度'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changeRotation,
+                            child: const Text('修改旋转角度'),
                           ),
                         ],
                       ),

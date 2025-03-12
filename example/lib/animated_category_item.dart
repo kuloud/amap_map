@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AnimatedCategoryItem extends StatelessWidget {
   AnimatedCategoryItem({
+    super.key,
     required double startDelayFraction,
     required this.controller,
     required this.child,
@@ -27,7 +28,7 @@ class AnimatedCategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: controller,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return Padding(
           padding: EdgeInsets.only(top: topPaddingAnimation.value),
           child: child,

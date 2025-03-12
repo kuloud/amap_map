@@ -96,12 +96,12 @@ class Marker extends BaseOverlay {
             (alpha != null ? (alpha < 0 ? 0 : (alpha > 1 ? 1 : alpha)) : alpha),
         // ignore: unnecessary_null_comparison
         anchor = (anchor == null
-            ? Offset(0.5, 1.0)
+            ? const Offset(0.5, 1.0)
             : ((anchor.dx < 0 ||
                     anchor.dx > 1 ||
                     anchor.dy < 0 ||
                     anchor.dy > 1)
-                ? Offset(0.5, 1.0)
+                ? const Offset(0.5, 1.0)
                 : anchor)),
         super();
 

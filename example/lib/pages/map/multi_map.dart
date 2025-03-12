@@ -3,7 +3,7 @@ import 'package:x_amap_base/x_amap_base.dart';
 import 'package:flutter/material.dart';
 
 class MultiMapDemoPage extends StatefulWidget {
-  const MultiMapDemoPage();
+  const MultiMapDemoPage({super.key});
   @override
   State<StatefulWidget> createState() => _MultiMapDemoState();
 }
@@ -14,7 +14,7 @@ class _MultiMapDemoState extends State<MultiMapDemoPage> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[

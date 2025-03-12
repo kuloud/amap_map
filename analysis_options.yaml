@@ -1,1 +1,21 @@
-include: package:lints/recommended.yaml
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  errors:
+    missing_required_param: error
+    missing_return: error
+    invalid_null_aware_operator: error
+
+linter:
+  rules:
+    always_specify_types: true
+    prefer_final_fields: true
+    prefer_final_in_for_each: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    avoid_print: false
+    avoid_empty_else: true
+    sort_child_properties_last: true

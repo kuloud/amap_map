@@ -1,10 +1,7 @@
 package com.amap.flutter.map;
 
-import android.app.Activity;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.amap.flutter.map.utils.LogUtil;
 
@@ -12,7 +9,6 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.embedding.engine.plugins.lifecycle.FlutterLifecycleAdapter;
-import io.flutter.plugin.common.PluginRegistry;
 
 /**
  * AmapFlutterMapPlugin

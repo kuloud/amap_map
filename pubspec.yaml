@@ -1,6 +1,6 @@
 name: amap_map
 description: Amap SDK Flutter plugin for integrating AMapSDK in iOS and Android applications.
-version: 1.0.13
+version: 1.0.14
 homepage: https://github.com/kuloud/amap_map
 issue_tracker: https://github.com/kuloud/amap_map/issues
 platforms:
@@ -26,9 +26,9 @@ dependencies:
   x_common: ^1.0.4
 
 dev_dependencies:
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  lints: ^5.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

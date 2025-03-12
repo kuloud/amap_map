@@ -259,16 +259,16 @@ class AMapController {
 
 1. [android] app 的 targetSDKVersion >= 30, 地图页返回闪退
 
-在里的 AndroidManifest.xml 里的 application 里增加`android:allowNativeHeapPointerTagging="false"`
+    在里的 AndroidManifest.xml 里的 application 里增加`android:allowNativeHeapPointerTagging="false"`
 
-```xml
-    <application android:allowNativeHeapPointerTagging="false">
-    ...
-    </application>
-```
+    ```xml
+        <application android:allowNativeHeapPointerTagging="false">
+        ...
+        </application>
+    ```
 
-google 官方说明地址：https://source.android.com/devices/tech/debug/tagged-pointers
+    google 官方说明地址：https://source.android.com/devices/tech/debug/tagged-pointers
 
 1. 原本本插件拓展设计的思路是把一些不常用的特性功能做成可插拔的 extension，昨天（2024/07/28）考虑了下，觉得有点过度设计了，包括轻量版 SDK 的接入适配，于是决定后续实现做些调整，尽量贴合 SDK API 实现功能。
 
-1. 如果模拟器运行遇到 `com.amap.api.col.3sl.dl$b.createContext(GlesUtility.java:73)` 闪退，可尝试切换模拟器图像加速模式为`Software`以获得更好的兼容性。(#27)
+1. 如果模拟器运行遇到 `com.amap.api.col.3sl.dl$b.createContext(GlesUtility.java:73)` 闪退，可尝试切换模拟器图像加速模式为`Software`以获得更好的兼容性。[Issue #27](https://github.com/kuloud/amap_map/issues/27)

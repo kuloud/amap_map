@@ -2,7 +2,7 @@ import 'package:amap_map/amap_map.dart';
 import 'package:flutter/material.dart';
 
 class MinMaxZoomDemoPage extends StatefulWidget {
-  MinMaxZoomDemoPage({super.key});
+  const MinMaxZoomDemoPage({super.key});
 
   @override
   State<MinMaxZoomDemoPage> createState() => _BodyState();
@@ -22,7 +22,7 @@ class _BodyState extends State<MinMaxZoomDemoPage> {
       minMaxZoomPreference: MinMaxZoomPreference(_minZoom, _maxZoom),
     );
     return ConstrainedBox(
-      constraints: BoxConstraints.expand(),
+      constraints: const BoxConstraints.expand(),
       child: Stack(
         children: [
           Container(
@@ -40,24 +40,24 @@ class _BodyState extends State<MinMaxZoomDemoPage> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   color: Colors.grey,
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '当前限制的最小最大缩放级别是：[$_minZoom, $_maxZoom]',
-                    style: TextStyle(color: Colors.blue),
+                    style: const TextStyle(color: Colors.blue),
                   ),
                 ),
                 _currentZoom != null
                     ? Container(
                         width: MediaQuery.of(context).size.width,
                         color: Colors.grey,
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         alignment: Alignment.centerLeft,
                         child: Text(
                           _currentZoom!,
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ))
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -69,7 +69,7 @@ class _BodyState extends State<MinMaxZoomDemoPage> {
               children: [
                 InkResponse(
                   child: Container(
-                    child: Icon(
+                    child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
@@ -81,7 +81,7 @@ class _BodyState extends State<MinMaxZoomDemoPage> {
                 ),
                 InkResponse(
                   child: Container(
-                    child: Icon(
+                    child: const Icon(
                       Icons.remove,
                       color: Colors.white,
                     ),

@@ -3,17 +3,19 @@ import 'package:x_amap_base/x_amap_base.dart';
 import 'package:flutter/material.dart';
 
 class MarkerCustomIconPage extends StatefulWidget {
+  const MarkerCustomIconPage({super.key});
+
   @override
   State<MarkerCustomIconPage> createState() => _BodyState();
 }
 
 class _BodyState extends State<MarkerCustomIconPage> {
-  static final LatLng markerPosition = const LatLng(39.909187, 116.397451);
+  static const LatLng markerPosition = LatLng(39.909187, 116.397451);
   final Map<String, Marker> _initMarkerMap = <String, Marker>{};
   String? _currentMarkerId;
   bool _hasInitMarker = false;
-  static final String _startIconPath = 'assets/start.png';
-  static final String _endIconPath = 'assets/end.png';
+  static const String _startIconPath = 'assets/start.png';
+  static const String _endIconPath = 'assets/end.png';
   String _iconPath = _startIconPath;
   void _initMarker(BuildContext context) async {
     if (_hasInitMarker) {

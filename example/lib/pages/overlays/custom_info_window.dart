@@ -39,8 +39,8 @@ class _State extends State<CustomInfoWindowDemoPage> {
       position: markPostion,
       icon: _markerIcon!,
       infoWindow: InfoWindow(title: '第 $markerCount 个Marker'),
-      onTap: (markerId) => _onMarkerTapped(markerId),
-      onDragEnd: (markerId, endPosition) =>
+      onTap: (String markerId) => _onMarkerTapped(markerId),
+      onDragEnd: (String markerId, LatLng endPosition) =>
           _onMarkerDragEnd(markerId, endPosition),
     );
 
@@ -196,7 +196,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+        children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
@@ -212,64 +212,64 @@ class _State extends State<CustomInfoWindowDemoPage> {
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('添加'),
                             onPressed: _add,
+                            child: const Text('添加'),
                           ),
                           TextButton(
-                            child: const Text('移除'),
                             onPressed:
                                 (selectedMarkerId == null) ? null : _remove,
+                            child: const Text('移除'),
                           ),
                           TextButton(
-                            child: const Text('更新InfoWidow'),
                             onPressed:
                                 (selectedMarkerId == null) ? null : _changeInfo,
+                            child: const Text('更新InfoWidow'),
                           ),
                           TextButton(
-                            child: const Text('修改锚点'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changeAnchor,
+                            child: const Text('修改锚点'),
                           ),
                           TextButton(
-                            child: const Text('修改透明度'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changeAlpha,
+                            child: const Text('修改透明度'),
                           ),
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('全部移除'),
                             onPressed: _markers.isNotEmpty ? _removeAll : null,
+                            child: const Text('全部移除'),
                           ),
                           AMapSwitchButton(
-                            label: Text('允许拖动'),
+                            label: const Text('允许拖动'),
                             onSwitchChanged: (selectedMarkerId == null)
                                 ? null
                                 : _toggleDraggable,
                             defaultValue: false,
                           ),
                           AMapSwitchButton(
-                            label: Text('显示'),
+                            label: const Text('显示'),
                             onSwitchChanged: (selectedMarkerId == null)
                                 ? null
                                 : _toggleVisible,
                             defaultValue: true,
                           ),
                           TextButton(
-                            child: const Text('修改坐标'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changePosition,
+                            child: const Text('修改坐标'),
                           ),
                           TextButton(
-                            child: const Text('修改旋转角度'),
                             onPressed: (selectedMarkerId == null)
                                 ? null
                                 : _changeRotation,
+                            child: const Text('修改旋转角度'),
                           ),
                         ],
                       ),
@@ -300,8 +300,8 @@ class CustomInfoWindowAdapter extends BaseInfoWindowAdapter {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(
+        boxShadow: <BoxShadow>[
+          const BoxShadow(
             color: Colors.black26,
             blurRadius: 4.0,
             spreadRadius: 2.0,
@@ -310,10 +310,10 @@ class CustomInfoWindowAdapter extends BaseInfoWindowAdapter {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           Text(
             marker.infoWindow.title ?? 'No Title',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           Text(
             marker.infoWindow.snippet ?? 'No Snippet',

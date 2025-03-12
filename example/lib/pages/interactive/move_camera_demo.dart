@@ -4,7 +4,7 @@ import 'package:amap_map_example/widgets/amap_gridview.dart';
 import 'package:flutter/material.dart';
 
 class MoveCameraDemoPage extends StatefulWidget {
-  MoveCameraDemoPage({super.key});
+  const MoveCameraDemoPage({super.key});
 
   @override
   State<MoveCameraDemoPage> createState() => _BodyState();
@@ -29,7 +29,7 @@ class _BodyState extends State<MoveCameraDemoPage> {
 
     Widget cameraOptions() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -45,7 +45,7 @@ class _BodyState extends State<MoveCameraDemoPage> {
     }
 
     return ConstrainedBox(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         child: Column(
           children: [
             ConstrainedBox(
@@ -54,7 +54,7 @@ class _BodyState extends State<MoveCameraDemoPage> {
                   minHeight: MediaQuery.of(context).size.height * 0.7),
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.7,
                     width: MediaQuery.of(context).size.width,
                     child: amap,
@@ -66,28 +66,28 @@ class _BodyState extends State<MoveCameraDemoPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         InkResponse(
+                          onTap: _zoomIn,
                           child: Container(
-                            child: Icon(
+                            width: 40,
+                            height: 40,
+                            color: Colors.blue,
+                            child: const Icon(
                               Icons.add,
                               color: Colors.white,
                             ),
-                            width: 40,
-                            height: 40,
-                            color: Colors.blue,
                           ),
-                          onTap: _zoomIn,
                         ),
                         InkResponse(
+                          onTap: _zoomOut,
                           child: Container(
-                            child: Icon(
+                            color: Colors.blue,
+                            width: 40,
+                            height: 40,
+                            child: const Icon(
                               Icons.remove,
                               color: Colors.white,
                             ),
-                            color: Colors.blue,
-                            width: 40,
-                            height: 40,
                           ),
-                          onTap: _zoomOut,
                         ),
                       ],
                     ),
@@ -103,14 +103,14 @@ class _BodyState extends State<MoveCameraDemoPage> {
                         ? Container(
                             width: MediaQuery.of(context).size.width,
                             color: Colors.grey,
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             alignment: Alignment.centerLeft,
                             child: Text(
                               _currentZoom!,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     Container(
                       child: cameraOptions(),
                     ),
@@ -141,7 +141,7 @@ class _BodyState extends State<MoveCameraDemoPage> {
   void _changeCameraPosition() {
     _mapController?.moveCamera(
       CameraUpdate.newCameraPosition(
-        CameraPosition(
+        const CameraPosition(
             //中心点
             target: LatLng(31.230378, 121.473658),
             //缩放级别
@@ -184,8 +184,8 @@ class _BodyState extends State<MoveCameraDemoPage> {
     _mapController?.moveCamera(
       CameraUpdate.newLatLngBounds(
           LatLngBounds(
-              southwest: LatLng(33.789925, 104.838326),
-              northeast: LatLng(38.740688, 114.647472)),
+              southwest: const LatLng(33.789925, 104.838326),
+              northeast: const LatLng(38.740688, 114.647472)),
           15.0),
       animated: true,
     );
