@@ -32,7 +32,7 @@ class _BodyState extends State<MapUIDemoPage> {
   int _logoBottomMargin = 0;
   int _logoLeftMargin = 0;
 
-  final Map<String, LogoPosition?> _radioValueMap = {
+  final Map<String, LogoPosition?> _radioValueMap = <String, LogoPosition?>{
     '底部居左': LogoPosition.BOTTOM_LEFT,
     '底部居中': LogoPosition.BOTTOM_CENTER,
     '底部居右': LogoPosition.BOTTOM_RIGHT,
@@ -52,47 +52,47 @@ class _BodyState extends State<MapUIDemoPage> {
     );
 
     //ui控制
-    final List<Widget> uiOptions = [
+    final List<Widget> uiOptions = <Widget>[
       AMapSwitchButton(
-        label: Text('显示路况'),
+        label: const Text('显示路况'),
         defaultValue: _trafficEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _trafficEnabled = value;
           })
         },
       ),
       AMapSwitchButton(
-        label: Text('显示3D建筑物'),
+        label: const Text('显示3D建筑物'),
         defaultValue: _buildingsEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _buildingsEnabled = value;
           })
         },
       ),
       AMapSwitchButton(
-        label: Text('显示指南针'),
+        label: const Text('显示指南针'),
         defaultValue: _compassEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _compassEnabled = value;
           })
         },
       ),
       AMapSwitchButton(
-        label: Text('显示地图文字'),
+        label: const Text('显示地图文字'),
         defaultValue: _labelsEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _labelsEnabled = value;
           })
         },
       ),
       AMapSwitchButton(
-        label: Text('显示比例尺'),
+        label: const Text('显示比例尺'),
         defaultValue: _scaleEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _scaleEnabled = value;
           })
@@ -102,21 +102,21 @@ class _BodyState extends State<MapUIDemoPage> {
 
     Widget uiOptionsWidget() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
+          children: <Widget>[
+            const Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: AMapGradView(childrenWidgets: uiOptions),
             ),
             AMapRadioGroup<LogoPosition?>(
               groupLabel: 'Logo位置',
               groupValue: _logoPosition,
               radioValueMap: _radioValueMap,
-              onChanged: (value) => {
+              onChanged: (LogoPosition? value) => <void>{
                 //改变当前地图样式为选中的样式
                 setState(() {
                   _logoPosition = value!;
@@ -154,14 +154,14 @@ class _BodyState extends State<MapUIDemoPage> {
       );
     }
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
+        children: <Widget>[
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             child: map,

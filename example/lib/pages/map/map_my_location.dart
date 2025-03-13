@@ -1,9 +1,10 @@
 import 'package:amap_map/amap_map.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:x_amap_base/x_amap_base.dart';
 
 class MyLocationPage extends StatefulWidget {
-  MyLocationPage({super.key});
+  const MyLocationPage({super.key});
   @override
   State<MyLocationPage> createState() => _BodyState();
 }
@@ -37,13 +38,13 @@ class _BodyState extends State<MyLocationPage> {
         circleStrokeColor: Colors.blue,
         circleStrokeWidth: 1,
       ),
-      onLocationChanged: (loc) {
+      onLocationChanged: (AMapLocation loc) {
         if (isLocationValid(loc)) {
           print(loc);
           _mapController?.moveCamera(CameraUpdate.newLatLng(loc.latLng));
         }
       },
-      onMapCreated: (controller) {
+      onMapCreated: (AMapController controller) {
         _mapController = controller;
       },
     );
