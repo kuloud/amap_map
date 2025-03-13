@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.amap.flutter.amap_map_example"
-    compileSdkVersion 35
+    compileSdkVersion flutter.compileSdkVersion
 
     lint {
         disable 'InvalidPackage'

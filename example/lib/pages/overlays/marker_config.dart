@@ -10,14 +10,14 @@ import 'package:x_amap_base/x_amap_base.dart';
 import 'dart:math';
 
 class MarkerConfigDemoPage extends StatefulWidget {
-  const MarkerConfigDemoPage();
+  const MarkerConfigDemoPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _State();
 }
 
 class _State extends State<MarkerConfigDemoPage> {
-  static final LatLng mapCenter = const LatLng(39.909187, 116.397451);
+  static const LatLng mapCenter = LatLng(39.909187, 116.397451);
 
   final Map<String, Marker> _markers = <String, Marker>{};
   BitmapDescriptor? _markerIcon;
@@ -63,7 +63,7 @@ class _State extends State<MarkerConfigDemoPage> {
       bitmapIcon.complete(bitmap);
     }));
 
-    bitmapIcon.future.then((value) => _updateBitmap(value));
+    bitmapIcon.future.then((BitmapDescriptor value) => _updateBitmap(value));
   }
 
   void _updateBitmap(BitmapDescriptor bitmap) {
@@ -81,8 +81,8 @@ class _State extends State<MarkerConfigDemoPage> {
       position: markPostion,
       icon: _markerIcon!,
       infoWindow: InfoWindow(title: '第 $markerCount 个Marker'),
-      onTap: (markerId) => _onMarkerTapped(markerId),
-      onDragEnd: (markerId, endPosition) =>
+      onTap: (String markerId) => _onMarkerTapped(markerId),
+      onDragEnd: (String markerId, LatLng endPosition) =>
           _onMarkerDragEnd(markerId, endPosition),
     );
 
@@ -244,14 +244,14 @@ class _State extends State<MarkerConfigDemoPage> {
       onMapCreated: _onMapCreated,
       markers: Set<Marker>.of(_markers.values),
     );
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
+        children: <Widget>[
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,

@@ -81,8 +81,8 @@ class PolygonUpdates {
   }
 
   @override
-  int get hashCode =>
-      Object.hashAll([polygonsToAdd, polygonIdsToRemove, polygonsToChange]);
+  int get hashCode => Object.hashAll(
+      <Object?>[polygonsToAdd, polygonIdsToRemove, polygonsToChange]);
 
   @override
   String toString() {

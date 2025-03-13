@@ -33,7 +33,7 @@ class _AMapRadioGroupState<T> extends State<AMapRadioGroup<T>> {
     Widget myRadio(String label, dynamic radioValue) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Text(label),
           Radio<T>(
             value: radioValue,
@@ -50,19 +50,19 @@ class _AMapRadioGroupState<T> extends State<AMapRadioGroup<T>> {
     }
 
     if (widget.radioValueMap != null) {
-      widget.radioValueMap!.forEach((key, value) {
+      widget.radioValueMap!.forEach((String key, value) {
         radioList.add(myRadio(key, value));
       });
     }
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           Text(widget.groupLabel!),
           Container(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: AMapGradView(
               childrenWidgets: radioList,
             ),

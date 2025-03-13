@@ -186,7 +186,7 @@ class Polyline extends BaseOverlay {
   }
 
   @override
-  int get hashCode => Object.hashAll([
+  int get hashCode => Object.hashAll(<Object?>[
         id,
         points,
         width,

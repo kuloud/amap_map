@@ -21,43 +21,43 @@ public interface AMapOptionsSink extends UISettingsSink {
 
     void setMapType(int mapType);
 
-    public void setCustomMapStyleOptions(CustomMapStyleOptions customMapStyleOptions);
+    void setCustomMapStyleOptions(CustomMapStyleOptions customMapStyleOptions);
 
-    public void setMyLocationStyle(MyLocationStyle myLocationStyle);
+    void setMyLocationStyle(MyLocationStyle myLocationStyle);
 
-    public void setScreenAnchor(float x, float y);
+    void setScreenAnchor(float x, float y);
 
-    public void setMinZoomLevel(float minZoomLevel);
+    void setMinZoomLevel(float minZoomLevel);
 
-    public void setMaxZoomLevel(float maxZoomLevel);
+    void setMaxZoomLevel(float maxZoomLevel);
 
-    public void setLatLngBounds(LatLngBounds latLngBounds);
+    void setLatLngBounds(LatLngBounds latLngBounds);
 
-    public void setTrafficEnabled(boolean trafficEnabled);
+    void setTrafficEnabled(boolean trafficEnabled);
 
-    public void setTouchPoiEnabled(boolean touchPoiEnabled);
+    void setTouchPoiEnabled(boolean touchPoiEnabled);
 
-    public void setBuildingsEnabled(boolean buildingsEnabled);
+    void setBuildingsEnabled(boolean buildingsEnabled);
 
-    public void setLabelsEnabled(boolean labelsEnabled);
+    void setLabelsEnabled(boolean labelsEnabled);
 
-    public void setCompassEnabled(boolean compassEnabled);
+    void setCompassEnabled(boolean compassEnabled);
 
-    public void setScaleEnabled(boolean scaleEnabled);
+    void setScaleEnabled(boolean scaleEnabled);
 
-    public void setZoomGesturesEnabled(boolean zoomGesturesEnabled);
+    void setZoomGesturesEnabled(boolean zoomGesturesEnabled);
 
-    public void setScrollGesturesEnabled(boolean scrollGesturesEnabled);
+    void setScrollGesturesEnabled(boolean scrollGesturesEnabled);
 
-    public void setRotateGesturesEnabled(boolean rotateGesturesEnabled);
+    void setRotateGesturesEnabled(boolean rotateGesturesEnabled);
 
-    public void setTiltGesturesEnabled(boolean tiltGesturesEnabled);
+    void setTiltGesturesEnabled(boolean tiltGesturesEnabled);
 
-    public void setInitialMarkers(Object initialMarkers);
+    void setInitialMarkers(Object initialMarkers);
 
-    public void setInitialPolylines(Object initialPolylines);
+    void setInitialPolylines(Object initialPolylines);
 
-    public void setInitialPolygons(Object initialPolygons);
+    void setInitialPolygons(Object initialPolygons);
 
     /**
      * 设置地图语言

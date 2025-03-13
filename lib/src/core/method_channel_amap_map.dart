@@ -24,11 +24,11 @@ import 'package:stream_transform/stream_transform.dart';
 import 'map_event.dart';
 
 // ignore: constant_identifier_names
-const VIEW_TYPE = 'com.amap.flutter.map';
+const String VIEW_TYPE = 'com.amap.flutter.map';
 
 /// 使用[MethodChannel]与Native代码通信的[AMapFlutterPlatform]的实现。
 class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
-  final Map<int, MethodChannel> _channels = {};
+  final Map<int, MethodChannel> _channels = <int, MethodChannel>{};
 
   MethodChannel channel(int mapId) {
     return _channels[mapId]!;
@@ -39,7 +39,8 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
     MethodChannel? channel = _channels[mapId];
     if (channel == null) {
       channel = MethodChannel('amap_map_$mapId');
-      channel.setMethodCallHandler((call) => _handleMethodCall(call, mapId));
+      channel.setMethodCallHandler(
+          (MethodCall call) => _handleMethodCall(call, mapId));
       _channels[mapId] = channel;
     }
     return channel.invokeMethod<void>('map#waitForMap');
@@ -125,12 +126,13 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
   }
 
   // handleMethodCall的`broadcast`
-  final StreamController<MapEvent> _mapEventStreamController =
-      StreamController<MapEvent>.broadcast();
+  final StreamController<MapEvent<dynamic>> _mapEventStreamController =
+      StreamController<MapEvent<dynamic>>.broadcast();
 
   // 根据mapid返回相应的event.
-  Stream<MapEvent> _events(int mapId) =>
-      _mapEventStreamController.stream.where((event) => event.mapId == mapId);
+  Stream<MapEvent<dynamic>> _events(int mapId) =>
+      _mapEventStreamController.stream
+          .where((MapEvent<dynamic> event) => event.mapId == mapId);
 
   //定位回调
   Stream<LocationChangedEvent> onLocationChanged({required int mapId}) {

@@ -12,11 +12,12 @@ abstract class BaseInfoWindowAdapter implements InfoWindowAdapter {
 
   @override
   Widget? getInfoWindow(BuildContext context, Marker marker) {
-    final contentView = buildInfoWindowContent(context, marker);
+    final Widget? contentView = buildInfoWindowContent(context, marker);
     return (contentView != null)
-        ? FutureBuilder(
+        ? FutureBuilder<ScreenCoordinate>(
             future: controller?.toScreenCoordinate(marker.position),
-            builder: (context, snapshot) {
+            builder: (BuildContext context,
+                AsyncSnapshot<ScreenCoordinate> snapshot) {
               if (snapshot.hasData) {
                 double devicePixelRatio =
                     MediaQuery.of(context).devicePixelRatio;
@@ -26,7 +27,7 @@ abstract class BaseInfoWindowAdapter implements InfoWindowAdapter {
                   child: contentView,
                 );
               } else {
-                return Container(); // 当未获取到数据时，返回空的 `Container`
+                return Container();
               }
             },
           )

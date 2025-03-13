@@ -103,12 +103,12 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
     Widget mapTypeRadio(String label, MapType radioValue) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Text(label),
           Radio(
             value: radioValue,
             groupValue: _mapType,
-            onChanged: (value) {
+            onChanged: (MapType? value) {
               setState(() {
                 _mapType = value as MapType;
               });
@@ -118,7 +118,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       );
     }
 
-    final List<Widget> mapTypeList = [
+    final List<Widget> mapTypeList = <Widget>[
       mapTypeRadio('普通地图', MapType.normal),
       mapTypeRadio('卫星地图', MapType.satellite),
       mapTypeRadio('导航地图', MapType.navi),
@@ -127,11 +127,11 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
     ];
 
     //ui控制
-    final List<Widget> uiOptions = [
+    final List<Widget> uiOptions = <Widget>[
       AMapSwitchButton(
         label: const Text('显示路况'),
         defaultValue: _trafficEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _trafficEnabled = value;
           })
@@ -140,7 +140,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('显示3D建筑物'),
         defaultValue: _buildingsEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _buildingsEnabled = value;
           })
@@ -149,7 +149,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('显示指南针'),
         defaultValue: _compassEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _compassEnabled = value;
           })
@@ -158,7 +158,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('显示地图文字'),
         defaultValue: _labelsEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _labelsEnabled = value;
           })
@@ -167,7 +167,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('显示比例尺'),
         defaultValue: _scaleEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _scaleEnabled = value;
           })
@@ -176,7 +176,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('点击Poi'),
         defaultValue: _touchPoiEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _touchPoiEnabled = value;
           })
@@ -185,7 +185,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('自定义地图'),
         defaultValue: _customStyleOptions.enabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _customStyleOptions.enabled = value;
           })
@@ -194,11 +194,11 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
     ];
 
     //手势开关
-    final List<Widget> gesturesOptions = [
+    final List<Widget> gesturesOptions = <Widget>[
       AMapSwitchButton(
         label: const Text('旋转'),
         defaultValue: _rotateGesturesEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _rotateGesturesEnabled = value;
           })
@@ -207,7 +207,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('滑动'),
         defaultValue: _scrollGesturesEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _scrollGesturesEnabled = value;
           })
@@ -216,7 +216,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('倾斜'),
         defaultValue: _tiltGesturesEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _tiltGesturesEnabled = value;
           })
@@ -225,7 +225,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       AMapSwitchButton(
         label: const Text('缩放'),
         defaultValue: _zoomGesturesEnabled,
-        onSwitchChanged: (value) => {
+        onSwitchChanged: (value) => <void>{
           setState(() {
             _zoomGesturesEnabled = value;
           })
@@ -239,7 +239,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             const Text('地图样式', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
               padding: const EdgeInsets.only(left: 10),
@@ -256,13 +256,13 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
-          children: [
+          children: <Widget>[
             // Text('定位小蓝点', style: TextStyle(fontWeight: FontWeight.w600)),
             AMapSwitchButton(
               label: const Text('定位小蓝点',
                   style: TextStyle(fontWeight: FontWeight.w600)),
               defaultValue: _myLocationStyleOptions.enabled,
-              onSwitchChanged: (value) => {
+              onSwitchChanged: (value) => <void>{
                 setState(() {
                   _myLocationStyleOptions.enabled = value;
                 })
@@ -279,7 +279,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             const Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
               padding: const EdgeInsets.only(left: 10),
@@ -296,7 +296,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             const Text('手势控制', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
               padding: const EdgeInsets.only(left: 10),
@@ -309,7 +309,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
 
     Widget optionsItem() {
       return Column(
-        children: [
+        children: <Widget>[
           mapTypeOptions(),
           myLocationStyleContainer(),
           uiOptionsWidget(),
@@ -328,7 +328,7 @@ class _MapUiBodyState extends State<AllMapConfigDemoPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+        children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
