@@ -140,13 +140,13 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
   }
 
   // Camera 移动回调
-  Stream<CameraPositionMoveEvent> onCameraMove({required int mapId}) {
-    return _events(mapId).whereType<CameraPositionMoveEvent>();
+  Stream<CameraMoveEvent> onCameraMove({required int mapId}) {
+    return _events(mapId).whereType<CameraMoveEvent>();
   }
 
   /// Camera 移动结束回调
-  Stream<CameraPositionMoveEndEvent> onCameraMoveEnd({required int mapId}) {
-    return _events(mapId).whereType<CameraPositionMoveEndEvent>();
+  Stream<CameraMoveEndEvent> onCameraMoveEnd({required int mapId}) {
+    return _events(mapId).whereType<CameraMoveEndEvent>();
   }
 
   /// Camera 地图点击回调
@@ -191,7 +191,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
 
       case 'camera#onMove':
         try {
-          _mapEventStreamController.add(CameraPositionMoveEvent(
+          _mapEventStreamController.add(CameraMoveEvent(
               mapId, CameraPosition.fromMap(call.arguments['position'])!));
         } catch (e) {
           print("camera#onMove error===>$e");
@@ -199,7 +199,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
         break;
       case 'camera#onMoveEnd':
         try {
-          _mapEventStreamController.add(CameraPositionMoveEndEvent(
+          _mapEventStreamController.add(CameraMoveEndEvent(
               mapId, CameraPosition.fromMap(call.arguments['position'])!));
         } catch (e) {
           print("camera#onMoveEnd error===>$e");
