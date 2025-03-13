@@ -14,7 +14,7 @@ import 'package:amap_map_example/widgets/amap_radio_group.dart';
 import 'package:flutter/material.dart';
 
 class ChangeMapLangPage extends StatefulWidget {
-  ChangeMapLangPage({super.key});
+  const ChangeMapLangPage({super.key});
 
   @override
   State<ChangeMapLangPage> createState() => _PageBodyState();
@@ -22,7 +22,7 @@ class ChangeMapLangPage extends StatefulWidget {
 
 class _PageBodyState extends State<ChangeMapLangPage> {
   MapLanguage? _mapLang;
-  final Map<String, MapLanguage> _radioValueMap = {
+  final Map<String, MapLanguage> _radioValueMap = <String, MapLanguage>{
     '中文': MapLanguage.chinese,
     'English': MapLanguage.english,
   };
@@ -38,31 +38,29 @@ class _PageBodyState extends State<ChangeMapLangPage> {
     final AMapWidget map = AMapWidget(
       mapLanguage: _mapLang,
     );
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
+        children: <Widget>[
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,
           ),
           Expanded(
             child: SingleChildScrollView(
-              child: Container(
-                child: AMapRadioGroup(
-                  groupLabel: '地图语言',
-                  groupValue: _mapLang,
-                  radioValueMap: _radioValueMap,
-                  onChanged: (value) => {
-                    setState(() {
-                      _mapLang = value;
-                    })
-                  },
-                ),
+              child: AMapRadioGroup(
+                groupLabel: '地图语言',
+                groupValue: _mapLang,
+                radioValueMap: _radioValueMap,
+                onChanged: (MapLanguage? value) => <void>{
+                  setState(() {
+                    _mapLang = value;
+                  })
+                },
               ),
             ),
           ),
