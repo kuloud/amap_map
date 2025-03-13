@@ -23,22 +23,24 @@ class Path {
 }
 
 class RouteConfig {
-  static final List<Path> _paths = [
+  static final List<Path> _paths = <Path>[
     Path(
       r'^/([\w-]+)$',
-      (context, match) => DemoPage(slug: match),
+      (BuildContext context, String? match) => DemoPage(slug: match),
     ),
   ];
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    for (final path in _paths) {
-      final regExpPattern = RegExp(path.pattern);
+    for (final Path path in _paths) {
+      final RegExp regExpPattern = RegExp(path.pattern);
       if (regExpPattern.hasMatch(settings.name!)) {
-        final firstMatch = regExpPattern.firstMatch(settings.name!)!;
-        final match = (firstMatch.groupCount == 1) ? firstMatch.group(1) : null;
+        final RegExpMatch firstMatch =
+            regExpPattern.firstMatch(settings.name!)!;
+        final String? match =
+            (firstMatch.groupCount == 1) ? firstMatch.group(1) : null;
 
         return MaterialPageRoute<void>(
-          builder: (context) => path.builder(context, match),
+          builder: (BuildContext context) => path.builder(context, match),
           settings: settings,
         );
       }

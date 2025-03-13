@@ -7,12 +7,8 @@
 |             | Android                    | iOS      |
 | ----------- | -------------------------- | -------- |
 | **AMapSDK** | 10.1.200_loc6.4.9_sea9.7.4 | 10.1.200 |
-| **Support** | SDK 16+                    | 12.0+    |
+| **Support** | SDK 21+                    | 12.0+    |
 
-本插件基于 amap_flutter_map 3.0.0 进行二开的原因：
-
-1. 原插件 21 年开始已无更新，插件年久失修，依赖 SDK 版本老旧
-1. 原插件只实现了基础的地图展示和交互功能，无法满足常见定制化需求
 
 ## Usage
 
@@ -268,7 +264,5 @@ class AMapController {
     ```
 
     google 官方说明地址：https://source.android.com/devices/tech/debug/tagged-pointers
-
-1. 原本本插件拓展设计的思路是把一些不常用的特性功能做成可插拔的 extension，昨天（2024/07/28）考虑了下，觉得有点过度设计了，包括轻量版 SDK 的接入适配，于是决定后续实现做些调整，尽量贴合 SDK API 实现功能。
 
 1. 如果模拟器运行遇到 `com.amap.api.col.3sl.dl$b.createContext(GlesUtility.java:73)` 闪退，可尝试切换模拟器图像加速模式为`Software`以获得更好的兼容性。[Issue #27](https://github.com/kuloud/amap_map/issues/27)

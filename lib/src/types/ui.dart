@@ -51,9 +51,7 @@ class CameraTargetBounds {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (runtimeType != other.runtimeType) return false;
-    final CameraTargetBounds typedOther = other as CameraTargetBounds;
-    return bounds == typedOther.bounds;
+    return other is CameraTargetBounds && bounds == other.bounds;
   }
 
   @override
@@ -101,7 +99,7 @@ class MinMaxZoomPreference {
   }
 
   @override
-  int get hashCode => Object.hashAll([minZoom, maxZoom]);
+  int get hashCode => Object.hashAll(<Object?>[minZoom, maxZoom]);
 
   @override
   String toString() {
@@ -196,8 +194,8 @@ class MyLocationStyleOptions {
   }
 
   @override
-  int get hashCode =>
-      Object.hashAll([enabled, circleFillColor, circleStrokeColor, icon]);
+  int get hashCode => Object.hashAll(
+      <Object?>[enabled, circleFillColor, circleStrokeColor, icon]);
 }
 
 ///地图自定义样式
@@ -254,7 +252,8 @@ class CustomStyleOptions {
   }
 
   @override
-  int get hashCode => Object.hashAll([enabled, styleData, styleExtraData]);
+  int get hashCode =>
+      Object.hashAll(<Object?>[enabled, styleData, styleExtraData]);
 
   CustomStyleOptions clone() {
     return CustomStyleOptions(enabled,

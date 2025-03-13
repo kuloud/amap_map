@@ -25,7 +25,7 @@ class _BodyState extends State<MinMaxZoomDemoPage> {
       constraints: const BoxConstraints.expand(),
       child: Stack(
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: amap,
@@ -68,28 +68,28 @@ class _BodyState extends State<MinMaxZoomDemoPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkResponse(
+                  onTap: _zoomIn,
                   child: Container(
+                    width: 40,
+                    height: 40,
+                    color: Colors.blue,
                     child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    width: 40,
-                    height: 40,
-                    color: Colors.blue,
                   ),
-                  onTap: _zoomIn,
                 ),
                 InkResponse(
+                  onTap: _zoomOut,
                   child: Container(
+                    color: Colors.blue,
+                    width: 40,
+                    height: 40,
                     child: const Icon(
                       Icons.remove,
                       color: Colors.white,
                     ),
-                    color: Colors.blue,
-                    width: 40,
-                    height: 40,
                   ),
-                  onTap: _zoomOut,
                 ),
               ],
             ),

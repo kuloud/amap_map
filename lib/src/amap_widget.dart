@@ -191,7 +191,7 @@ class _MapState extends State<AMapWidget> {
     );
 
     return Stack(
-      children: [mapView, ..._infoWindows.values.nonNulls],
+      children: <Widget>[mapView, ..._infoWindows.values.nonNulls],
     );
   }
 
@@ -296,7 +296,7 @@ class _MapState extends State<AMapWidget> {
     MarkerUpdates markerUpdates =
         MarkerUpdates.from(_markers.values.toSet(), widget.markers);
 
-    markerUpdates.markerIdsToRemove?.forEach((markerId) {
+    markerUpdates.markerIdsToRemove?.forEach((String markerId) {
       _removeInfoWindow(markerId);
     });
 
@@ -305,7 +305,7 @@ class _MapState extends State<AMapWidget> {
     _markers = keyByMarkerId(widget.markers);
 
     if (widget.infoWindowAdapter != null) {
-      for (var marker in _markers.values) {
+      for (final Marker marker in _markers.values) {
         _onInfoWindowUpdate(marker);
       }
     }

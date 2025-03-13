@@ -30,7 +30,7 @@ class AMapController {
   static Future<AMapController> init(
     int id,
     CameraPosition initialCameration,
-    mapState,
+    dynamic mapState,
   ) async {
     await _methodChannel.init(id);
     return AMapController._(

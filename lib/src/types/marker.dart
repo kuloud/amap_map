@@ -67,7 +67,7 @@ class InfoWindow {
   }
 
   @override
-  int get hashCode => Object.hashAll([title, snippet]);
+  int get hashCode => Object.hashAll(<Object?>[title, snippet]);
 
   @override
   String toString() {
@@ -243,7 +243,7 @@ class Marker extends BaseOverlay {
   }
 
   @override
-  int get hashCode => Object.hashAll([
+  int get hashCode => Object.hashAll(<Object?>[
         id,
         alpha,
         anchor,
