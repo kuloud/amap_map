@@ -1,7 +1,11 @@
 name: Publish to Pub.dev
 
 on:
-  push
+  push:
+  pull_request:
+    branches:
+      - main
+
 
 jobs:
   publishing:

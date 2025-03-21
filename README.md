@@ -112,7 +112,7 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
 
 ## 更多示例
 
-<img src="./showcase/Simulator Screenshot - iPhone 15 Pro Max - 2024-01-03 at 17.18.55.png" width="30%"/>
+<img src="https://github.com/kuloud/amap_map/raw/main/showcase/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-01-03%20at%2017.18.55.png" width="30%"/>
 
 ### 地图视图
 
