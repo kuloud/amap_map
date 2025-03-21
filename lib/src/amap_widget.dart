@@ -261,11 +261,12 @@ class _MapState extends State<AMapWidget> {
 
   void onMarkerDragEnd(String markerId, LatLng position) {
     final Marker? marker = _markers[markerId];
-    if (marker != null) {
-      final MarkerDragEndCallback? onDragEnd = marker.onDragEnd;
-      if (onDragEnd != null) {
-        onDragEnd(markerId, position);
-      }
+    if (marker == null) {
+      throw UnknownMapObjectIdError('marker', markerId, 'onDragEnd');
+    }
+    final ValueChanged<LatLng>? onDragEnd = marker.onDragEnd;
+    if (onDragEnd != null) {
+      onDragEnd(position);
     }
   }
 

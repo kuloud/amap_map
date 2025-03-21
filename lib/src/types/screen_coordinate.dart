@@ -4,23 +4,23 @@
 
 import 'package:flutter/foundation.dart' show immutable, objectRuntimeType;
 
-/// Represents a point coordinate in the [GoogleMap]'s view.
+/// Represents a point coordinate in the [AMap]'s view.
 ///
 /// The screen location is specified in screen pixels (not display pixels) relative
 /// to the top left of the map, not top left of the whole screen. (x, y) = (0, 0)
-/// corresponds to top-left of the [GoogleMap] not the whole screen.
+/// corresponds to top-left of the [AMap] not the whole screen.
 @immutable
 class ScreenCoordinate {
-  /// Creates an immutable representation of a point coordinate in the [GoogleMap]'s view.
+  /// Creates an immutable representation of a point coordinate in the [AMap]'s view.
   const ScreenCoordinate({
     required this.x,
     required this.y,
   });
 
-  /// Represents the number of pixels from the left of the [GoogleMap].
+  /// Represents the number of pixels from the left of the [AMap].
   final int x;
 
-  /// Represents the number of pixels from the top of the [GoogleMap].
+  /// Represents the number of pixels from the top of the [AMap].
   final int y;
 
   /// Converts this object to something serializable in JSON.

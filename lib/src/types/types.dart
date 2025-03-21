@@ -22,3 +22,5 @@ export 'polygon_updates.dart';
 export 'bitmap.dart';
 export 'screen_coordinate.dart';
 export 'info_window_adapter.dart';
+
+export 'maps_object_updates.dart';

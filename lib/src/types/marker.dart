@@ -1,50 +1,77 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
+// Copyright 2025 kuloud. All rights reserved.
+// Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
 import 'dart:ui' show Offset;
-import 'package:amap_map/src/types/base_overlay.dart';
-import 'package:x_amap_base/x_amap_base.dart';
-import 'bitmap.dart';
 
-/// Marker拖动回调
-typedef MarkerDragEndCallback = void Function(String id, LatLng endPosition);
+import 'package:amap_map/src/types/maps_object.dart'
+    show MapsObject, MapsObjectId;
+import 'package:flutter/foundation.dart'
+    show ValueChanged, VoidCallback, immutable;
+import 'package:x_amap_base/x_amap_base.dart' show LatLng;
 
-///Marker的气泡
-///
-///Android和iOS的实现机制有差异，仅在接口层面拉齐，效果一致
+import 'types.dart';
+
+Object _offsetToJson(Offset offset) {
+  return <Object>[offset.dx, offset.dy];
+}
+
+/// Text labels for a [Marker] info window.
+@immutable
 class InfoWindow {
-  /// 为 [Marker] 产生一个不可修改的文本气泡.
+  /// Creates an immutable representation of a label on for [Marker].
   const InfoWindow({
     this.title,
     this.snippet,
+    this.anchor = const Offset(0.5, 0.0),
+    this.onTap,
   });
 
-  /// 无文本的气泡
+  /// Text labels specifying that no text is to be displayed.
   static const InfoWindow noText = InfoWindow();
 
-  /// 气泡的title
+  /// Text displayed in an info window when the user taps the marker.
+  ///
+  /// A null value means no title.
   final String? title;
 
-  /// 气泡的详细信息
+  /// Additional text displayed below the [title].
+  ///
+  /// A null value means no additional text.
   final String? snippet;
 
-  /// 气泡copy方法
+  /// The icon image point that will be the anchor of the info window when
+  /// displayed.
   ///
+  /// The image point is specified in normalized coordinates: An anchor of
+  /// (0.0, 0.0) means the top left corner of the image. An anchor
+  /// of (1.0, 1.0) means the bottom right corner of the image.
+  final Offset anchor;
+
+  /// onTap callback for this [InfoWindow].
+  final VoidCallback? onTap;
+
+  /// Creates a new [InfoWindow] object whose values are the same as this instance,
+  /// unless overwritten by the specified parameters.
   InfoWindow copyWith({
     String? titleParam,
     String? snippetParam,
+    Offset? anchorParam,
+    VoidCallback? onTapParam,
   }) {
     return InfoWindow(
       title: titleParam ?? title,
       snippet: snippetParam ?? snippet,
+      anchor: anchorParam ?? anchor,
+      onTap: onTapParam ?? onTap,
     );
   }
 
-  Map<String, dynamic> _toMap() {
-    final Map<String, dynamic> json = <String, dynamic>{};
+  Object _toJson() {
+    final Map<String, Object> json = <String, Object>{};
 
-    void addIfPresent(String fieldName, dynamic value) {
+    void addIfPresent(String fieldName, Object? value) {
       if (value != null) {
         json[fieldName] = value;
       }
@@ -52,157 +79,222 @@ class InfoWindow {
 
     addIfPresent('title', title);
     addIfPresent('snippet', snippet);
+    addIfPresent('anchor', _offsetToJson(anchor));
+
     return json;
   }
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other.runtimeType != runtimeType) return false;
-    if (other is! InfoWindow) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
       return false;
     }
-    final InfoWindow typedOther = other;
-    return title == typedOther.title && snippet == typedOther.snippet;
+    return other is InfoWindow &&
+        title == other.title &&
+        snippet == other.snippet &&
+        anchor == other.anchor;
   }
 
   @override
-  int get hashCode => Object.hashAll(<Object?>[title, snippet]);
+  int get hashCode => Object.hash(title.hashCode, snippet, anchor);
 
   @override
   String toString() {
-    return 'InfoWindow{title: $title, snippet: $snippet}';
+    return 'InfoWindow{title: $title, snippet: $snippet, anchor: $anchor}';
   }
 }
 
-/// 点覆盖物的类
-class Marker extends BaseOverlay {
-  Marker({
-    required this.position,
-    double alpha = 1.0,
-    Offset anchor = const Offset(0.5, 1.0),
-    this.clickable = true,
+/// Uniquely identifies a [Marker] among [AMap] markers.
+///
+/// This does not have to be globally unique, only unique among the list.
+@immutable
+class MarkerId extends MapsObjectId<Marker> {
+  /// Creates an immutable identifier for a [Marker].
+  const MarkerId(super.value);
+}
+
+/// Marks a geographical location on the map.
+///
+/// A marker icon is drawn oriented against the device's screen rather than
+/// the map's surface; that is, it will not necessarily change orientation
+/// due to map rotations, tilting, or zooming.
+@immutable
+class Marker implements MapsObject<Marker> {
+  /// Creates a set of marker configuration options.
+  ///
+  /// Default marker options.
+  ///
+  /// Specifies a marker that
+  /// * is fully opaque; [alpha] is 1.0
+  /// * uses icon bottom center to indicate map position; [anchor] is (0.5, 1.0)
+  /// * has default tap handling; [consumeTapEvents] is false
+  /// * is stationary; [draggable] is false
+  /// * is drawn against the screen, not the map; [flat] is false
+  /// * has a default icon; [icon] is `BitmapDescriptor.defaultMarker`
+  /// * anchors the info window at top center; [infoWindowAnchor] is (0.5, 0.0)
+  /// * has no info window text; [infoWindowText] is `InfoWindowText.noText`
+  /// * is positioned at 0, 0; [position] is `LatLng(0.0, 0.0)`
+  /// * has an axis-aligned icon; [rotation] is 0.0
+  /// * is visible; [visible] is true
+  /// * is placed at the base of the drawing order; [zIndex] is 0.0
+  /// * reports [onTap] events
+  /// * reports [onDragEnd] events
+  const Marker({
+    required this.markerId,
+    this.alpha = 1.0,
+    this.anchor = const Offset(0.5, 1.0),
+    this.consumeTapEvents = false,
     this.draggable = false,
+    this.flat = false,
     this.icon = BitmapDescriptor.defaultMarker,
-    this.infoWindowEnable = true,
     this.infoWindow = InfoWindow.noText,
+    this.position = const LatLng(0.0, 0.0),
     this.rotation = 0.0,
     this.visible = true,
     this.zIndex = 0.0,
     this.onTap,
+    this.onDrag,
+    this.onDragStart,
     this.onDragEnd,
-  })  : alpha =
-            // ignore: unnecessary_null_comparison
-            (alpha != null ? (alpha < 0 ? 0 : (alpha > 1 ? 1 : alpha)) : alpha),
-        // ignore: unnecessary_null_comparison
-        anchor = (anchor == null
-            ? const Offset(0.5, 1.0)
-            : ((anchor.dx < 0 ||
-                    anchor.dx > 1 ||
-                    anchor.dy < 0 ||
-                    anchor.dy > 1)
-                ? const Offset(0.5, 1.0)
-                : anchor)),
-        super();
+  }) : assert(0.0 <= alpha && alpha <= 1.0);
 
-  /// 透明度
+  /// Uniquely identifies a [Marker].
+  final MarkerId markerId;
+
+  @override
+  MarkerId get mapsId => markerId;
+
+  /// The opacity of the marker, between 0.0 and 1.0 inclusive.
+  ///
+  /// 0.0 means fully transparent, 1.0 means fully opaque.
   final double alpha;
 
-  /// 覆盖物视图相对地图上的经纬度位置的锚点
+  /// The icon image point that will be placed at the [position] of the marker.
+  ///
+  /// The image point is specified in normalized coordinates: An anchor of
+  /// (0.0, 0.0) means the top left corner of the image. An anchor
+  /// of (1.0, 1.0) means the bottom right corner of the image.
   final Offset anchor;
 
-  /// 是否可点击，默认为true
-  final bool clickable;
+  /// True if the marker icon consumes tap events. If not, the map will perform
+  /// default tap handling by centering the map on the marker and displaying its
+  /// info window.
+  final bool consumeTapEvents;
 
-  /// 是否可拖拽，默认为false
+  /// True if the marker is draggable by user touch events.
   final bool draggable;
 
-  /// 覆盖物的图标
+  /// True if the marker is rendered flatly against the surface of the Earth, so
+  /// that it will rotate and tilt along with map camera movements.
+  final bool flat;
+
+  /// A description of the bitmap used to draw the marker icon.
+  ///
+  /// To create marker icon from assets, use [AssetMapBitmap],
+  /// [AssetMapBitmap.create] or [BitmapDescriptor.asset].
+  ///
+  /// To create marker icon from raw PNG data use [BytesMapBitmap]
+  /// or [BitmapDescriptor.bytes].
   final BitmapDescriptor icon;
 
-  /// 是否显示气泡，如果为true,则点击[Marker]后，会显示该气泡[InfoWindow]
-  /// 如果为false,则始终不会显示该气泡
-  final bool infoWindowEnable;
-
-  /// 覆盖物上的气泡，当被点击时，如果infoWindowEnable为true,则会显示出来
+  /// A Google Maps InfoWindow.
+  ///
+  /// The window is displayed when the marker is tapped.
   final InfoWindow infoWindow;
 
-  /// 位置,不能为空
+  /// Geographical location of the marker.
   final LatLng position;
 
-  /// 旋转角度,以锚点为中心,顺时针旋转（单位：度数）
-  ///
-  /// 注意：iOS端目前仅支持绕marker中心点旋转
+  /// Rotation of the marker image in degrees clockwise from the [anchor] point.
   final double rotation;
 
-  /// 是否可见
+  /// True if the marker is visible.
   final bool visible;
 
-  /// z轴的值，用于调整该覆盖物的相对绘制层级关系
-  /// 值越小，图层越靠下，iOS该值不支持动态修改,仅能在初始化时指定
+  /// The z-index of the marker, used to determine relative drawing order of
+  /// map overlays.
+  ///
+  /// Overlays are drawn in order of z-index, so that lower values means drawn
+  /// earlier, and thus appearing to be closer to the surface of the Earth.
   final double zIndex;
 
-  /// 回调的参数是对应的id
-  final ArgumentCallback<String>? onTap;
+  /// Callbacks to receive tap events for markers placed on this map.
+  final VoidCallback? onTap;
 
-  /// Marker被拖拽结束的回调
-  final MarkerDragEndCallback? onDragEnd;
+  /// Signature reporting the new [LatLng] at the start of a drag event.
+  final ValueChanged<LatLng>? onDragStart;
 
-  /// copy的真正复制的参数，主要用于需要修改某个属性参数时使用
+  /// Signature reporting the new [LatLng] at the end of a drag event.
+  final ValueChanged<LatLng>? onDragEnd;
+
+  /// Signature reporting the new [LatLng] during the drag event.
+  final ValueChanged<LatLng>? onDrag;
+
+  /// Creates a new [Marker] object whose values are the same as this instance,
+  /// unless overwritten by the specified parameters.
   Marker copyWith({
     double? alphaParam,
     Offset? anchorParam,
-    bool? clickableParam,
+    bool? consumeTapEventsParam,
     bool? draggableParam,
+    bool? flatParam,
     BitmapDescriptor? iconParam,
-    bool? infoWindowEnableParam,
     InfoWindow? infoWindowParam,
     LatLng? positionParam,
     double? rotationParam,
     bool? visibleParam,
-    ArgumentCallback<String?>? onTapParam,
-    MarkerDragEndCallback? onDragEndParam,
+    double? zIndexParam,
+    VoidCallback? onTapParam,
+    ValueChanged<LatLng>? onDragStartParam,
+    ValueChanged<LatLng>? onDragParam,
+    ValueChanged<LatLng>? onDragEndParam,
   }) {
-    Marker copyMark = Marker(
+    return Marker(
+      markerId: markerId,
       alpha: alphaParam ?? alpha,
       anchor: anchorParam ?? anchor,
-      clickable: clickableParam ?? clickable,
+      consumeTapEvents: consumeTapEventsParam ?? consumeTapEvents,
       draggable: draggableParam ?? draggable,
+      flat: flatParam ?? flat,
       icon: iconParam ?? icon,
-      infoWindowEnable: infoWindowEnableParam ?? infoWindowEnable,
       infoWindow: infoWindowParam ?? infoWindow,
       position: positionParam ?? position,
       rotation: rotationParam ?? rotation,
       visible: visibleParam ?? visible,
-      zIndex: zIndex,
+      zIndex: zIndexParam ?? zIndex,
       onTap: onTapParam ?? onTap,
+      onDragStart: onDragStartParam ?? onDragStart,
+      onDrag: onDragParam ?? onDrag,
       onDragEnd: onDragEndParam ?? onDragEnd,
     );
-    copyMark.setIdForCopy(id);
-    return copyMark;
   }
 
+  /// Creates a new [Marker] object whose values are the same as this instance.
   @override
   Marker clone() => copyWith();
 
+  /// Converts this object to something serializable in JSON.
   @override
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> json = <String, dynamic>{};
+  Object toJson() {
+    final Map<String, Object> json = <String, Object>{};
 
-    void addIfPresent(String fieldName, dynamic value) {
+    void addIfPresent(String fieldName, Object? value) {
       if (value != null) {
         json[fieldName] = value;
       }
     }
 
-    addIfPresent('id', id);
+    addIfPresent('markerId', markerId.value);
     addIfPresent('alpha', alpha);
     addIfPresent('anchor', _offsetToJson(anchor));
-    addIfPresent('clickable', clickable);
+    addIfPresent('consumeTapEvents', consumeTapEvents);
     addIfPresent('draggable', draggable);
+    addIfPresent('flat', flat);
     addIfPresent('icon', icon.toMap());
-    addIfPresent('infoWindowEnable', infoWindowEnable);
-    addIfPresent('infoWindow', infoWindow._toMap());
+    addIfPresent('infoWindow', infoWindow._toJson());
     addIfPresent('position', position.toJson());
     addIfPresent('rotation', rotation);
     addIfPresent('visible', visible);
@@ -210,56 +302,38 @@ class Marker extends BaseOverlay {
     return json;
   }
 
-  dynamic _offsetToJson(Offset offset) {
-    return <dynamic>[offset.dx, offset.dy];
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    return other is Marker &&
+        markerId == other.markerId &&
+        alpha == other.alpha &&
+        anchor == other.anchor &&
+        consumeTapEvents == other.consumeTapEvents &&
+        draggable == other.draggable &&
+        flat == other.flat &&
+        icon == other.icon &&
+        infoWindow == other.infoWindow &&
+        position == other.position &&
+        rotation == other.rotation &&
+        visible == other.visible &&
+        zIndex == other.zIndex;
   }
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other.runtimeType != runtimeType) return false;
-    if (other is! Marker) return false;
-    final Marker typedOther = other;
-    return id == typedOther.id &&
-        alpha == typedOther.alpha &&
-        anchor == typedOther.anchor &&
-        clickable == typedOther.clickable &&
-        draggable == typedOther.draggable &&
-        icon == typedOther.icon &&
-        infoWindowEnable == typedOther.infoWindowEnable &&
-        infoWindow == typedOther.infoWindow &&
-        position == typedOther.position &&
-        rotation == typedOther.rotation &&
-        visible == typedOther.visible &&
-        zIndex == typedOther.zIndex;
-  }
+  int get hashCode => markerId.hashCode;
 
   @override
   String toString() {
-    return 'Marker{id: $id, alpha: $alpha, anchor: $anchor, '
-        'clickable: $clickable, draggable: $draggable,'
-        'icon: $icon, infoWindowEnable: $infoWindowEnable, infoWindow: $infoWindow, position: $position, rotation: $rotation, '
-        'visible: $visible, zIndex: $zIndex, onTap: $onTap}';
+    return 'Marker{markerId: $markerId, alpha: $alpha, anchor: $anchor, '
+        'consumeTapEvents: $consumeTapEvents, draggable: $draggable, flat: $flat, '
+        'icon: $icon, infoWindow: $infoWindow, position: $position, rotation: $rotation, '
+        'visible: $visible, zIndex: $zIndex, onTap: $onTap, onDragStart: $onDragStart, '
+        'onDrag: $onDrag, onDragEnd: $onDragEnd';
   }
-
-  @override
-  int get hashCode => Object.hashAll(<Object?>[
-        id,
-        alpha,
-        anchor,
-        clickable,
-        draggable,
-        icon,
-        infoWindowEnable,
-        infoWindow,
-        position,
-        rotation,
-        visible,
-        zIndex
-      ]);
-}
-
-Map<String, Marker> keyByMarkerId(Iterable<Marker> markers) {
-  return Map<String, Marker>.fromEntries(markers.map(
-      (Marker marker) => MapEntry<String, Marker>(marker.id, marker.clone())));
 }

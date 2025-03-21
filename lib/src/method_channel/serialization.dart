@@ -5,13 +5,25 @@
 
 import 'package:x_amap_base/x_amap_base.dart' show LatLng;
 
-String _objectsToAddKey(String name) => '${name}sToAdd';
-String _objectsToChangeKey(String name) => '${name}sToChange';
-String _objectIdsToRemoveKey(String name) => '${name}IdsToRemove';
+String objectsToAddKey(String name) => '${name}sToAdd';
+String objectsToChangeKey(String name) => '${name}sToChange';
+String objectIdsToRemoveKey(String name) => '${name}IdsToRemove';
 
-void _addIfNonNull(Map<String, Object?> map, String fieldName, Object? value) {
-  if (value != null) {
-    map[fieldName] = value;
+class MapBuilder {
+  final Map<String, dynamic> map;
+
+  MapBuilder() : map = <String, dynamic>{};
+
+  void addIfNonNull(String fieldName, dynamic value) {
+    if (value != null) {
+      map[fieldName] = value;
+    }
+  }
+
+  void addAllIfNonNull(Map<String, dynamic> values) {
+    values.forEach((String key, dynamic value) {
+      addIfNonNull(key, value);
+    });
   }
 }
 
