@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'dart:ui' show Color;
+import 'package:amap_map/src/compatibility/color_extensions.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 import 'package:amap_map/amap_map.dart';
 
@@ -165,8 +166,8 @@ class MyLocationStyleOptions {
     }
 
     addIfPresent('enabled', enabled);
-    addIfPresent('circleFillColor', circleFillColor?.toARGB32());
-    addIfPresent('circleStrokeColor', circleStrokeColor?.toARGB32());
+    addIfPresent('circleFillColor', circleFillColor?.argbValue);
+    addIfPresent('circleStrokeColor', circleStrokeColor?.argbValue);
     addIfPresent('circleStrokeWidth', circleStrokeWidth);
     addIfPresent('icon', icon?.toMap());
     return json;
