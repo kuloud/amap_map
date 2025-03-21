@@ -1,5 +1,7 @@
 ## 1.0.15
-
+2025-03-21
+* add MapConfiguration and serialize utils
+* add compatibility with Color.fromARGB()
 * code lint
 
 ## 1.0.14
