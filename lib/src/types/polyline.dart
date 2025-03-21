@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:amap_map/src/compatibility/color_extensions.dart';
 import 'package:amap_map/src/types/bitmap.dart';
 import 'package:flutter/foundation.dart' show listEquals;
 import 'package:flutter/material.dart' show Color;
@@ -155,7 +156,7 @@ class Polyline extends BaseOverlay {
     addIfPresent('capType', capType.index);
     addIfPresent('joinType', joinType.index);
     addIfPresent('customTexture', customTexture?.toMap());
-    addIfPresent('color', color.toARGB32());
+    addIfPresent('color', color.argbValue);
     return json;
   }
 

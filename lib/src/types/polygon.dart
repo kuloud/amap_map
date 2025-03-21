@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:amap_map/src/compatibility/color_extensions.dart';
 import 'package:flutter/foundation.dart' show listEquals;
 import 'package:flutter/material.dart' show Color;
 import 'package:x_amap_base/x_amap_base.dart';
@@ -77,8 +78,8 @@ class Polygon extends BaseOverlay {
     addIfPresent('id', id);
     json['points'] = _pointsToJson();
     addIfPresent('strokeWidth', strokeWidth);
-    addIfPresent('strokeColor', strokeColor.toARGB32());
-    addIfPresent('fillColor', fillColor.toARGB32());
+    addIfPresent('strokeColor', strokeColor.argbValue);
+    addIfPresent('fillColor', fillColor.argbValue);
     addIfPresent('visible', visible);
     addIfPresent('joinType', joinType.index);
     return json;
