@@ -165,10 +165,10 @@ class AMapWidget extends StatefulWidget {
 }
 
 class _MapState extends State<AMapWidget> {
-  Map<String, Marker> _markers = <String, Marker>{};
+  Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
   Map<String, Polyline> _polylines = <String, Polyline>{};
   Map<String, Polygon> _polygons = <String, Polygon>{};
-  final Map<String, Widget?> _infoWindows = <String, Widget?>{};
+  final Map<MarkerId, Widget?> _infoWindows = <MarkerId, Widget?>{};
 
   final Completer<AMapController> _controller = Completer<AMapController>();
   late _AMapOptions _mapOptions;
@@ -180,7 +180,7 @@ class _MapState extends State<AMapWidget> {
       'apiKey': AMapInitializer._apiKey?.toMap(),
       'initialCameraPosition': widget.initialCameraPosition.toMap(),
       'options': _mapOptions.toMap(),
-      'markersToAdd': serializeOverlaySet(widget.markers),
+      'markersToAdd': serializeMarkerSet(widget.markers),
       'polylinesToAdd': serializeOverlaySet(widget.polylines),
       'polygonsToAdd': serializeOverlaySet(widget.polygons),
     };
@@ -249,17 +249,17 @@ class _MapState extends State<AMapWidget> {
     }
   }
 
-  void onMarkerTap(String markerId) {
+  void onMarkerTap(MarkerId markerId) {
     final Marker? marker = _markers[markerId];
     if (marker != null) {
-      final ArgumentCallback<String>? onTap = marker.onTap;
+      final VoidCallback? onTap = marker.onTap;
       if (onTap != null) {
-        onTap(markerId);
+        onTap();
       }
     }
   }
 
-  void onMarkerDragEnd(String markerId, LatLng position) {
+  void onMarkerDragEnd(MarkerId markerId, LatLng position) {
     final Marker? marker = _markers[markerId];
     if (marker == null) {
       throw UnknownMapObjectIdError('marker', markerId, 'onDragEnd');
@@ -297,9 +297,9 @@ class _MapState extends State<AMapWidget> {
     MarkerUpdates markerUpdates =
         MarkerUpdates.from(_markers.values.toSet(), widget.markers);
 
-    markerUpdates.markerIdsToRemove?.forEach((String markerId) {
+    for (final MarkerId markerId in markerUpdates.markerIdsToRemove) {
       _removeInfoWindow(markerId);
-    });
+    }
 
     // ignore: unawaited_futures
     controller._updateMarkers(markerUpdates);
@@ -329,13 +329,13 @@ class _MapState extends State<AMapWidget> {
   void _onInfoWindowUpdate(Marker marker) {
     if (widget.infoWindowAdapter != null) {
       setState(() {
-        _infoWindows[marker.id] =
+        _infoWindows[marker.markerId] =
             widget.infoWindowAdapter!.getInfoWindow(context, marker);
       });
     }
   }
 
-  void _removeInfoWindow(String markerId) {
+  void _removeInfoWindow(MarkerId markerId) {
     setState(() {
       _infoWindows.remove(markerId);
     });

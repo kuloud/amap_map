@@ -1,3 +1,8 @@
+## 1.0.16
+
+* 升级amap android sdk版本 10.1.201_loc6.4.9_sea9.7.4 | 2025-03-18
+* code lint
+
 ## 1.0.15
 2025-03-21
 * add MapConfiguration and serialize utils

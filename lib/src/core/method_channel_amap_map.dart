@@ -66,7 +66,7 @@ class MethodChannelAMapFlutterMap implements AMapFlutterPlatform {
   }) {
     return channel(mapId).invokeMethod<void>(
       'markers#update',
-      markerUpdates.toMap(),
+      markerUpdates.toJson(),
     );
   }
 

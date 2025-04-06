@@ -28,12 +28,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  AMap3DMap: 220e48934bc6553a15251c8c86f581a802787506
-  amap_map: 5be213f350872f6ea406be964031572ab9a0d6e1
+  AMap3DMap: 06a11a83072857d6076c14060b2e1a676182e84d
+  amap_map: a681a1441e8b707efafde356c3cd388148495524
   AMapFoundation: 9885c48fc3a78fdfb84a0299a2293e56ea3c9fec
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
 
 PODFILE CHECKSUM: cf0c950f7e9a456b4e325f5b8fc0f98906a3705a
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

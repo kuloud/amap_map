@@ -11,8 +11,8 @@ class MarkerCustomIconPage extends StatefulWidget {
 
 class _BodyState extends State<MarkerCustomIconPage> {
   static const LatLng markerPosition = LatLng(39.909187, 116.397451);
-  final Map<String, Marker> _initMarkerMap = <String, Marker>{};
-  String? _currentMarkerId;
+  final Map<MarkerId, Marker> _initMarkerMap = <MarkerId, Marker>{};
+  MarkerId? _currentMarkerId;
   bool _hasInitMarker = false;
   static const String _startIconPath = 'assets/start.png';
   static const String _endIconPath = 'assets/end.png';
@@ -21,13 +21,16 @@ class _BodyState extends State<MarkerCustomIconPage> {
     if (_hasInitMarker) {
       return;
     }
+    MarkerId markerId = MarkerId(
+        'marker_${DateTime.now().millisecondsSinceEpoch}_${UniqueKey()}');
     Marker marker = Marker(
+        markerId: markerId,
         position: markerPosition,
         icon: BitmapDescriptor.fromIconPath(_iconPath));
     setState(() {
       _hasInitMarker = true;
-      _currentMarkerId = marker.id;
-      _initMarkerMap[marker.id] = marker;
+      _currentMarkerId = marker.markerId;
+      _initMarkerMap[marker.markerId] = marker;
     });
   }
 
@@ -70,7 +73,7 @@ class _BodyState extends State<MarkerCustomIconPage> {
     final AMapWidget amap = AMapWidget(
       markers: Set<Marker>.of(_initMarkerMap.values),
     );
-    return Container(
+    return SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 
 class PolylineTextureDemoPage extends StatefulWidget {
-  const PolylineTextureDemoPage();
+  const PolylineTextureDemoPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _State();

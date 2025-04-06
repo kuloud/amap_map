@@ -4,7 +4,7 @@ import 'package:amap_map_example/widgets/amap_switch_button.dart';
 import 'package:flutter/material.dart';
 
 class GesturesDemoPage extends StatefulWidget {
-  GesturesDemoPage({super.key});
+  const GesturesDemoPage({super.key});
 
   @override
   State<GesturesDemoPage> createState() => _BodyState();

@@ -3,7 +3,7 @@ import 'package:amap_map_example/widgets/amap_radio_group.dart';
 import 'package:flutter/material.dart';
 
 class ChangeMapTypePage extends StatefulWidget {
-  ChangeMapTypePage({super.key});
+  const ChangeMapTypePage({super.key});
 
   @override
   State<ChangeMapTypePage> createState() => _PageBodyState();
@@ -32,14 +32,14 @@ class _PageBodyState extends State<ChangeMapTypePage> {
       //地图类型属性
       mapType: _mapType,
     );
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,

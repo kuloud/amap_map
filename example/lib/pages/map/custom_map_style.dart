@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomMapStylePage extends StatefulWidget {
-  CustomMapStylePage({super.key});
+  const CustomMapStylePage({super.key});
 
   @override
   State<CustomMapStylePage> createState() => _CustomMapStyleState();

@@ -15,6 +15,9 @@ library;
 
 import 'dart:async';
 
+import 'package:amap_map/src/amap_map.dart' show UnknownMapObjectIdError;
+import 'package:amap_map/src/types/utils/marker.dart'
+    show keyByMarkerId, serializeMarkerSet;
 import 'package:x_amap_base/x_amap_base.dart';
 import 'package:amap_map/src/core/amap_flutter_platform.dart';
 import 'package:amap_map/src/core/map_event.dart';

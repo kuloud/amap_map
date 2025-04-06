@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:x_amap_base/x_amap_base.dart';
 
 class MapUIDemoPage extends StatefulWidget {
-  MapUIDemoPage({super.key});
+  const MapUIDemoPage({super.key});
 
   @override
   State<MapUIDemoPage> createState() => _BodyState();

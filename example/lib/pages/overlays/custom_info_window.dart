@@ -9,18 +9,18 @@ import 'dart:math';
 
 /// 自定义[InfoWindow]用例
 class CustomInfoWindowDemoPage extends StatefulWidget {
-  const CustomInfoWindowDemoPage();
+  const CustomInfoWindowDemoPage({super.key});
 
   @override
   State<StatefulWidget> createState() => _State();
 }
 
 class _State extends State<CustomInfoWindowDemoPage> {
-  static final LatLng mapCenter = const LatLng(39.909187, 116.397451);
+  static const LatLng mapCenter = LatLng(39.909187, 116.397451);
 
-  final Map<String, Marker> _markers = <String, Marker>{};
+  final Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
   BitmapDescriptor? _markerIcon;
-  String? selectedMarkerId;
+  MarkerId? selectedMarkerId;
   bool showInfoWindow = false;
   AMapController? _controller;
 
@@ -35,21 +35,24 @@ class _State extends State<CustomInfoWindowDemoPage> {
     LatLng markPostion = LatLng(
         mapCenter.latitude + sin(markerCount * pi / 12.0) / 20.0,
         mapCenter.longitude + cos(markerCount * pi / 12.0) / 20.0);
+    MarkerId markerId = MarkerId(
+        'marker_${DateTime.now().millisecondsSinceEpoch}_${UniqueKey()}');
     final Marker marker = Marker(
+      markerId: markerId,
       position: markPostion,
       icon: _markerIcon!,
       infoWindow: InfoWindow(title: '第 $markerCount 个Marker'),
-      onTap: (String markerId) => _onMarkerTapped(markerId),
-      onDragEnd: (String markerId, LatLng endPosition) =>
+      onTap: () => _onMarkerTapped(markerId),
+      onDragEnd: (LatLng endPosition) =>
           _onMarkerDragEnd(markerId, endPosition),
     );
 
     setState(() {
-      _markers[marker.id] = marker;
+      _markers[marker.markerId] = marker;
     });
   }
 
-  void _onMarkerTapped(String markerId) {
+  void _onMarkerTapped(MarkerId markerId) {
     final Marker? tappedMarker = _markers[markerId];
     final String? title = tappedMarker!.infoWindow.title;
     print('$title 被点击了,markerId: $markerId');
@@ -58,7 +61,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
     });
   }
 
-  void _onMarkerDragEnd(String markerId, LatLng position) {
+  void _onMarkerDragEnd(MarkerId markerId, LatLng position) {
     final Marker? tappedMarker = _markers[markerId];
     final String? title = tappedMarker!.infoWindow.title;
     print('$title markerId: $markerId 被拖拽到了: $position');
@@ -80,7 +83,7 @@ class _State extends State<CustomInfoWindowDemoPage> {
     if (_markers.isNotEmpty) {
       setState(() {
         _markers.clear();
-        selectedMarkerId = null.toString();
+        selectedMarkerId = null;
       });
     }
   }
@@ -288,11 +291,11 @@ class _State extends State<CustomInfoWindowDemoPage> {
 class CustomInfoWindowAdapter extends BaseInfoWindowAdapter {
   CustomInfoWindowAdapter(super.controller, this.selectedMarkerId);
 
-  final String? selectedMarkerId;
+  final MarkerId? selectedMarkerId;
 
   @override
   Widget? buildInfoWindowContent(BuildContext context, Marker marker) {
-    if (marker.id != selectedMarkerId) {
+    if (marker.markerId != selectedMarkerId) {
       return null;
     }
     return Container(

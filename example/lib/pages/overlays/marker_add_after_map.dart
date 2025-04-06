@@ -12,13 +12,16 @@ class MarkerAddAfterMapPage extends StatefulWidget {
 class _BodyState extends State<MarkerAddAfterMapPage> {
   static const LatLng defaultPosition = LatLng(39.909187, 116.397451);
   //需要先设置一个空的map赋值给AMapWidget的markers，否则后续无法添加marker
-  final Map<String, Marker> _markers = <String, Marker>{};
+  final Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
   LatLng _currentLatLng = defaultPosition;
   //添加一个marker
   void _addMarker() {
+    MarkerId markerId = MarkerId(
+        'marker_${DateTime.now().millisecondsSinceEpoch}_${UniqueKey()}');
     final LatLng markerPosition =
         LatLng(_currentLatLng.latitude, _currentLatLng.longitude + 2 / 1000);
     final Marker marker = Marker(
+      markerId: markerId,
       position: markerPosition,
       //使用默认hue的方式设置Marker的图标
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
@@ -27,7 +30,7 @@ class _BodyState extends State<MarkerAddAfterMapPage> {
     setState(() {
       _currentLatLng = markerPosition;
       //将新的marker添加到map里
-      _markers[marker.id] = marker;
+      _markers[marker.markerId] = marker;
     });
   }
 
@@ -62,7 +65,7 @@ class _BodyState extends State<MarkerAddAfterMapPage> {
       // //创建地图时，给marker属性赋值一个空的set，否则后续无法添加marker
       markers: Set<Marker>.of(_markers.values),
     );
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
