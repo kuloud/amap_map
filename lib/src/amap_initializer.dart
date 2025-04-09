@@ -1,4 +1,4 @@
-// Copyright 2023-2024 kuloud
+// Copyright 2023-2025 kuloud
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,11 +22,10 @@ class AMapInitializer {
 
   /// 初始化地图组件
   ///
-  /// @param context 用于图片资源适配屏幕密度，需在[AMapWidget]使用前调用[init]方法
+  /// @param context 需在[AMapWidget]使用前调用[init]方法
   /// @param apiKey 申请的 AMapSDK Key，如果熟悉原生侧集成配置，可以参考高德文档集成，可选
   ///
   static void init(BuildContext context, {AMapApiKey? apiKey}) {
-    AMapUtil.init(context);
     _apiKey = apiKey;
   }
 

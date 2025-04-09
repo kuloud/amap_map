@@ -12,10 +12,12 @@ import androidx.lifecycle.LifecycleRegistry;
 import com.amap.flutter.map.utils.LogUtil;
 
 /**
- * This class provides a {@link LifecycleOwner} for the activity driven by {@link
+ * This class provides a {@link LifecycleOwner} for the activity driven by
+ * {@link
  * Application.ActivityLifecycleCallbacks}.
  *
- * <p>This is used in the case where a direct Lifecycle/Owner is not available.
+ * <p>
+ * This is used in the case where a direct Lifecycle/Owner is not available.
  */
 public class ProxyLifecycleProvider
         implements
@@ -37,7 +39,7 @@ public class ProxyLifecycleProvider
             return;
         }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
-        LogUtil.i(CLASS_NAME, "onActivityCreated==>");
+        LogUtil.i(CLASS_NAME, "[onActivityCreated]");
     }
 
     @Override
@@ -46,7 +48,7 @@ public class ProxyLifecycleProvider
             return;
         }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START);
-        LogUtil.i(CLASS_NAME, "onActivityStarted==>");
+        LogUtil.i(CLASS_NAME, "[onActivityStarted]");
     }
 
     @Override
@@ -55,7 +57,7 @@ public class ProxyLifecycleProvider
             return;
         }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
-        LogUtil.i(CLASS_NAME, "onActivityResumed==>");
+        LogUtil.i(CLASS_NAME, "[onActivityResumed]");
     }
 
     @Override
@@ -64,7 +66,7 @@ public class ProxyLifecycleProvider
             return;
         }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
-        LogUtil.i(CLASS_NAME, "onActivityPaused==>");
+        LogUtil.i(CLASS_NAME, "[onActivityPaused]");
     }
 
     @Override
@@ -73,7 +75,7 @@ public class ProxyLifecycleProvider
             return;
         }
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
-        LogUtil.i(CLASS_NAME, "onActivityStopped==>");
+        LogUtil.i(CLASS_NAME, "[onActivityStopped]");
     }
 
     @Override
@@ -87,7 +89,7 @@ public class ProxyLifecycleProvider
         }
         activity.getApplication().unregisterActivityLifecycleCallbacks(this);
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
-        LogUtil.i(CLASS_NAME, "onActivityDestroyed==>");
+        LogUtil.i(CLASS_NAME, "[onActivityDestroyed]");
     }
 
     @NonNull

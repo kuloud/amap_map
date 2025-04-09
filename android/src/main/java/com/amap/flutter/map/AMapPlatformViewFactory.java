@@ -27,7 +27,7 @@ class AMapPlatformViewFactory extends PlatformViewFactory {
     private final LifecycleOwner lifecycleProvider;
 
     AMapPlatformViewFactory(BinaryMessenger binaryMessenger,
-                            LifecycleOwner lifecycleProvider) {
+            LifecycleOwner lifecycleProvider) {
         super(StandardMessageCodec.INSTANCE);
         this.binaryMessenger = binaryMessenger;
         this.lifecycleProvider = lifecycleProvider;
@@ -40,7 +40,7 @@ class AMapPlatformViewFactory extends PlatformViewFactory {
         try {
             ConvertUtil.density = context.getResources().getDisplayMetrics().density;
             params = (Map<String, Object>) args;
-            LogUtil.i(CLASS_NAME, "create params==>" + params);
+            LogUtil.i(CLASS_NAME, "[create] params: " + params);
             if (params.containsKey("privacyStatement")) {
                 ConvertUtil.setPrivacyStatement(context, params.get("privacyStatement"));
             }
@@ -65,7 +65,6 @@ class AMapPlatformViewFactory extends PlatformViewFactory {
             if (params.containsKey("polygonsToAdd")) {
                 builder.setInitialPolygons(params.get("polygonsToAdd"));
             }
-
 
             if (params.containsKey("apiKey")) {
                 ConvertUtil.checkApiKey(params.get("apiKey"));
